@@ -8,8 +8,9 @@
     <string name="name_field">Имя</string>
     <string name="surname_field">Фамилия</string>
     <string name="patronymic_field">Отчество</string>
-    <string name="email_field">email</string>
+    <string name="email_field">Email</string>
     <string name="password_field">Пароль</string>
     <string name="photo_field">Фотография</string>
     <string name="registration_button">Зарегистрироваться</string>
+    <string name="childrenProfile">Профиль малыша</string>
 </resources>
