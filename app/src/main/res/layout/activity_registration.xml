@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/maincolor">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0">
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/secondMainColor"
+            android:fontFamily="monospace"
+            android:text="@string/registration_field"
+            android:textAlignment="center"
+            android:textSize="32sp" />
+
+        <TextView
+            android:id="@+id/textView5"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15sp"
+            android:layout_marginTop="60sp"
+            android:layout_marginRight="15sp"
+            android:background="@drawable/fields_for_login_page"
+            android:fontFamily="monospace"
+            android:hint="@string/name_field"
+            android:padding="10sp"
+            android:textAlignment="center" />
+
+        <TextView
+            android:id="@+id/textView6"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15sp"
+            android:layout_marginTop="30sp"
+            android:layout_marginRight="15sp"
+            android:background="@drawable/fields_for_login_page"
+            android:fontFamily="monospace"
+            android:hint="@string/surname_field"
+            android:padding="10sp"
+            android:textAlignment="center" />
+
+        <TextView
+            android:id="@+id/textView7"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15sp"
+            android:layout_marginTop="30sp"
+            android:layout_marginRight="15sp"
+            android:background="@drawable/fields_for_login_page"
+            android:fontFamily="monospace"
+            android:hint="@string/patronymic_field"
+            android:padding="10sp"
+            android:textAlignment="center" />
+
+        <TextView
+            android:id="@+id/textView8"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15sp"
+            android:layout_marginTop="30sp"
+            android:layout_marginRight="15sp"
+            android:background="@drawable/fields_for_login_page"
+            android:fontFamily="monospace"
+            android:hint="@string/email_field"
+            android:padding="10sp"
+            android:textAlignment="center" />
+
+        <TextView
+            android:id="@+id/textView9"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15sp"
+            android:layout_marginTop="30sp"
+            android:layout_marginRight="15sp"
+            android:background="@drawable/fields_for_login_page"
+            android:fontFamily="monospace"
+            android:hint="@string/password_field"
+            android:padding="10sp"
+            android:textAlignment="center" />
+
+        <TextView
+            android:id="@+id/textView10"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15sp"
+            android:layout_marginTop="30sp"
+            android:layout_marginRight="15sp"
+            android:background="@drawable/fields_for_login_page"
+            android:fontFamily="monospace"
+            android:hint="@string/photo_field"
+            android:padding="10sp"
+            android:textAlignment="center" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:layout_marginLeft="70sp"
+            android:layout_marginTop="70sp"
+            android:layout_marginRight="70sp"
+            android:layout_marginBottom="20sp"
+            android:background="@drawable/button_on_login_page"
+            android:fontFamily="monospace"
+            android:text="@string/registration_button" />
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

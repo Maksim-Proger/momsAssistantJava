@@ -4,4 +4,12 @@
     <string name="password">Password</string>
     <string name="enter">Войти</string>
     <string name="register">Зарегистрироваться</string>
+    <string name="registration_field">Регистрация</string>
+    <string name="name_field">Имя</string>
+    <string name="surname_field">Фамилия</string>
+    <string name="patronymic_field">Отчество</string>
+    <string name="email_field">email</string>
+    <string name="password_field">Пароль</string>
+    <string name="photo_field">Фотография</string>
+    <string name="registration_button">Зарегистрироваться</string>
 </resources>
