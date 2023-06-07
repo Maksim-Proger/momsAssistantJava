@@ -14,6 +14,13 @@
         tools:targetApi="31">
         <activity android:name=".all_activities.MainScreenActivity"/>
         <activity android:name=".all_activities.RegistrationActivity"/>
+        <activity android:name=".all_activities.ArticlesActivity"/>
+        <activity android:name=".all_activities.ChildrenProfileActivity"/>
+        <activity android:name=".all_activities.DiaryActivity"/>
+        <activity android:name=".all_activities.GamesActivity"/>
+        <activity android:name=".all_activities.NotesActivity"/>
+        <activity android:name=".all_activities.SleepActivity"/>
+        <activity android:name=".all_activities.MomProfileActivity"/>
 
         <activity android:name=".all_activities.LoginActivity"
             android:exported="true">
