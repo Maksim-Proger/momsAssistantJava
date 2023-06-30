@@ -11,15 +11,12 @@
         android:id="@+id/diary_button"
         android:layout_width="125dp"
         android:layout_height="50dp"
-        android:layout_marginTop="4dp"
         android:background="@drawable/button_on_login_page"
         android:text="Дневник"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/assistant_button"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/sleep_button"
-        app:layout_constraintTop_toBottomOf="@+id/textView3"
-        app:layout_constraintVertical_bias="0.974" />
+        app:layout_constraintStart_toEndOf="@+id/sleep_button" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/assistant_button"
@@ -30,9 +27,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/diary_button"
-        app:layout_constraintTop_toBottomOf="@+id/textView3"
-        app:layout_constraintVertical_bias="0.974" />
+        app:layout_constraintStart_toEndOf="@+id/diary_button" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/sleep_button"
@@ -43,32 +38,18 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/diary_button"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView3"
-        app:layout_constraintVertical_bias="0.974" />
+        app:layout_constraintStart_toStartOf="parent" />
 
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="88dp"
-        android:layout_height="51dp"
+    <Button
+        android:id="@+id/button_show_popup_menu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:text="Меню"
-        app:layout_constraintBottom_toTopOf="@+id/button2"
+        app:layout_constraintBottom_toTopOf="@+id/sleep_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.049"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.035" />
-
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="262dp"
-        android:layout_height="57dp"
-        android:text="Список детей"
-        app:layout_constraintBottom_toTopOf="@+id/button2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.892"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.034" />
+        app:layout_constraintVertical_bias="0.025" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
