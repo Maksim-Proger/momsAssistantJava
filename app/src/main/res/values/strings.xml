@@ -18,4 +18,8 @@
     <string name="forNotes3">Добавить</string>
     <string name="forNotes4">Удалить</string>
     <string name="sleepProfile">Сон</string>
+    <string name="fellAsleep">Заснул</string>
+    <string name="wokeUp">Проснулся</string>
+    <string name="sleepStatistics">Статистика сна</string>
+    <string name="articlesProfile">Полезные статьи</string>
 </resources>
