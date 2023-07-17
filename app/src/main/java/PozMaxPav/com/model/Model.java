@@ -6,7 +6,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.PopupMenu;
-import android.widget.Toast;
 import java.util.ArrayList;
 import PozMaxPav.com.model.mainmenu.Category;
 
@@ -20,22 +19,6 @@ public class Model {
             Category category = categories.get(i);
             popupMenu.getMenu().add(Menu.NONE, category.getId(), i, category.getTitle());
         }
-
-//        popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-//            @Override
-//            public boolean onMenuItemClick(MenuItem item) {
-//                int itemId = item.getItemId();
-//                for (Category category: categories) {
-//
-//                    Intent intent = new Intent(context,category.getActivityClass());
-//                    context.startActivity(intent);
-//
-////                    Toast.makeText(context,category.getTitle(), Toast.LENGTH_SHORT).show();
-//                    return true;
-//                }
-//                return false;
-//            }
-//        });
 
         popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
             @Override
@@ -51,7 +34,6 @@ public class Model {
                 return false;
             }
         });
-
 
         popupMenu.show();
     }

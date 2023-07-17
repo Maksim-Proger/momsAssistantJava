@@ -28,56 +28,57 @@
             android:id="@+id/textView5"
             android:layout_width="match_parent"
             android:layout_height="450dp"
-            android:background="@color/secondMainColor"
             android:layout_marginTop="20dp"
-            android:layout_marginRight="20dp"
-            android:layout_marginLeft="20dp"
-            android:text="TextView" />
+            android:background="@color/secondMainColor" />
 
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/button7"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="60dp"
             android:layout_marginRight="60dp"
-            android:layout_marginTop="20dp"
-            android:text="Button" />
+            android:layout_marginTop="40dp"
+            android:background="@drawable/button_on_login_page"
+            android:text="@string/forNotes1" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="horizontal">
 
-            <Button
+            <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/button8"
-                android:layout_width="wrap_content"
+                android:layout_width="100dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:layout_marginStart="20dp"
                 android:layout_marginBottom="10dp"
                 android:layout_gravity="bottom"
-                android:text="Button" />
+                android:background="@drawable/button_on_login_page"
+                android:text="@string/forNotes2" />
 
-            <Button
+            <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/button9"
-                android:layout_width="wrap_content"
+                android:layout_width="110dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:layout_marginStart="20dp"
                 android:layout_marginBottom="10dp"
                 android:layout_gravity="bottom"
-                android:text="Button" />
+                android:background="@drawable/button_on_login_page"
+                android:text="@string/forNotes3" />
 
-            <Button
+            <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/button10"
-                android:layout_width="wrap_content"
+                android:layout_width="100dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
                 android:layout_marginBottom="10dp"
                 android:layout_gravity="bottom"
-                android:text="Button" />
+                android:background="@drawable/button_on_login_page"
+                android:text="@string/forNotes4" />
         </LinearLayout>
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
