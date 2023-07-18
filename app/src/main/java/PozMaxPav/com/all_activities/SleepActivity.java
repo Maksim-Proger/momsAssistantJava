@@ -1,18 +1,16 @@
 package PozMaxPav.com.all_activities;
 
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Chronometer;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
-import java.text.SimpleDateFormat;
 import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
-import java.util.Date;
 import PozMaxPav.com.R;
-import PozMaxPav.com.model.mainmenu.Category;
 import PozMaxPav.com.view.Controller;
 
 public class SleepActivity extends AppCompatActivity {
@@ -20,6 +18,7 @@ public class SleepActivity extends AppCompatActivity {
     private String fellAsleepString, wokeUpString;
     private Button fellAsleep,wokeUp;
     private TextView viewSleep;
+    private Chronometer chronometer; // Декларируем Chronometer
 
     private ArrayList<String> resultArray = new ArrayList<>();
     private ArrayList<String> beautyResultArray = new ArrayList<>();
@@ -29,6 +28,7 @@ public class SleepActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_sleep);
+        chronometer = (Chronometer) findViewById(R.id.chronometer);
         addListenerOnButton();
 
     }
@@ -45,6 +45,13 @@ public class SleepActivity extends AppCompatActivity {
             public void onClick(View view) {
                 fellAsleepString = controller.fixTime();
                 printSleepView(fellAsleepString);
+
+                // Запускаем Chronometer
+                chronometer.setBase(SystemClock.elapsedRealtime());
+                chronometer.start();
+
+                // Устанавливаем Chronometer видимым
+                chronometer.setVisibility(View.VISIBLE);
             }
         });
 
@@ -54,6 +61,12 @@ public class SleepActivity extends AppCompatActivity {
             public void onClick(View view) {
                 wokeUpString = controller.fixTime();
                 printSleepView2(wokeUpString);
+
+                // Останавливаем Chronometer
+                chronometer.stop();
+
+                // Делаем Chronometer невидимым после остановки
+                chronometer.setVisibility(View.GONE);
             }
         });
     }
