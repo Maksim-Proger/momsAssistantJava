@@ -16,4 +16,8 @@ public class Controller {
         presenter.popupMenu(context,view,categories);
     }
 
+    public String fixTime(){
+        return presenter.fixTime();
+    }
+
 }

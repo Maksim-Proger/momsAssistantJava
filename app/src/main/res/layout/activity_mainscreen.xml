@@ -13,6 +13,7 @@
         android:layout_height="50dp"
         android:background="@drawable/button_on_login_page"
         android:text="Дневник"
+        android:layout_marginBottom="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/assistant_button"
         app:layout_constraintHorizontal_bias="0.5"
@@ -24,6 +25,7 @@
         android:layout_height="50dp"
         android:background="@drawable/button_on_login_page"
         android:text="Помощник"
+        android:layout_marginBottom="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -35,16 +37,18 @@
         android:layout_height="50dp"
         android:background="@drawable/button_on_login_page"
         android:text="Сон"
+        android:layout_marginBottom="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/diary_button"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/button_show_popup_menu"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Меню"
+        android:background="@drawable/button_on_login_page"
         app:layout_constraintBottom_toTopOf="@+id/sleep_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.049"
