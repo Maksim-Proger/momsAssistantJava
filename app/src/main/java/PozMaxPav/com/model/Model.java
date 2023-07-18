@@ -6,7 +6,11 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.PopupMenu;
+
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+
 import PozMaxPav.com.model.mainmenu.Category;
 
 public class Model {
@@ -36,5 +40,11 @@ public class Model {
         });
 
         popupMenu.show();
+    }
+
+    public String fixTime() {
+        Date dateNow = new Date();
+        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
+        return sdf.format(dateNow);
     }
 }

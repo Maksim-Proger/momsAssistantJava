@@ -16,5 +16,9 @@ public class Presenter {
         model.showPopupMenu(context,view,categories);
     }
 
+    public String fixTime(){
+        return model.fixTime();
+    }
+
 
 }
