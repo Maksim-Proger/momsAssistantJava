@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/maincolor">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="32sp"
+            android:text="Статистика сна"
+            android:textAlignment="center"
+            android:background="@color/secondMainColor"
+            android:fontFamily="monospace"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="500dp"
+            android:background="@color/secondMainColor"
+            android:textAlignment="center"
+            android:textSize="20sp"/>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:layout_width="200dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="60dp"
+            android:layout_gravity="center"
+            android:text="Сбросить статистику"
+            android:background="@drawable/button_on_login_page"/>
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

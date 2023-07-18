@@ -21,6 +21,7 @@
         <activity android:name=".all_activities.NotesActivity"/>
         <activity android:name=".all_activities.SleepActivity"/>
         <activity android:name=".all_activities.MomProfileActivity"/>
+        <activity android:name=".all_activities.SleepStatistics"/>
 
         <activity android:name=".all_activities.LoginActivity"
             android:exported="true">

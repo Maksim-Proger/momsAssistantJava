@@ -1,5 +1,6 @@
 package PozMaxPav.com.all_activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.SystemClock;
 import android.view.View;
@@ -16,7 +17,7 @@ import PozMaxPav.com.view.Controller;
 public class SleepActivity extends AppCompatActivity {
 
     private String fellAsleepString, wokeUpString;
-    private Button fellAsleep,wokeUp;
+    private Button fellAsleep,wokeUp,statistics;
     private TextView viewSleep;
     private Chronometer chronometer; // Декларируем Chronometer
 
@@ -39,6 +40,7 @@ public class SleepActivity extends AppCompatActivity {
         fellAsleep = (Button)findViewById(R.id.fellAsleep);
         wokeUp = (Button)findViewById(R.id.wokeUp);
         viewSleep = (TextView)findViewById(R.id.viewSleep);
+        statistics = (Button)findViewById(R.id.statistics);
 
         fellAsleep.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -67,6 +69,16 @@ public class SleepActivity extends AppCompatActivity {
 
                 // Делаем Chronometer невидимым после остановки
                 chronometer.setVisibility(View.GONE);
+            }
+        });
+
+        statistics.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(
+                        SleepActivity.this, SleepStatistics.class
+                );
+                startActivity(intent);
             }
         });
     }
