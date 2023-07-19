@@ -22,4 +22,6 @@
     <string name="wokeUp">Проснулся</string>
     <string name="sleepStatistics">Статистика сна</string>
     <string name="articlesProfile">Полезные статьи</string>
+    <string name="resetStats">Сбросить статистику</string>
+    <string name="headerSleepStatistics">Статистика сна</string>
 </resources>

@@ -13,8 +13,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="32sp"
-            android:text="Статистика сна"
+            android:text="@string/headerSleepStatistics"
             android:textAlignment="center"
+            android:textColor="@color/black"
             android:background="@color/secondMainColor"
             android:fontFamily="monospace"/>
 
@@ -23,14 +24,18 @@
             android:layout_height="500dp"
             android:background="@color/secondMainColor"
             android:textAlignment="center"
+            android:textColor="@color/black"
             android:textSize="20sp"/>
 
         <androidx.appcompat.widget.AppCompatButton
             android:layout_width="200dp"
-            android:layout_height="40dp"
+            android:layout_height="48dp"
             android:layout_marginTop="60dp"
             android:layout_gravity="center"
-            android:text="Сбросить статистику"
+            android:text="@string/resetStats"
+            android:id="@+id/buttonResetStats"
+            android:fontFamily="monospace"
+            android:textColor="@color/black"
             android:background="@drawable/button_on_login_page"/>
 
     </LinearLayout>
