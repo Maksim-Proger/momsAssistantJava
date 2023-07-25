@@ -2,22 +2,34 @@ package PozMaxPav.com.model;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.TypedArray;
+import android.view.ContextThemeWrapper;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.PopupMenu;
+import android.widget.PopupWindow;
 
+import androidx.appcompat.view.menu.MenuPopupHelper;
+import androidx.core.content.ContextCompat;
+
+import java.lang.reflect.Field;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
+import PozMaxPav.com.R;
 import PozMaxPav.com.model.mainmenu.Category;
 
 public class Model {
 
     public void showPopupMenu(Context context, View view, ArrayList<Category> categories){
 
-        PopupMenu popupMenu = new PopupMenu(context, view);
+        ContextThemeWrapper contextThemeWrapper = new ContextThemeWrapper(context, R.style.AppTheme);
+        PopupMenu popupMenu = new PopupMenu(contextThemeWrapper, view);
+
+//        PopupMenu popupMenu = new PopupMenu(context, view);
 
         for (int i = 0; i < categories.size(); i++) {
             Category category = categories.get(i);

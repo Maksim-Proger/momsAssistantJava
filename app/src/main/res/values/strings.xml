@@ -24,4 +24,6 @@
     <string name="articlesProfile">Полезные статьи</string>
     <string name="resetStats">Сбросить статистику</string>
     <string name="headerSleepStatistics">Статистика сна</string>
+    <string name="headerDiary">Дневник</string>
+    <string name="buttonBack">Назад</string>
 </resources>
