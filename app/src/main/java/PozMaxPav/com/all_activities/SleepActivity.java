@@ -19,12 +19,10 @@ import PozMaxPav.com.view.Controller;
 public class SleepActivity extends AppCompatActivity {
 
     private String fellAsleepString, wokeUpString;
-    private Button fellAsleep,wokeUp,statistics;
+    private Button fellAsleep,wokeUp,statistics,back_button_sleep;
     private TextView fellAsleepView,wokeUpView,resultSleep,test;
     private Chronometer chronometer; // Декларируем Chronometer
     private final ArrayList<String> resultArray = new ArrayList<>();
-    private HashMap<Integer, ArrayList<String>> hashMap = new HashMap<>();
-    private int num = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,9 +39,19 @@ public class SleepActivity extends AppCompatActivity {
         fellAsleep = (Button)findViewById(R.id.fellAsleep);
         wokeUp = (Button)findViewById(R.id.wokeUp);
         statistics = (Button)findViewById(R.id.statistics);
+        back_button_sleep = findViewById(R.id.back_button_sleep);
         fellAsleepView = (TextView)findViewById(R.id.fellAsleepView);
         wokeUpView = (TextView)findViewById(R.id.wokeUpView);
         resultSleep = (TextView)findViewById(R.id.resultSleep);
+
+        back_button_sleep.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(SleepActivity.this,MainScreenActivity.class);
+                startActivity(intent);
+            }
+        });
+
 
         fellAsleep.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -104,15 +112,6 @@ public class SleepActivity extends AppCompatActivity {
     }
 
     private void result(){
-
-        //записываем данные в наш HashMap
-        test = (TextView)findViewById(R.id.test);
-        hashMap.put(num,resultArray);
-        num++;
-        test.setText(hashMap.toString());
-
-
-
 
         String first = resultArray.get(0);
         String second = resultArray.get(1);

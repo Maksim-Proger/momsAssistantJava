@@ -11,15 +11,36 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/textView19"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/secondMainColor"
-            android:textSize="32sp"
-            android:textAlignment="center"
-            android:fontFamily="monospace"
-            android:text="Давай поиграем" />
+            android:orientation="horizontal">
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:layout_width="wrap_content"
+                android:layout_height="35dp"
+                android:layout_gravity="center"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:background="@drawable/other_button"
+                android:text="Назад"
+                android:textColor="@color/black"
+                android:id="@+id/back_button_games"
+                android:textSize="11sp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/other_button"
+                android:textSize="32sp"
+                android:textAlignment="center"
+                android:fontFamily="monospace"
+                android:textColor="@color/black"
+                android:text="Давай поиграем"/>
+
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -92,5 +113,7 @@
                 android:layout_weight="1"
                 android:text="Button" />
         </LinearLayout>
+
     </LinearLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

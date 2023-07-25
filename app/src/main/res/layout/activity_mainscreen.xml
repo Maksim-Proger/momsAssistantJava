@@ -7,53 +7,71 @@
     android:background="@color/maincolor"
     tools:context=".all_activities.MainScreenActivity">
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/diary_button"
-        android:layout_width="125dp"
-        android:layout_height="50dp"
-        android:background="@drawable/button_on_login_page"
-        android:text="Дневник"
-        android:layout_marginBottom="20dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/assistant_button"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/sleep_button" />
-
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/assistant_button"
-        android:layout_width="125dp"
-        android:layout_height="50dp"
-        android:background="@drawable/button_on_login_page"
-        android:text="Помощник"
-        android:layout_marginBottom="20dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/diary_button" />
-
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/sleep_button"
-        android:layout_width="125dp"
-        android:layout_height="50dp"
-        android:background="@drawable/button_on_login_page"
-        android:text="Сон"
-        android:layout_marginBottom="20dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/diary_button"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/button_show_popup_menu"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Меню"
+        android:layout_marginBottom="596dp"
         android:background="@drawable/button_on_login_page"
-        app:layout_constraintBottom_toTopOf="@+id/sleep_button"
+        android:text="Меню"
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.049"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.025" />
+        app:layout_constraintVertical_bias="0.992"
+        tools:layout_editor_absoluteX="0dp">
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/sleep_button"
+            android:layout_width="125dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:layout_marginStart="5dp"
+            android:layout_marginEnd="10dp"
+            android:layout_weight="1"
+            android:background="@drawable/button_on_login_page"
+            android:textColor="@color/black"
+            android:text="Сон"
+            android:textAlignment="center"/>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/diary_button"
+            android:layout_width="125dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:layout_marginStart="0dp"
+            android:layout_marginEnd="10dp"
+            android:layout_weight="1"
+            android:background="@drawable/button_on_login_page"
+            android:textColor="@color/black"
+            android:text="Дневник"
+            android:textAlignment="center"/>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/assistant_button"
+            android:layout_width="125dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:layout_marginStart="0dp"
+            android:layout_marginEnd="5dp"
+            android:layout_weight="1"
+            android:background="@drawable/button_on_login_page"
+            android:textColor="@color/black"
+            android:text="Помощник"
+            android:textAlignment="center"/>
+
+    </LinearLayout>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
