@@ -9,15 +9,41 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <TextView
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="32sp"
-            android:text="@string/headerSleepStatistics"
-            android:textAlignment="center"
-            android:textColor="@color/black"
-            android:background="@color/secondMainColor"
-            android:fontFamily="monospace"/>
+            android:orientation="horizontal">
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:layout_width="wrap_content"
+                android:layout_height="48dp"
+                android:layout_gravity="center"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:background="@drawable/other_button"
+                android:text="@string/buttonBack"
+                android:textColor="@color/black"
+                android:id="@+id/back_button_statistics"
+                android:textSize="11sp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:fontFamily="monospace"
+                android:layout_marginStart="0dp"
+                android:layout_marginEnd="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:textSize="26sp"
+                android:textAlignment="center"
+                android:gravity="center"
+                android:background="@drawable/other_button"
+                android:text="@string/headerSleepStatistics"
+                android:textColor="@color/black"/>
+
+        </LinearLayout>
 
         <TextView
             android:layout_width="match_parent"

@@ -16,15 +16,41 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0">
 
-        <TextView
-            android:id="@+id/textView"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/secondMainColor"
-            android:fontFamily="monospace"
-            android:text="@string/registration_field"
-            android:textAlignment="center"
-            android:textSize="32sp" />
+            android:orientation="horizontal">
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:layout_width="wrap_content"
+                android:layout_height="48dp"
+                android:layout_gravity="center"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:background="@drawable/other_button"
+                android:text="@string/buttonBack"
+                android:textColor="@color/black"
+                android:id="@+id/back_button"
+                android:textSize="11sp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:fontFamily="monospace"
+                android:layout_marginStart="0dp"
+                android:layout_marginEnd="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:textSize="26sp"
+                android:textAlignment="center"
+                android:gravity="center"
+                android:background="@drawable/other_button"
+                android:text="@string/registration_field"
+                android:textColor="@color/black"/>
+
+        </LinearLayout>
 
         <EditText
             android:id="@+id/editText5"
@@ -91,18 +117,6 @@
             android:padding="10sp"
             android:textAlignment="center" />
 
-        <TextView
-            android:id="@+id/editText10"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="15sp"
-            android:layout_marginTop="30sp"
-            android:layout_marginRight="15sp"
-            android:background="@drawable/fields_for_login_page"
-            android:fontFamily="monospace"
-            android:hint="@string/photo_field"
-            android:padding="10sp"
-            android:textAlignment="center" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/button"
