@@ -7,14 +7,13 @@
     android:background="@color/maincolor"
     tools:context=".all_activities.MainScreenActivity">
 
-
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/button_show_popup_menu"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="596dp"
         android:background="@drawable/button_on_login_page"
-        android:text="Меню"
+        android:text="@string/popupMenu"
         android:textColor="@color/black"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout"
         app:layout_constraintEnd_toEndOf="parent"
@@ -29,7 +28,7 @@
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.992"
+        app:layout_constraintVertical_bias="0.97"
         tools:layout_editor_absoluteX="0dp">
 
         <androidx.appcompat.widget.AppCompatButton

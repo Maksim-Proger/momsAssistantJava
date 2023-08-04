@@ -29,20 +29,20 @@ public class SleepActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_sleep);
-        chronometer = (Chronometer) findViewById(R.id.chronometer);
+        chronometer = findViewById(R.id.chronometer);
         addListenerOnButton();
     }
 
 
     private void addListenerOnButton() {
         Controller controller = new Controller();
-        fellAsleep = (Button)findViewById(R.id.fellAsleep);
-        wokeUp = (Button)findViewById(R.id.wokeUp);
-        statistics = (Button)findViewById(R.id.statistics);
+        fellAsleep = findViewById(R.id.fellAsleep);
+        wokeUp = findViewById(R.id.wokeUp);
+        statistics = findViewById(R.id.statistics);
         back_button_sleep = findViewById(R.id.back_button_sleep);
-        fellAsleepView = (TextView)findViewById(R.id.fellAsleepView);
-        wokeUpView = (TextView)findViewById(R.id.wokeUpView);
-        resultSleep = (TextView)findViewById(R.id.resultSleep);
+        fellAsleepView = findViewById(R.id.fellAsleepView);
+        wokeUpView = findViewById(R.id.wokeUpView);
+        resultSleep = findViewById(R.id.resultSleep);
 
         back_button_sleep.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -65,7 +65,6 @@ public class SleepActivity extends AppCompatActivity {
                 // Запускаем Chronometer
                 chronometer.setBase(SystemClock.elapsedRealtime());
                 chronometer.start();
-
                 // Устанавливаем Chronometer видимым
                 chronometer.setVisibility(View.VISIBLE);
             }
@@ -83,7 +82,6 @@ public class SleepActivity extends AppCompatActivity {
 
                 // Останавливаем Chronometer
                 chronometer.stop();
-
                 // Делаем Chronometer невидимым после остановки
                 chronometer.setVisibility(View.GONE);
             }
@@ -110,6 +108,7 @@ public class SleepActivity extends AppCompatActivity {
         resultArray.add(result);
         result();
     }
+
 
     private void result(){
 

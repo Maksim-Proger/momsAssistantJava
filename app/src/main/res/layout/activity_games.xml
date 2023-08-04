@@ -18,7 +18,7 @@
 
             <androidx.appcompat.widget.AppCompatButton
                 android:layout_width="wrap_content"
-                android:layout_height="35dp"
+                android:layout_height="48dp"
                 android:layout_gravity="center"
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="5dp"
@@ -32,13 +32,18 @@
 
             <TextView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/other_button"
-                android:textSize="32sp"
-                android:textAlignment="center"
+                android:layout_height="48dp"
                 android:fontFamily="monospace"
-                android:textColor="@color/black"
-                android:text="Давай поиграем"/>
+                android:layout_marginStart="0dp"
+                android:layout_marginEnd="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:textSize="26sp"
+                android:textAlignment="center"
+                android:gravity="center"
+                android:background="@drawable/other_button"
+                android:text="Давай поиграем"
+                android:textColor="@color/black"/>
 
         </LinearLayout>
 
@@ -55,7 +60,7 @@
                 android:layout_weight="1"
                 tools:srcCompat="@tools:sample/avatars" />
 
-            <Button
+            <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/button4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -63,7 +68,8 @@
                 android:layout_weight="1"
                 android:layout_marginLeft="15sp"
                 android:layout_marginRight="15sp"
-                android:text="Button" />
+                android:text="@string/play"
+                android:background="@drawable/button_on_login_page"/>
         </LinearLayout>
 
         <LinearLayout
@@ -79,7 +85,7 @@
                 android:layout_weight="1"
                 tools:srcCompat="@tools:sample/avatars" />
 
-            <Button
+            <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/button5"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -87,7 +93,8 @@
                 android:layout_marginLeft="15sp"
                 android:layout_marginRight="15sp"
                 android:layout_weight="1"
-                android:text="Button" />
+                android:text="@string/play"
+                android:background="@drawable/button_on_login_page"/>
         </LinearLayout>
 
         <LinearLayout
@@ -103,7 +110,7 @@
                 android:layout_weight="1"
                 tools:srcCompat="@tools:sample/avatars" />
 
-            <Button
+            <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/button6"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -111,7 +118,8 @@
                 android:layout_marginLeft="15sp"
                 android:layout_marginRight="15sp"
                 android:layout_weight="1"
-                android:text="Button" />
+                android:text="@string/play"
+                android:background="@drawable/button_on_login_page"/>
         </LinearLayout>
 
     </LinearLayout>

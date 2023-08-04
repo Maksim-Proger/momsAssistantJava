@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">Moms Assistant</string>
+    <string name="momsProfile">Мамин профиль</string>
     <string name="email">Email</string>
     <string name="password">Password</string>
     <string name="enter">Войти</string>
@@ -26,4 +27,7 @@
     <string name="headerSleepStatistics">Статистика сна</string>
     <string name="headerDiary">Дневник</string>
     <string name="buttonBack">Назад</string>
+    <string name="popupMenu">Меню</string>
+    <string name="save">Сохранить</string>
+    <string name="play">Играть</string>
 </resources>
