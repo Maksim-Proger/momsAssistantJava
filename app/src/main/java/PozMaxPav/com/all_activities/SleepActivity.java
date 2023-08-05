@@ -56,6 +56,10 @@ public class SleepActivity extends AppCompatActivity {
         fellAsleep.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                fellAsleepView.setText(""); // очищаем поле для повторного нажатия
+                wokeUpView.setText(""); // очищаем поле для повторного нажатия
+                resultSleep.setText(""); // очищаем поле для повторного нажатия
+
                 fellAsleepString = controller.fixTime();
                 String string = "Заснул: " + fellAsleepString;
                 fellAsleepView.setText(string);
@@ -106,7 +110,9 @@ public class SleepActivity extends AppCompatActivity {
 
     private void printSleepView2(String result) {
         resultArray.add(result);
-        result();
+        if (resultArray.size() >= 2){
+            result();
+        }
     }
 
 
@@ -124,6 +130,7 @@ public class SleepActivity extends AppCompatActivity {
         resultSleep.setText(string);
 
         resultArray.clear();
+
     }
 
 }
