@@ -51,6 +51,7 @@
             android:background="@color/secondMainColor"
             android:textAlignment="center"
             android:textColor="@color/black"
+            android:id="@+id/statisticsView"
             android:textSize="20sp"/>
 
         <androidx.appcompat.widget.AppCompatButton
