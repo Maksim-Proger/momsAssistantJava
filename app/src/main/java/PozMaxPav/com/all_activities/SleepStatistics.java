@@ -1,22 +1,66 @@
 package PozMaxPav.com.all_activities;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
+import java.util.List;
+import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 import PozMaxPav.com.R;
+import PozMaxPav.com.all_activities.database.AppDatabase;
+import PozMaxPav.com.all_activities.database.MyApp;
+import PozMaxPav.com.all_activities.database.User;
+import PozMaxPav.com.all_activities.database.UserDao;
 
 public class SleepStatistics extends AppCompatActivity {
 
     private Button back_button_statistics;
+    private TextView statisticsView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_sleepstatistics);
 
+        statisticsView = findViewById(R.id.statisticsView);
+
+        // Инициализируем экземпляр базы данных
+        AppDatabase appDatabase = ((MyApp) getApplication()).getAppDatabase();
+
+        // Получаем список пользователей из базы данных асинхронно
+        ExecutorService executor = Executors.newSingleThreadExecutor();
+        Future<List<User>> future = executor.submit(new GetUsersCallable(appDatabase));
+        try {
+            List<User> users = future.get();
+            showStatistics(users);
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            executor.shutdown();
+        }
+
         addListenerOnButton();
+    }
+
+    private static class GetUsersCallable implements Callable<List<User>> {
+        private final AppDatabase appDatabase;
+
+        public GetUsersCallable(AppDatabase appDatabase) {
+            this.appDatabase = appDatabase;
+        }
+
+        @Override
+        public List<User> call() throws Exception {
+            // Получаем DAO для работы с таблицей пользователей
+            UserDao userDao = appDatabase.getUserDao();
+
+            // Получаем список всех пользователей из базы данных
+            return userDao.getAllUsers();
+        }
     }
 
     private void addListenerOnButton() {
@@ -29,6 +73,15 @@ public class SleepStatistics extends AppCompatActivity {
                 onBackPressed();
             }
         });
+    }
 
+    private void showStatistics(List<User> users) {
+        StringBuilder stringBuilder = new StringBuilder();
+        for (User item: users) {
+            stringBuilder.append("№: ").append(item.getId()).append(", Заснул: ")
+                    .append(item.getSleep1()).append(", Проснулся: ")
+                    .append(item.getSleep2()).append("\n");
+        }
+        statisticsView.setText(stringBuilder);
     }
 }
