@@ -50,6 +50,14 @@ public class MainScreenActivity extends AppCompatActivity {
             }
         });
 
+        assistant_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainScreenActivity.this, Assistant.class);
+                startActivity(intent);
+            }
+        });
+
         button_show_popup_menu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

@@ -26,6 +26,7 @@
     <string name="resetStats">Сбросить статистику</string>
     <string name="headerSleepStatistics">Статистика сна</string>
     <string name="headerDiary">Дневник</string>
+    <string name="assistent">Помощник</string>
     <string name="buttonBack">Назад</string>
     <string name="popupMenu">Меню</string>
     <string name="save">Сохранить</string>
