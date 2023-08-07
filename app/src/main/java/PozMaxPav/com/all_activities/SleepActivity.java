@@ -1,11 +1,13 @@
 package PozMaxPav.com.all_activities;
 
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
-import android.os.SystemClock;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Chronometer;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import java.time.LocalTime;
@@ -21,6 +23,7 @@ import PozMaxPav.com.all_activities.database.AppDatabase;
 import PozMaxPav.com.all_activities.database.MyApp;
 import PozMaxPav.com.all_activities.database.User;
 import PozMaxPav.com.all_activities.database.UserDao;
+import PozMaxPav.com.all_activities.helperClasses.TimerService;
 import PozMaxPav.com.view.Controller;
 
 public class SleepActivity extends AppCompatActivity {
@@ -28,9 +31,19 @@ public class SleepActivity extends AppCompatActivity {
     private AppDatabase appDatabase; // объявляем переменную
     private String fellAsleepString, wokeUpString;
     private Button fellAsleep,wokeUp,statistics,back_button_sleep;
-    private TextView fellAsleepView,wokeUpView,resultSleep,test;
-    private Chronometer chronometer; // Декларируем Chronometer
+    private TextView fellAsleepView,wokeUpView,resultSleep;
+    private TextView timer;
+    private LocalBroadcastManager localBroadcastManager;
     private final ArrayList<String> resultArray = new ArrayList<>();
+
+    // Регистрируем BroadcastReceiver для обновления времени из сервиса
+    private BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            long elapsedMillis = intent.getLongExtra("elapsedMillis", 0);
+            updateTimer(elapsedMillis);
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,14 +51,37 @@ public class SleepActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_sleep);
 
+        timer = findViewById(R.id.timer);
+
         // Инициализируем экземляр базы данных
         appDatabase = ((MyApp) getApplication()).getAppDatabase();
 
         // Получаем экземпляр базы данных с помощбю метода getInstance
         appDatabase = AppDatabase.getInstance(getApplicationContext());
 
-        chronometer = findViewById(R.id.chronometer);
+        // Инициализируем LocalBroadcastManager
+        localBroadcastManager = LocalBroadcastManager.getInstance(this);
+
         addListenerOnButton();
+
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        LocalBroadcastManager.getInstance(this).unregisterReceiver(broadcastReceiver);
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        localBroadcastManager.registerReceiver(broadcastReceiver, new IntentFilter("UPDATE_TIME"));
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        localBroadcastManager.unregisterReceiver(broadcastReceiver);
     }
 
     private void insertOrUpdateUser(User user) {
@@ -116,11 +152,11 @@ public class SleepActivity extends AppCompatActivity {
 
                 printSleepView(fellAsleepString);
 
-                // Запускаем Chronometer
-                chronometer.setBase(SystemClock.elapsedRealtime());
-                chronometer.start();
-                // Устанавливаем Chronometer видимым
-                chronometer.setVisibility(View.VISIBLE);
+                // Запускаем секундомер
+                timer.setVisibility(View.VISIBLE);
+                Intent serviceIntent = new Intent(SleepActivity.this, TimerService.class);
+                serviceIntent.setAction(TimerService.ACTION_START);
+                startService(serviceIntent);
             }
         });
 
@@ -134,10 +170,10 @@ public class SleepActivity extends AppCompatActivity {
 
                 printSleepView2(wokeUpString);
 
-                // Останавливаем Chronometer
-                chronometer.stop();
-                // Делаем Chronometer невидимым после остановки
-                chronometer.setVisibility(View.GONE);
+                // Останавливаем секундомер
+                timer.setVisibility(View.GONE);
+                Intent serviceIntent = new Intent(SleepActivity.this, TimerService.class);
+                stopService(serviceIntent);
             }
         });
 
@@ -224,6 +260,16 @@ public class SleepActivity extends AppCompatActivity {
 
         resultArray.clear();
 
+    }
+
+    private void updateTimer(long elapsedMillis) {
+        int seconds = (int) (elapsedMillis / 1000); // Переводим миллисекунды в секунды
+        int minutes = seconds / 60; // Получаем количество минут
+        int hours = minutes / 60; // Получаем количество часов
+        seconds %= 60; // Получаем количество секунд, оставшихся после вычитания минут
+        minutes %= 60; // Получаем количество минут, оставшихся после вычитания часов
+        String time = String.format("%02d:%02d:%02d", hours, minutes, seconds); // Форматируем время в "чч:мм:сс"
+        timer.setText(time); // Устанавливаем отформатированное время в TextView
     }
 
 }
