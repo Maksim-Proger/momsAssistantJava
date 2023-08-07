@@ -23,6 +23,7 @@
         <activity android:name=".all_activities.SleepActivity"/>
         <activity android:name=".all_activities.MomProfileActivity"/>
         <activity android:name=".all_activities.SleepStatistics"/>
+        <service android:name=".all_activities.helperClasses.TimerService" />
 
         <activity android:name=".all_activities.LoginActivity"
             android:exported="true">
