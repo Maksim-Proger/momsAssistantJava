@@ -60,13 +60,10 @@ public class SleepActivity extends AppCompatActivity {
     }
 
     public class InsertOrUpdateUserCalleble implements Callable<Void> {
-
         private User user;
-
         public InsertOrUpdateUserCalleble(User user) {
             this.user = user;
         }
-
         @Override
         public Void call() throws Exception {
             // Получаем DAO для работы с таблицей пользователей
