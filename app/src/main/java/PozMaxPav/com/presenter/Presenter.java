@@ -20,5 +20,7 @@ public class Presenter {
         return model.fixTime();
     }
 
-
+    public String assistantMethod(String question) {
+        return model.assistantMethod(question);
+    }
 }

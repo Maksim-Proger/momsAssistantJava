@@ -9,9 +9,35 @@ import android.widget.PopupMenu;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Random;
+
 import PozMaxPav.com.model.mainmenu.Category;
 
 public class Model {
+
+    protected ArrayList<String> answerOptions = new ArrayList<>();
+    protected ArrayList<String> questionOptions = new ArrayList<>();
+    protected ArrayList<String> answerOptions2 = new ArrayList<>();
+    protected ArrayList<String> answerOptions3 = new ArrayList<>();
+    protected ArrayList<String> answerOptions4 = new ArrayList<>();
+
+    public void fillingArrayListAnswer() {
+        answerOptions.add("Привет");
+        answerOptions.add("Рад вас видеть");
+        answerOptions.add("И вам привет");
+        answerOptions.add("Здравствуйте");
+
+    }
+
+    public void fillingArrayListQuestion() {
+        questionOptions.add("Привет");
+        questionOptions.add("Привед");
+        questionOptions.add("привет");
+        questionOptions.add("привед");
+        questionOptions.add("Привет.");
+        questionOptions.add("Ghbdtn");
+        questionOptions.add("ghbdtn.");
+    }
 
     public void showPopupMenu(Context context, View view, ArrayList<Category> categories){
 
@@ -40,10 +66,22 @@ public class Model {
         popupMenu.show();
     }
 
-
     public String fixTime() {
         Date dateNow = new Date();
         SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
         return sdf.format(dateNow);
+    }
+
+    public String assistantMethod(String question) {
+
+        fillingArrayListAnswer();
+        fillingArrayListQuestion();
+        Random random = new Random();
+
+        if (questionOptions.contains(question)) {
+            int num = random.nextInt(answerOptions.size());
+            return answerOptions.get(num);
+        }
+        return "Пока я не могу ответить вам на этот вопрос. Попробуйте его переформулировать.";
     }
 }

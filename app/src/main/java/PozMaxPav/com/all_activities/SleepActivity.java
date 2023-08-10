@@ -19,11 +19,11 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import PozMaxPav.com.R;
-import PozMaxPav.com.all_activities.database.AppDatabase;
-import PozMaxPav.com.all_activities.database.MyApp;
-import PozMaxPav.com.all_activities.database.User;
-import PozMaxPav.com.all_activities.database.UserDao;
-import PozMaxPav.com.all_activities.helperClasses.TimerService;
+import PozMaxPav.com.model.database.AppDatabase;
+import PozMaxPav.com.model.database.MyApp;
+import PozMaxPav.com.model.database.User;
+import PozMaxPav.com.model.database.UserDao;
+import PozMaxPav.com.model.helperClasses.TimerService;
 import PozMaxPav.com.view.Controller;
 
 public class SleepActivity extends AppCompatActivity {

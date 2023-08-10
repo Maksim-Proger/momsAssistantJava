@@ -1,4 +1,4 @@
-package PozMaxPav.com.all_activities.database;
+package PozMaxPav.com.model.database;
 
 import android.content.Context;
 import androidx.room.Database;
