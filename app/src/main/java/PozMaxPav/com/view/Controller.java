@@ -20,4 +20,8 @@ public class Controller {
         return presenter.fixTime();
     }
 
+    public String assistantMethod(String question){
+        return presenter.assistantMethod(question);
+    }
+
 }

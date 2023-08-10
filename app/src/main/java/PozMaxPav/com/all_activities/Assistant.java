@@ -7,6 +7,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import PozMaxPav.com.R;
+import PozMaxPav.com.view.Controller;
 
 public class Assistant extends AppCompatActivity {
 
@@ -18,6 +19,7 @@ public class Assistant extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_assistant);
+
         addListenerOnButton();
     }
 
@@ -27,30 +29,14 @@ public class Assistant extends AppCompatActivity {
         editAssistant = findViewById(R.id.editAssistent);
         buttonAssistant = findViewById(R.id.buttonAssistent);
 
+        // Инициализируем экземпляр класса Controller
+        Controller controller = new Controller();
+
         buttonAssistant.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 String text = String.valueOf(editAssistant.getText());
-                String answer = "В данный момент я ничего не умею. Но я уверен, что в ближайшем " +
-                        "будущем я стану очень умным. Так что приходи чуть позже)))";
-                switch (text) {
-                    case "Что ты умеешь?":
-                    case "что ты умеешь?":
-                        viewAssistant.setText(answer);
-                        break;
-                    case "Привет":
-                    case "привет":
-                        viewAssistant.setText("И тебе привет!");
-                        break;
-                    case "Как тебя зовут?":
-                    case "как тебя зовут?":
-                        viewAssistant.setText("Сложно сказать. Я очень многогранная личность.");
-                        break;
-                    case "Пока":
-                    case "пока":
-                        viewAssistant.setText("Пока. Я буду ждать тебя тут.");
-                        break;
-                }
+                viewAssistant.setText(controller.assistantMethod(text));
                 editAssistant.setText("");
             }
         });

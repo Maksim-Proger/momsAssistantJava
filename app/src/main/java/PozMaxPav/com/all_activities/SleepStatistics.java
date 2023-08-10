@@ -11,10 +11,10 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import PozMaxPav.com.R;
-import PozMaxPav.com.all_activities.database.AppDatabase;
-import PozMaxPav.com.all_activities.database.MyApp;
-import PozMaxPav.com.all_activities.database.User;
-import PozMaxPav.com.all_activities.database.UserDao;
+import PozMaxPav.com.model.database.AppDatabase;
+import PozMaxPav.com.model.database.MyApp;
+import PozMaxPav.com.model.database.User;
+import PozMaxPav.com.model.database.UserDao;
 
 public class SleepStatistics extends AppCompatActivity {
 

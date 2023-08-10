@@ -1,4 +1,4 @@
-package PozMaxPav.com.all_activities.helperClasses;
+package PozMaxPav.com.model.helperClasses;
 
 import android.app.Service;
 import android.content.Intent;
