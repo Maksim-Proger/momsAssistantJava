@@ -5,22 +5,34 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
+
 import java.util.ArrayList;
 import PozMaxPav.com.R;
+import PozMaxPav.com.model.helperClasses.SharedPreferencesUtils;
 import PozMaxPav.com.model.mainmenu.Category;
 import PozMaxPav.com.view.Controller;
 
 public class MainScreenActivity extends AppCompatActivity {
 
     private Button sleep_button, diary_button, assistant_button, button_show_popup_menu;
+    private TextView fieldName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mainscreen);
 
-        addListenerOnButton();
 
+        // Получение и вывод имени пользователя и вывод в поле fieldName
+        fieldName = findViewById(R.id.fieldName);
+        String name = SharedPreferencesUtils.getKeyName(this);
+        if (name != null) {
+            fieldName.setText(name);
+        }
+
+
+        addListenerOnButton();
     }
 
     private void addListenerOnButton() {

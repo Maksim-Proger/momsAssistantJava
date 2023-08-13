@@ -131,13 +131,6 @@
             android:fontFamily="monospace"
             android:text="@string/registration_button" />
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="70dp"
-            android:id="@+id/textViewTest"
-            android:background="@color/secondMainColor"/>
-
-
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
