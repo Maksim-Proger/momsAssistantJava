@@ -13,7 +13,6 @@ public class RegistrationActivity extends AppCompatActivity {
 
     private Button back_button,buttonReg;
     private EditText editName,editSurname,editPatronymic,editEmail,editPassword;
-    private TextView textViewTest;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,8 +33,6 @@ public class RegistrationActivity extends AppCompatActivity {
         editEmail = findViewById(R.id.editEmail);
         editPassword = findViewById(R.id.editPassword);
 
-        textViewTest = findViewById(R.id.textViewTest);
-
         back_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -54,7 +51,6 @@ public class RegistrationActivity extends AppCompatActivity {
                 String password = String.valueOf(editName.getText());
                 
                 Mums mum = new Mums(name,surname,patronymic,email,password);
-                textViewTest.setText(mum.toString());
             }
         });
 

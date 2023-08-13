@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.os.Handler;
 import android.os.IBinder;
 import android.os.SystemClock;
-
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 public class TimerService extends Service {

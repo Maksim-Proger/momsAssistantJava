@@ -30,7 +30,7 @@ public class SleepActivity extends AppCompatActivity {
 
     private AppDatabase appDatabase; // объявляем переменную
     private String fellAsleepString, wokeUpString;
-    private Button fellAsleep,wokeUp,statistics,back_button_sleep;
+    private Button fellAsleep,wokeUp,statistics,back_button_sleep,pause,cont;
     private TextView fellAsleepView,wokeUpView,resultSleep;
     private TextView timer;
     private LocalBroadcastManager localBroadcastManager;
@@ -125,6 +125,8 @@ public class SleepActivity extends AppCompatActivity {
         wokeUp = findViewById(R.id.wokeUp);
         statistics = findViewById(R.id.statistics);
         back_button_sleep = findViewById(R.id.back_button_sleep);
+        pause = findViewById(R.id.pause);
+        cont = findViewById(R.id.cont);
         fellAsleepView = findViewById(R.id.fellAsleepView);
         wokeUpView = findViewById(R.id.wokeUpView);
         resultSleep = findViewById(R.id.resultSleep);
@@ -156,6 +158,26 @@ public class SleepActivity extends AppCompatActivity {
                 timer.setVisibility(View.VISIBLE);
                 Intent serviceIntent = new Intent(SleepActivity.this, TimerService.class);
                 serviceIntent.setAction(TimerService.ACTION_START);
+                startService(serviceIntent);
+            }
+        });
+
+        pause.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Приостанавливаем работу секундомера
+                Intent serviceIntent = new Intent(SleepActivity.this, TimerService.class);
+                serviceIntent.setAction(TimerService.ACTION_PAUSE);
+                startService(serviceIntent);
+            }
+        });
+
+        cont.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Продолжаем работу секундомера
+                Intent serviceIntent = new Intent(SleepActivity.this, TimerService.class);
+                serviceIntent.setAction(TimerService.ACTION_RESUME);
                 startService(serviceIntent);
             }
         });
