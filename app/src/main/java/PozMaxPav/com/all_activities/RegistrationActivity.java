@@ -1,5 +1,6 @@
 package PozMaxPav.com.all_activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -7,6 +8,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import PozMaxPav.com.R;
+import PozMaxPav.com.model.helperClasses.SharedPreferencesUtils;
 import PozMaxPav.com.model.users.Mums;
 
 public class RegistrationActivity extends AppCompatActivity {
@@ -50,9 +52,20 @@ public class RegistrationActivity extends AppCompatActivity {
                 String email = String.valueOf(editName.getText());
                 String password = String.valueOf(editName.getText());
                 
-                Mums mum = new Mums(name,surname,patronymic,email,password);
+//                Mums mum = new Mums(name,surname,patronymic,email,password); // пока не задействовал, НО надо !!!
+
+                // Сохраняем данные пользователя
+                saveCredentials(name,surname,patronymic,email,password);
+
+                Intent intent = new Intent(RegistrationActivity.this, MainScreenActivity.class);
+                startActivity(intent);
             }
         });
+    }
 
+    private void saveCredentials(
+            String name, String surname, String patronymic, String email, String password) {
+        SharedPreferencesUtils.saveCredentials(
+                this, name, surname, patronymic, email, password);
     }
 }
