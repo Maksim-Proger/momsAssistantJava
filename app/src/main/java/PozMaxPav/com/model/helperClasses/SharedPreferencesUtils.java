@@ -11,6 +11,8 @@ public class SharedPreferencesUtils {
     private static final String KEY_PATRONYMIC = "patronymic";
     private static final String KEY_EMAIL = "email";
     private static final String KEY_PASSWORD = "password";
+    private static final String KEY_LOGGED_IN = "is_logged_in";
+
 
     public static String getKeyName(Context context) {
         SharedPreferences sharedPreferences = context.getSharedPreferences(
@@ -42,13 +44,25 @@ public class SharedPreferencesUtils {
         editor.apply();
     }
 
+    // Методы проверки наличия логина и пароля в SharedPreferences
+    public boolean hasLoginAndPassword(Context context) {
+        SharedPreferences sharedPreferences = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
+        String savedEmail = sharedPreferences.getString(KEY_EMAIL, null);
+        String savedPassword = sharedPreferences.getString(KEY_PASSWORD, null);
 
-    // надо не забыть удалить этот метод
-//    public static void clear(Context context){
-//        SharedPreferences sharedPreferences = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
-//        SharedPreferences.Editor editor = sharedPreferences.edit();
-//        editor.clear();
-//        editor.apply();
-//    }
+        return savedEmail != null && savedPassword != null;
+    }
+
+    public static boolean isLoggedIn(Context context) {
+        SharedPreferences sharedPreferences = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
+        return sharedPreferences.getBoolean(KEY_LOGGED_IN, false);
+    }
+
+    public static void setLoggedIn(Context context, boolean loggedIn) {
+        SharedPreferences sharedPreferences = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putBoolean(KEY_LOGGED_IN, loggedIn);
+        editor.apply();
+    }
 
 }

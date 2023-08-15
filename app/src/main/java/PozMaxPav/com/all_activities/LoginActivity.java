@@ -8,6 +8,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import PozMaxPav.com.R;
+import PozMaxPav.com.model.helperClasses.SharedPreferencesUtils;
 import PozMaxPav.com.view.Controller;
 
 public class LoginActivity extends AppCompatActivity {
@@ -22,6 +23,15 @@ public class LoginActivity extends AppCompatActivity {
 
         email = findViewById(R.id.email);
         password = findViewById(R.id.password);
+
+        // Проверка наличия логина и пароля в SharedPreferences
+        SharedPreferencesUtils sharedPreferencesUtils = new SharedPreferencesUtils();
+        boolean hasLoginAndPassword = sharedPreferencesUtils.hasLoginAndPassword(this);
+
+        if (hasLoginAndPassword && sharedPreferencesUtils.isLoggedIn(this)) {
+            startMainScreen();
+            return;
+        }
 
         addListenerOnButton();
     }
@@ -38,12 +48,10 @@ public class LoginActivity extends AppCompatActivity {
                 String ourPassword = String.valueOf(password.getText());
                 String result = controller.inputValidation(LoginActivity.this, ourEmail, ourPassword);
 
-                if (result.equals("Вход выполнен")){
+                if (result.equals("Вход выполнен")) {
                     Toast.makeText(LoginActivity.this, result, Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(
-                            LoginActivity.this, MainScreenActivity.class
-                    );
-                    startActivity(intent);
+                    SharedPreferencesUtils.setLoggedIn(LoginActivity.this, true);
+                    startMainScreen();
                 } else {
                     Toast.makeText(LoginActivity.this, result, Toast.LENGTH_SHORT).show();
                 }
@@ -61,9 +69,10 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
-// Вспомогательный метод для очистки SharedPreferences
-//    private void clear(){
-//        SharedPreferencesUtils.clear(this);
-//    }
+    private void startMainScreen() {
+        Intent intent = new Intent(LoginActivity.this, MainScreenActivity.class);
+        startActivity(intent);
+        finish();
+    }
 
 }
