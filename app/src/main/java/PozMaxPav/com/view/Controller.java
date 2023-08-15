@@ -24,4 +24,13 @@ public class Controller {
         return presenter.assistantMethod(question);
     }
 
+    public String inputValidation(Context context, String email, String password) {
+        return presenter.inputValidation(context,email,password);
+    }
+
+    public String checkValidation(String name, String surname,
+                                  String patronymic, String email, String password) {
+        return presenter.checkValidation(name,surname,patronymic,email,password);
+    }
+
 }

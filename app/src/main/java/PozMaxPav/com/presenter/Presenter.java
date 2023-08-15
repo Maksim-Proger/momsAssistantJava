@@ -23,4 +23,13 @@ public class Presenter {
     public String assistantMethod(String question) {
         return model.assistantMethod(question);
     }
+
+    public String inputValidation(Context context, String email, String password) {
+        return model.inputValidation(context,email,password);
+    }
+
+    public String checkValidation(String name, String surname,
+                                  String patronymic, String email, String password) {
+        return model.checkValidation(name,surname,patronymic,email,password);
+    }
 }

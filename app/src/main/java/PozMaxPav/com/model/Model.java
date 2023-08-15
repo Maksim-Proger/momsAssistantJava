@@ -2,6 +2,7 @@ package PozMaxPav.com.model;
 
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -10,6 +11,13 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Random;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+import PozMaxPav.com.all_activities.LoginActivity;
+import PozMaxPav.com.all_activities.MainScreenActivity;
+import PozMaxPav.com.all_activities.RegistrationActivity;
+import PozMaxPav.com.model.helperClasses.SharedPreferencesUtils;
 import PozMaxPav.com.model.mainmenu.Category;
 
 public class Model {
@@ -86,4 +94,71 @@ public class Model {
         }
         return "Пока я не могу ответить вам на этот вопрос. Попробуйте его переформулировать.";
     }
+
+    public String inputValidation(Context context, String email, String password) {
+        String emailSharedPreferences = SharedPreferencesUtils.getKeyEmail(context);
+        String passwordSharedPreferencesUtils = SharedPreferencesUtils.getKeyPassword(context);
+
+        if (emailSharedPreferences.equals(email) && passwordSharedPreferencesUtils.equals(password)) {
+            return "Вход выполнен";
+        } else {
+            return "Неверный логин или пароль";
+        }
+    }
+
+    public String checkValidation(String name, String surname, String patronymic, String email, String password) {
+
+        boolean isValid = isValidEmail(email);
+
+        if (name.equals("")) {
+            return "Введите имя пользователя";
+        } else if (surname.equals("")) {
+            return "Введите фамилию пользователя";
+        } else if (patronymic.equals("")) {
+            return "Введите отчество пользователя";
+        } else if (email.equals("")) {
+            return "Введите email";
+        } else if (!isValid) {
+            return "Введен некоректный email";
+        } else if (password.equals("")) {
+            return "Введите пароль";
+        }
+        return "Пользователь зарегистрирован!";
+    }
+
+    public static boolean isValidEmail(String email) {
+        // Шаблон для проверки email
+        String emailPattern = "^[A-Za-z0-9+_.-]+@(.+)$";
+
+        Pattern pattern = Pattern.compile(emailPattern);
+        Matcher matcher = pattern.matcher(email);
+
+        return matcher.matches();
+    }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
