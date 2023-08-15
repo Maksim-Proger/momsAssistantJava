@@ -66,7 +66,7 @@ public class RegistrationActivity extends AppCompatActivity {
                     // Сохраняем данные пользователя
                     saveCredentials(name,surname,patronymic,email,password);
 
-                    Intent intent = new Intent(RegistrationActivity.this, MainScreenActivity.class);
+                    Intent intent = new Intent(RegistrationActivity.this, LoginActivity.class);
                     startActivity(intent);
                 } else {
                     Toast.makeText(RegistrationActivity.this, result, Toast.LENGTH_SHORT).show();
