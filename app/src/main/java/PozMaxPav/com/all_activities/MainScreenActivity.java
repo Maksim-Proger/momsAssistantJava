@@ -28,7 +28,8 @@ public class MainScreenActivity extends AppCompatActivity {
         fieldName = findViewById(R.id.fieldName);
         String name = SharedPreferencesUtils.getKeyName(this);
         if (name != null) {
-            fieldName.setText(name);
+            String welcome = "Привет " + name;
+            fieldName.setText(welcome);
         }
 
 

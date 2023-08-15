@@ -18,6 +18,16 @@ public class SharedPreferencesUtils {
         return sharedPreferences.getString(KEY_NAME, null);
     }
 
+    public static String getKeyEmail(Context context) {
+        SharedPreferences sharedPreferences = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
+        return sharedPreferences.getString(KEY_EMAIL, null);
+    }
+
+    public static String getKeyPassword(Context context) {
+        SharedPreferences sharedPreferences = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
+        return sharedPreferences.getString(KEY_PASSWORD, null);
+    }
+
     public static void saveCredentials(
             Context context, String name, String surname,
             String patronymic, String email, String password) {
@@ -31,5 +41,14 @@ public class SharedPreferencesUtils {
         editor.putString(KEY_PASSWORD, password);
         editor.apply();
     }
+
+
+    // надо не забыть удалить этот метод
+//    public static void clear(Context context){
+//        SharedPreferences sharedPreferences = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
+//        SharedPreferences.Editor editor = sharedPreferences.edit();
+//        editor.clear();
+//        editor.apply();
+//    }
 
 }

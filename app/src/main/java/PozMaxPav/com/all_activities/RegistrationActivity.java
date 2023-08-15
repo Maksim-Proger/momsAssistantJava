@@ -6,10 +6,13 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import androidx.appcompat.app.AppCompatActivity;
 import PozMaxPav.com.R;
 import PozMaxPav.com.model.helperClasses.SharedPreferencesUtils;
 import PozMaxPav.com.model.users.Mums;
+import PozMaxPav.com.view.Controller;
 
 public class RegistrationActivity extends AppCompatActivity {
 
@@ -46,26 +49,35 @@ public class RegistrationActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
+                Controller controller = new Controller();
+
                 String name = String.valueOf(editName.getText());
-                String surname = String.valueOf(editName.getText());
-                String patronymic = String.valueOf(editName.getText());
-                String email = String.valueOf(editName.getText());
-                String password = String.valueOf(editName.getText());
+                String surname = String.valueOf(editSurname.getText());
+                String patronymic = String.valueOf(editPatronymic.getText());
+                String email = String.valueOf(editEmail.getText());
+                String password = String.valueOf(editPassword.getText());
+
+                String result = controller.checkValidation(name,surname,patronymic,email,password);
                 
 //                Mums mum = new Mums(name,surname,patronymic,email,password); // пока не задействовал, НО надо !!!
 
-                // Сохраняем данные пользователя
-                saveCredentials(name,surname,patronymic,email,password);
+                if (result.equals("Пользователь зарегистрирован!")) {
 
-                Intent intent = new Intent(RegistrationActivity.this, MainScreenActivity.class);
-                startActivity(intent);
+                    // Сохраняем данные пользователя
+                    saveCredentials(name,surname,patronymic,email,password);
+
+                    Intent intent = new Intent(RegistrationActivity.this, MainScreenActivity.class);
+                    startActivity(intent);
+                } else {
+                    Toast.makeText(RegistrationActivity.this, result, Toast.LENGTH_SHORT).show();
+                }
             }
         });
     }
 
-    private void saveCredentials(
-            String name, String surname, String patronymic, String email, String password) {
-        SharedPreferencesUtils.saveCredentials(
-                this, name, surname, patronymic, email, password);
+    private void saveCredentials(String name, String surname,
+                                 String patronymic, String email, String password) {
+        SharedPreferencesUtils.saveCredentials(this, name,
+                surname, patronymic, email, password);
     }
 }
