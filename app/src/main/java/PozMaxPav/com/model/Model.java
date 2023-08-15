@@ -99,10 +99,14 @@ public class Model {
         String emailSharedPreferences = SharedPreferencesUtils.getKeyEmail(context);
         String passwordSharedPreferencesUtils = SharedPreferencesUtils.getKeyPassword(context);
 
-        if (emailSharedPreferences.equals(email) && passwordSharedPreferencesUtils.equals(password)) {
-            return "Вход выполнен";
-        } else {
-            return "Неверный логин или пароль";
+        if (emailSharedPreferences != null && passwordSharedPreferencesUtils != null)
+            if (emailSharedPreferences.equals(email) && passwordSharedPreferencesUtils.equals(password)) {
+                return "Вход выполнен";
+            } else {
+                return "Неверный логин или пароль";
+            }
+        else {
+            return "Пользователь не зарегистрирован";
         }
     }
 
