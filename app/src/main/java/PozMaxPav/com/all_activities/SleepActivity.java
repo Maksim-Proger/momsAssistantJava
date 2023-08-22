@@ -14,6 +14,7 @@ import java.time.LocalTime;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -75,7 +76,8 @@ public class SleepActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        localBroadcastManager.registerReceiver(broadcastReceiver, new IntentFilter("UPDATE_TIME"));
+        localBroadcastManager.registerReceiver(broadcastReceiver,
+                new IntentFilter("UPDATE_TIME"));
     }
 
     @Override
@@ -290,7 +292,9 @@ public class SleepActivity extends AppCompatActivity {
         int hours = minutes / 60; // Получаем количество часов
         seconds %= 60; // Получаем количество секунд, оставшихся после вычитания минут
         minutes %= 60; // Получаем количество минут, оставшихся после вычитания часов
-        String time = String.format("%02d:%02d:%02d", hours, minutes, seconds); // Форматируем время в "чч:мм:сс"
+        String time = String.format(
+                Locale.getDefault(), "%02d:%02d:%02d",
+                hours, minutes, seconds); // Форматируем время в "чч:мм:сс"
         timer.setText(time); // Устанавливаем отформатированное время в TextView
     }
 

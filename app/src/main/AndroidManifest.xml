@@ -2,6 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS"/>
+
     <application
         android:name=".model.database.MyApp"
         android:allowBackup="true"
@@ -25,6 +28,10 @@
         <activity android:name=".all_activities.SleepStatistics"/>
         <activity android:name=".all_activities.Assistant"/>
         <service android:name=".model.helperClasses.TimerService" />
+        <service
+            android:name=".model.helperClasses.ForegroundService"
+            android:enabled="true"
+            android:exported="false"/>
 
         <activity android:name=".all_activities.LoginActivity"
             android:exported="true">
