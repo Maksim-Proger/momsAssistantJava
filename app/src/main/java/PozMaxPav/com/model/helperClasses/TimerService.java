@@ -47,7 +47,8 @@ public class TimerService extends Service {
                 }
             }
         }
-        // Возвращаем START_STICKY, чтобы сервис автоматически перезапускался, если его убьет система.
+        // Возвращаем START_STICKY, чтобы сервис автоматически
+        // перезапускался, если его убьет система.
         return START_STICKY;
     }
 

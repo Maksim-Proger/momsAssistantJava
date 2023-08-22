@@ -8,6 +8,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import PozMaxPav.com.R;
+import PozMaxPav.com.model.helperClasses.ForegroundService;
 import PozMaxPav.com.model.helperClasses.SharedPreferencesUtils;
 import PozMaxPav.com.view.Controller;
 
@@ -73,6 +74,14 @@ public class LoginActivity extends AppCompatActivity {
         Intent intent = new Intent(LoginActivity.this, MainScreenActivity.class);
         startActivity(intent);
         finish();
+    }
+
+    // Метод запускающий фоновый режим
+    @Override
+    protected void onPause() {
+        super.onPause();
+        Intent intent = new Intent(this, ForegroundService.class);
+        startForegroundService(intent);
     }
 
 }
