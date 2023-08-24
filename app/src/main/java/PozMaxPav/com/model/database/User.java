@@ -8,10 +8,9 @@ import androidx.room.PrimaryKey;
 public class User {
     @PrimaryKey
     private int id;
-
     private String sleep1;
     private String sleep2;
-//    private String sleep3;
+    private String sleep3;
 
     // Создаем гетеры и сетеры
 
@@ -28,9 +27,9 @@ public class User {
         return sleep2;
     }
 
-//    public String getSleep3() {
-//        return sleep3;
-//    }
+    public String getSleep3() {
+        return sleep3;
+    }
 
     public void setId(int id) {
         this.id = id;
@@ -44,7 +43,7 @@ public class User {
         this.sleep2 = sleep2;
     }
 
-//    public void setSleep3(String sleep3) {
-//        this.sleep3 = sleep3;
-//    }
+    public void setSleep3(String sleep3) {
+        this.sleep3 = sleep3;
+    }
 }
