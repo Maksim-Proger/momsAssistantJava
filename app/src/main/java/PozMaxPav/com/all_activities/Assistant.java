@@ -37,7 +37,7 @@ public class Assistant extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 String text = String.valueOf(editAssistant.getText());
-                viewAssistant.setText(controller.assistantMethod(text));
+                viewAssistant.setText(controller.assistantMethod(getApplicationContext(),text));
                 editAssistant.setText("");
             }
         });

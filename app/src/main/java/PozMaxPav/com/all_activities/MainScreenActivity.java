@@ -1,8 +1,12 @@
 package PozMaxPav.com.all_activities;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -22,6 +26,9 @@ public class MainScreenActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mainscreen);
+
+        // Запрос на утправку уведослений
+        showPermissionDialog();
 
 
         // Получение и вывод имени пользователя и вывод в поле fieldName
@@ -87,8 +94,27 @@ public class MainScreenActivity extends AppCompatActivity {
                 controller.menu(MainScreenActivity.this,view,categories);
             }
         });
+    }
 
+    // Запрос на утправку уведослений
+    private void showPermissionDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Разрешение на отправку уведомлений")
+                .setMessage("Вы хотите предоставить разрешение на отправку уведомлений?")
+                .setPositiveButton("Да", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        openNotificationSettings();
+                    }
+                })
+                .setNegativeButton("Нет", null)
+                .show();
+    }
 
+    private void openNotificationSettings() {
+        Intent intent = new Intent(Settings.ACTION_APP_NOTIFICATION_SETTINGS)
+                .putExtra(Settings.EXTRA_APP_PACKAGE, getPackageName());
+        startActivity(intent);
     }
 
 }
