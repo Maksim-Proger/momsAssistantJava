@@ -57,13 +57,18 @@
                 android:layout_height="600dp"
                 android:background="@color/secondMainColor">
                 <TextView
+                    android:hint="@string/hint"
                     android:id="@+id/viewAssistent"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textAlignment="center"
+                    android:paddingStart="15dp"
+                    android:paddingEnd="15dp"
                     android:textSize="20sp"
                     android:textColor="@color/black"
-                    android:background="@color/secondMainColor"/>
+                    android:background="@color/secondMainColor"
+                    android:justificationMode="inter_word"
+                    android:ellipsize="none"
+                    android:maxWidth="0dp" />
             </ScrollView>
 
             <LinearLayout

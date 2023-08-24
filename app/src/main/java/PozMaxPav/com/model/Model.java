@@ -13,10 +13,7 @@ import java.util.Date;
 import java.util.Random;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
-import PozMaxPav.com.all_activities.LoginActivity;
-import PozMaxPav.com.all_activities.MainScreenActivity;
-import PozMaxPav.com.all_activities.RegistrationActivity;
+import PozMaxPav.com.model.helperClasses.ReadBase;
 import PozMaxPav.com.model.helperClasses.SharedPreferencesUtils;
 import PozMaxPav.com.model.mainmenu.Category;
 
@@ -79,7 +76,9 @@ public class Model {
         questionOptions.add("привет ");
     }
 
-    public String assistantMethod(String question) {
+    public String assistantMethod(Context context, String question) {
+
+        ReadBase readBase = new ReadBase();
 
         fillingArrayListAnswer();
         fillingArrayListQuestion();
@@ -91,6 +90,9 @@ public class Model {
             return answerOptions.get(num);
         } if (question.equals("Как тебя зовут?") || question.equals("как тебя зовут?")) {
             return String.format("%s %s", "Меня зовут", name);
+        } if (question.equals("rrr")) {
+            Log.println(Log.DEBUG,"Результат чтения", readBase.read(context, "powerSupply.txt"));
+            return readBase.read(context, "powerSupply.txt");
         }
         return "Пока я не могу ответить вам на этот вопрос. Попробуйте его переформулировать.";
     }

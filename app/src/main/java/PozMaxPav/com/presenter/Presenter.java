@@ -20,8 +20,8 @@ public class Presenter {
         return model.fixTime();
     }
 
-    public String assistantMethod(String question) {
-        return model.assistantMethod(question);
+    public String assistantMethod(Context context, String question) {
+        return model.assistantMethod(context,question);
     }
 
     public String inputValidation(Context context, String email, String password) {

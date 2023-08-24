@@ -20,8 +20,8 @@ public class Controller {
         return presenter.fixTime();
     }
 
-    public String assistantMethod(String question){
-        return presenter.assistantMethod(question);
+    public String assistantMethod(Context context, String question){
+        return presenter.assistantMethod(context,question);
     }
 
     public String inputValidation(Context context, String email, String password) {
