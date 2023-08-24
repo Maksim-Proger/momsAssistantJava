@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -141,7 +142,6 @@ public class SleepActivity extends AppCompatActivity {
             }
         });
 
-
         fellAsleep.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -184,7 +184,6 @@ public class SleepActivity extends AppCompatActivity {
             }
         });
 
-
         wokeUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -213,13 +212,13 @@ public class SleepActivity extends AppCompatActivity {
     }
 
 
-    private void printSleepView(String result) {
-        resultArray.add(result);
+    private void printSleepView(String first) {
+        resultArray.add(first);
     }
 
 
-    private void printSleepView2(String result) {
-        resultArray.add(result);
+    private void printSleepView2(String second) {
+        resultArray.add(second);
         if (resultArray.size() >= 2) {
             // Выполняем вставку нового пользователя в базу данных в фоновом потоке
             ExecutorService executor = Executors.newSingleThreadExecutor();
@@ -228,7 +227,7 @@ public class SleepActivity extends AppCompatActivity {
                 public void run() {
                     String first = resultArray.get(0);
                     String second = resultArray.get(1);
-//                    String result = result();
+                    String result = result();
 
                     // Получаем DAO для работы с таблицей пользователей
                     UserDao userDao = appDatabase.getUserDao();
@@ -241,11 +240,9 @@ public class SleepActivity extends AppCompatActivity {
                     newUser.setId(users.size() + 1); // Устанавливаем уникальный id
                     newUser.setSleep1(first);
                     newUser.setSleep2(second);
-//                    newUser.setSleep3(result);
+                    newUser.setSleep3(result);
                     insertOrUpdateUser(newUser);
-
-                    result();
-//                    resultSleep.setText(result);
+                    resultSleep.setText(result);
 
                     // Очищаем список после обработки
                     resultArray.clear();
@@ -256,21 +253,7 @@ public class SleepActivity extends AppCompatActivity {
     }
 
 
-//    private String result(){
-//        String first = resultArray.get(0);
-//        String second = resultArray.get(1);
-//
-//        LocalTime time1 = LocalTime.parse(first);
-//        LocalTime time2 = LocalTime.parse(second);
-//
-//        long differenceInMinutes = ChronoUnit.MINUTES.between(time1, time2);
-//        return String.valueOf(differenceInMinutes);
-//    }
-
-
-
-    private void result(){
-
+    private String result(){
         String first = resultArray.get(0);
         String second = resultArray.get(1);
 
@@ -278,13 +261,27 @@ public class SleepActivity extends AppCompatActivity {
         LocalTime time2 = LocalTime.parse(second);
 
         long differenceInMinutes = ChronoUnit.MINUTES.between(time1, time2);
-        String differenceAsString = String.valueOf(differenceInMinutes);
-        String string = "Спал: " + differenceAsString + " минут";
-        resultSleep.setText(string);
-
-        resultArray.clear();
-
+        return String.valueOf(differenceInMinutes);
     }
+
+
+
+//    private void result(){
+//
+//        String first = resultArray.get(0);
+//        String second = resultArray.get(1);
+//
+//        LocalTime time1 = LocalTime.parse(first);
+//        LocalTime time2 = LocalTime.parse(second);
+//
+//        long differenceInMinutes = ChronoUnit.MINUTES.between(time1, time2);
+//        String differenceAsString = String.valueOf(differenceInMinutes);
+//        String string = "Спал: " + differenceAsString + " минут";
+//        resultSleep.setText(string);
+//
+//        resultArray.clear();
+//
+//    }
 
     private void updateTimer(long elapsedMillis) {
         int seconds = (int) (elapsedMillis / 1000); // Переводим миллисекунды в секунды

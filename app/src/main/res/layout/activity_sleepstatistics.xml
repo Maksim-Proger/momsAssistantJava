@@ -45,14 +45,20 @@
 
         </LinearLayout>
 
-        <TextView
+        <ScrollView
             android:layout_width="match_parent"
             android:layout_height="500dp"
-            android:background="@color/secondMainColor"
-            android:textAlignment="center"
-            android:textColor="@color/black"
-            android:id="@+id/statisticsView"
-            android:textSize="20sp"/>
+            android:background="@color/secondMainColor">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/secondMainColor"
+                android:textAlignment="center"
+                android:textColor="@color/black"
+                android:id="@+id/statisticsView"
+                android:textSize="20sp"/>
+
+        </ScrollView>
 
         <androidx.appcompat.widget.AppCompatButton
             android:layout_width="200dp"

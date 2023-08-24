@@ -23,9 +23,6 @@ public class ForegroundService extends Service {
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         startForeground(NOTIFICATION_ID, createNotification());
-
-        // тут будем описывать фоновую работу
-
         return START_STICKY;
     }
 

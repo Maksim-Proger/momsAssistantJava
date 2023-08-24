@@ -52,14 +52,19 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/viewAssistent"
+            <ScrollView
                 android:layout_width="match_parent"
-                android:layout_height="500dp"
-                android:textAlignment="center"
-                android:textSize="20sp"
-                android:textColor="@color/black"
-                android:background="@color/secondMainColor"/>
+                android:layout_height="600dp"
+                android:background="@color/secondMainColor">
+                <TextView
+                    android:id="@+id/viewAssistent"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textAlignment="center"
+                    android:textSize="20sp"
+                    android:textColor="@color/black"
+                    android:background="@color/secondMainColor"/>
+            </ScrollView>
 
             <LinearLayout
                 android:layout_width="match_parent"
