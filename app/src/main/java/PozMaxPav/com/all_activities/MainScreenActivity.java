@@ -3,6 +3,7 @@ package PozMaxPav.com.all_activities;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.NotificationManager;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,25 +11,34 @@ import android.provider.Settings;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-
 import java.util.ArrayList;
 import PozMaxPav.com.R;
+import PozMaxPav.com.model.Model;
+import PozMaxPav.com.model.helperClasses.ForegroundService;
 import PozMaxPav.com.model.helperClasses.SharedPreferencesUtils;
 import PozMaxPav.com.model.mainmenu.Category;
-import PozMaxPav.com.view.Controller;
 
 public class MainScreenActivity extends AppCompatActivity {
 
     private Button sleep_button, diary_button, assistant_button, button_show_popup_menu;
     private TextView fieldName;
 
+    // Проверка наличия уведомлений
+    private boolean hasNotificationPermission() {
+        NotificationManager notificationManager = getSystemService(NotificationManager.class);
+        return notificationManager.areNotificationsEnabled();
+    }
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mainscreen);
 
-        // Запрос на утправку уведослений
-        showPermissionDialog();
+        if (!hasNotificationPermission()) {
+            // Запрос на утправку уведомлений
+            showPermissionDialog();
+        }
 
 
         // Получение и вывод имени пользователя и вывод в поле fieldName
@@ -43,8 +53,17 @@ public class MainScreenActivity extends AppCompatActivity {
         addListenerOnButton();
     }
 
+
+//    @Override
+//    protected void onPause() {
+//        super.onPause();
+//        Intent serviceIntent = new Intent(this, ForegroundService.class);
+//        startForegroundService(serviceIntent);
+//    }
+
+
     private void addListenerOnButton() {
-        Controller controller = new Controller();
+        Model model = new Model();
         sleep_button = (Button)findViewById(R.id.sleep_button);
         diary_button = (Button)findViewById(R.id.diary_button);
         assistant_button = (Button)findViewById(R.id.assistant_button);
@@ -84,14 +103,15 @@ public class MainScreenActivity extends AppCompatActivity {
                 ArrayList<Category> categories = new ArrayList<>();
                 categories.add(new Category(1,"Добавить вашего малыша", ChildrenProfileActivity.class));
                 categories.add(new Category(2,"Профиль малыша", ChildrenProfileActivity.class));
-                categories.add(new Category(3,"Давай поиграем", GamesActivity.class));
-                categories.add(new Category(4,"Сон", SleepActivity.class));
-                categories.add(new Category(5,"Оставь тут свои заметки", NotesActivity.class));
+                categories.add(new Category(3, "Профиль мамы", MomProfileActivity.class));
+                categories.add(new Category(4,"Давай поиграем", GamesActivity.class));
+                categories.add(new Category(5,"Сон", SleepActivity.class));
+                categories.add(new Category(6,"Оставь тут свои заметки", NotesActivity.class));
 //                categories.add(new Category(6,"Первый"));
 //                categories.add(new Category(7,"Первый"));
 //                categories.add(new Category(8,"Первый"));
 
-                controller.menu(MainScreenActivity.this,view,categories);
+                model.showPopupMenu(MainScreenActivity.this,view,categories);
             }
         });
     }

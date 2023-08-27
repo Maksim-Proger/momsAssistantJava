@@ -7,7 +7,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import PozMaxPav.com.R;
-import PozMaxPav.com.view.Controller;
+import PozMaxPav.com.model.Model;
 
 public class Assistant extends AppCompatActivity {
 
@@ -31,13 +31,13 @@ public class Assistant extends AppCompatActivity {
         back_button_assistant = findViewById(R.id.back_button_assistant);
 
         // Инициализируем экземпляр класса Controller
-        Controller controller = new Controller();
+        Model model = new Model();
 
         buttonAssistant.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 String text = String.valueOf(editAssistant.getText());
-                viewAssistant.setText(controller.assistantMethod(getApplicationContext(),text));
+                viewAssistant.setText(model.assistantMethod(getApplicationContext(),text));
                 editAssistant.setText("");
             }
         });

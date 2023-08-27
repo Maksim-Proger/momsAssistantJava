@@ -20,7 +20,7 @@ public class DiaryActivity extends AppCompatActivity {
     }
 
     private void addListenerOnButton() {
-        back_button_diary = findViewById(R.id.back_button_diary);
+        back_button_diary = findViewById(R.id.back_button);
         
         back_button_diary.setOnClickListener(new View.OnClickListener() {
             @Override

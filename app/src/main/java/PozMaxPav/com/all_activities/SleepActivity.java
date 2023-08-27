@@ -6,7 +6,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -21,12 +20,12 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import PozMaxPav.com.R;
+import PozMaxPav.com.model.Model;
 import PozMaxPav.com.model.database.AppDatabase;
 import PozMaxPav.com.model.database.MyApp;
 import PozMaxPav.com.model.database.User;
 import PozMaxPav.com.model.database.UserDao;
 import PozMaxPav.com.model.helperClasses.TimerService;
-import PozMaxPav.com.view.Controller;
 
 public class SleepActivity extends AppCompatActivity {
 
@@ -123,7 +122,7 @@ public class SleepActivity extends AppCompatActivity {
 
 
     private void addListenerOnButton() {
-        Controller controller = new Controller();
+        Model model = new Model();
         fellAsleep = findViewById(R.id.fellAsleep);
         wokeUp = findViewById(R.id.wokeUp);
         statistics = findViewById(R.id.statistics);
@@ -150,7 +149,7 @@ public class SleepActivity extends AppCompatActivity {
                 wokeUpView.setText(""); // очищаем поле для повторного нажатия
                 resultSleep.setText(""); // очищаем поле для повторного нажатия
 
-                fellAsleepString = controller.fixTime();
+                fellAsleepString = model.fixTime();
                 String string = "Заснул: " + fellAsleepString;
                 fellAsleepView.setText(string);
 
@@ -187,7 +186,7 @@ public class SleepActivity extends AppCompatActivity {
         wokeUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                wokeUpString = controller.fixTime();
+                wokeUpString = model.fixTime();
                 String string = "Проснулся: " + wokeUpString;
                 wokeUpView.setText(string);
 

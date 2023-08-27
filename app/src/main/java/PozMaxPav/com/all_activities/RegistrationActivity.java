@@ -5,14 +5,12 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.appcompat.app.AppCompatActivity;
 import PozMaxPav.com.R;
+import PozMaxPav.com.model.Model;
 import PozMaxPav.com.model.helperClasses.SharedPreferencesUtils;
 import PozMaxPav.com.model.users.Mums;
-import PozMaxPav.com.view.Controller;
 
 public class RegistrationActivity extends AppCompatActivity {
 
@@ -49,7 +47,7 @@ public class RegistrationActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                Controller controller = new Controller();
+                Model model = new Model();
 
                 String name = String.valueOf(editName.getText());
                 String surname = String.valueOf(editSurname.getText());
@@ -57,7 +55,7 @@ public class RegistrationActivity extends AppCompatActivity {
                 String email = String.valueOf(editEmail.getText());
                 String password = String.valueOf(editPassword.getText());
 
-                String result = controller.checkValidation(name,surname,patronymic,email,password);
+                String result = model.checkValidation(name,surname,patronymic,email,password);
                 
 //                Mums mum = new Mums(name,surname,patronymic,email,password); // пока не задействовал, НО надо !!!
 

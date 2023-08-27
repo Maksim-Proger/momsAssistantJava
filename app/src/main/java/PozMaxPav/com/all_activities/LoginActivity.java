@@ -8,9 +8,9 @@ import android.widget.EditText;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import PozMaxPav.com.R;
+import PozMaxPav.com.model.Model;
 import PozMaxPav.com.model.helperClasses.ForegroundService;
 import PozMaxPav.com.model.helperClasses.SharedPreferencesUtils;
-import PozMaxPav.com.view.Controller;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -44,10 +44,10 @@ public class LoginActivity extends AppCompatActivity {
         enter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Controller controller = new Controller();
+                Model model = new Model();
                 String ourEmail = String.valueOf(email.getText());
                 String ourPassword = String.valueOf(password.getText());
-                String result = controller.inputValidation(LoginActivity.this, ourEmail, ourPassword);
+                String result = model.inputValidation(LoginActivity.this, ourEmail, ourPassword);
 
                 if (result.equals("Вход выполнен")) {
                     Toast.makeText(LoginActivity.this, result, Toast.LENGTH_SHORT).show();

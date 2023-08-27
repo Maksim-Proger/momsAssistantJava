@@ -12,11 +12,12 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
 
             <androidx.appcompat.widget.AppCompatButton
                 android:layout_width="wrap_content"
-                android:layout_height="35dp"
+                android:layout_height="48dp"
                 android:layout_gravity="center"
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="5dp"
@@ -24,13 +25,12 @@
                 android:layout_marginBottom="5dp"
                 android:background="@drawable/other_button"
                 android:text="@string/buttonBack"
-                android:textColor="@color/black"
-                android:id="@+id/back_button_diary"
+                android:id="@+id/back_button"
                 android:textSize="11sp"/>
 
             <TextView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="48dp"
                 android:fontFamily="monospace"
                 android:layout_marginStart="0dp"
                 android:layout_marginEnd="5dp"
@@ -38,6 +38,7 @@
                 android:layout_marginBottom="5dp"
                 android:textSize="26sp"
                 android:textAlignment="center"
+                android:gravity="center"
                 android:background="@drawable/other_button"
                 android:text="@string/headerDiary"
                 android:textColor="@color/black"/>

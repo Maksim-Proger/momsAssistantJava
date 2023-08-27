@@ -5,7 +5,7 @@ import android.content.SharedPreferences;
 
 public class SharedPreferencesUtils {
 
-    private static final String PREFS_NAME = "MyFrefs";
+    private static final String PREFS_NAME = "MyPrefs";
     private static final String KEY_NAME = "name";
     private static final String KEY_SURNAME = "surname";
     private static final String KEY_PATRONYMIC = "patronymic";
@@ -18,6 +18,20 @@ public class SharedPreferencesUtils {
         SharedPreferences sharedPreferences = context.getSharedPreferences(
                 PREFS_NAME, Context.MODE_PRIVATE);
         return sharedPreferences.getString(KEY_NAME, null);
+    }
+
+    public static String getKeySurname(Context context) {
+        SharedPreferences sharedPreferences = context.getSharedPreferences(
+                PREFS_NAME, Context.MODE_PRIVATE
+        );
+        return sharedPreferences.getString(KEY_SURNAME, null);
+    }
+
+    public static String getKeyPatronymic(Context context) {
+        SharedPreferences sharedPreferences = context.getSharedPreferences(
+                PREFS_NAME, Context.MODE_PRIVATE
+        );
+        return sharedPreferences.getString(KEY_PATRONYMIC, null);
     }
 
     public static String getKeyEmail(Context context) {
