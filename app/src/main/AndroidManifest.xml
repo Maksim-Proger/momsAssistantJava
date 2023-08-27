@@ -17,17 +17,62 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MyApplication"
         tools:targetApi="31">
-        <activity android:name=".all_activities.MainScreenActivity"/>
-        <activity android:name=".all_activities.RegistrationActivity"/>
-        <activity android:name=".all_activities.ArticlesActivity"/>
-        <activity android:name=".all_activities.ChildrenProfileActivity"/>
-        <activity android:name=".all_activities.DiaryActivity"/>
-        <activity android:name=".all_activities.GamesActivity"/>
-        <activity android:name=".all_activities.NotesActivity"/>
-        <activity android:name=".all_activities.SleepActivity"/>
-        <activity android:name=".all_activities.MomProfileActivity"/>
-        <activity android:name=".all_activities.SleepStatistics"/>
-        <activity android:name=".all_activities.Assistant"/>
+
+        <activity
+            android:name=".all_activities.MainScreenActivity"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity"/>
+
+        <activity
+            android:name=".all_activities.RegistrationActivity"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity"/>
+
+        <activity
+            android:name=".all_activities.ArticlesActivity"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity"/>
+
+        <activity
+            android:name=".all_activities.ChildrenProfileActivity"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity"/>
+
+        <activity
+            android:name=".all_activities.DiaryActivity"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity"/>
+
+        <activity
+            android:name=".all_activities.GamesActivity"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity"/>
+
+        <activity
+            android:name=".all_activities.NotesActivity"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity"/>
+
+        <activity
+            android:name=".all_activities.SleepActivity"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity"/>
+
+        <activity
+            android:name=".all_activities.MomProfileActivity"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity"/>
+
+        <activity
+            android:name=".all_activities.SleepStatistics"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity"/>
+
+        <activity
+            android:name=".all_activities.Assistant"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity"/>
+
         <service android:name=".model.helperClasses.TimerService" />
         <service
             android:name=".model.helperClasses.ForegroundService"
