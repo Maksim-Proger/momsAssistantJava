@@ -7,20 +7,45 @@
     android:background="@color/maincolor"
     tools:context=".all_activities.MainScreenActivity">
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/button_show_popup_menu"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="596dp"
-        android:background="@drawable/button_on_login_page"
-        android:text="@string/popupMenu"
-        android:textColor="@color/black"
+        android:orientation="horizontal"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.049"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.216" />
+        app:layout_constraintVertical_bias="0.009">
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/button_show_popup_menu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/button_on_login_page"
+            android:text="@string/popupMenu"
+            android:textColor="@color/black"
+            android:layout_weight="1"
+            android:layout_marginStart="10dp"
+            tools:layout_editor_absoluteX="323dp"
+            tools:layout_editor_absoluteY="172dp" />
+
+        <TextView
+            android:id="@+id/fieldName"
+            android:layout_width="170dp"
+            android:layout_height="45dp"
+            android:background="@drawable/other_button"
+            android:fontFamily="monospace"
+            android:gravity="center"
+            android:textColor="@color/black"
+            android:layout_weight="1"
+            android:layout_marginStart="45dp"
+            android:layout_marginEnd="10dp"
+            tools:layout_editor_absoluteX="241dp"
+            tools:layout_editor_absoluteY="771dp" />
+
+
+    </LinearLayout>
 
     <LinearLayout
         android:id="@+id/linearLayout"
@@ -29,7 +54,7 @@
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.97"
+        app:layout_constraintVertical_bias="0.992"
         tools:layout_editor_absoluteX="0dp">
 
         <androidx.appcompat.widget.AppCompatButton
@@ -41,9 +66,9 @@
             android:layout_marginEnd="10dp"
             android:layout_weight="1"
             android:background="@drawable/button_on_login_page"
-            android:textColor="@color/black"
             android:text="Сон"
-            android:textAlignment="center"/>
+            android:textAlignment="center"
+            android:textColor="@color/black" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/diary_button"
@@ -54,9 +79,9 @@
             android:layout_marginEnd="10dp"
             android:layout_weight="1"
             android:background="@drawable/button_on_login_page"
-            android:textColor="@color/black"
             android:text="Дневник"
-            android:textAlignment="center"/>
+            android:textAlignment="center"
+            android:textColor="@color/black" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/assistant_button"
@@ -67,26 +92,11 @@
             android:layout_marginEnd="5dp"
             android:layout_weight="1"
             android:background="@drawable/button_on_login_page"
-            android:textColor="@color/black"
             android:text="Помощник"
-            android:textAlignment="center"/>
+            android:textAlignment="center"
+            android:textColor="@color/black" />
 
     </LinearLayout>
-
-    <TextView
-        android:id="@+id/fieldName"
-        android:layout_width="170dp"
-        android:layout_height="45dp"
-        android:background="@drawable/other_button"
-        android:textColor="@color/black"
-        android:gravity="center"
-        android:fontFamily="monospace"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.755"
-        app:layout_constraintStart_toEndOf="@+id/button_show_popup_menu"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.047" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

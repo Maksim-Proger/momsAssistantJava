@@ -2,12 +2,12 @@ package PozMaxPav.com.model;
 
 import android.content.Context;
 import android.content.Intent;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.PopupMenu;
 import java.text.SimpleDateFormat;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Random;
@@ -16,14 +16,12 @@ import java.util.regex.Pattern;
 import PozMaxPav.com.model.helperClasses.ReadBase;
 import PozMaxPav.com.model.helperClasses.SharedPreferencesUtils;
 import PozMaxPav.com.model.mainmenu.Category;
+import opennlp.tools.stemmer.PorterStemmer;
+import opennlp.tools.tokenize.SimpleTokenizer;
 
 public class Model {
 
     protected ArrayList<String> answerOptions = new ArrayList<>();
-    protected ArrayList<String> questionOptions = new ArrayList<>();
-    protected ArrayList<String> answerOptions2 = new ArrayList<>();
-    protected ArrayList<String> answerOptions3 = new ArrayList<>();
-    protected ArrayList<String> answerOptions4 = new ArrayList<>();
 
     public void showPopupMenu(Context context, View view, ArrayList<Category> categories){
 
@@ -59,42 +57,64 @@ public class Model {
     }
 
     public void fillingArrayListAnswer() {
-        answerOptions.add("Привет");
-        answerOptions.add("Рад вас видеть");
-        answerOptions.add("И вам привет");
-        answerOptions.add("Здравствуйте");
-
-    }
-
-    public void fillingArrayListQuestion() {
-        questionOptions.add("Привет");
-        questionOptions.add("Привед");
-        questionOptions.add("привет");
-        questionOptions.add("привед");
-        questionOptions.add("Привет.");
-        questionOptions.add("Привет ");
-        questionOptions.add("привет ");
+        answerOptions.add("Привет!");
+        answerOptions.add("Рад вас видеть!");
+        answerOptions.add("И вам привет!");
+        answerOptions.add("Здравствуйте!");
     }
 
     public String assistantMethod(Context context, String question) {
-
         ReadBase readBase = new ReadBase();
-
         fillingArrayListAnswer();
-        fillingArrayListQuestion();
         Random random = new Random();
         String name = "MaksBot";
 
-        if (questionOptions.contains(question)) {
+        // Создание токенизатора и стеммера
+        SimpleTokenizer tokenizer = SimpleTokenizer.INSTANCE;
+        PorterStemmer stemmer = new PorterStemmer();
+
+        // Преобразование запроса в нормализованные токены
+        String[] tokens = tokenizer.tokenize(question);
+        for (int i = 0; i < tokens.length; i++) {
+            tokens[i] = stemmer.stem(tokens[i]);
+        }
+
+        // Теперь можно сравнивать нормализованные токены с нормализованными ключевыми словами
+        if (containsAnyNormalized(tokens, "привет", "здравствуй", "добрый", "день")) {
             int num = random.nextInt(answerOptions.size());
             return answerOptions.get(num);
-        } if (question.equals("Как тебя зовут?") || question.equals("как тебя зовут?")) {
+        } else if (containsAnyNormalized(
+                tokens, "имя","зовут","представься")) {
             return String.format("%s %s", "Меня зовут", name);
-        } if (question.equals("rrr")) {
-            Log.println(Log.DEBUG,"Результат чтения", readBase.read(context, "powerSupply.txt"));
+        } else if (containsAnyNormalized(
+                tokens, "питание","питания","питании","диета","диеты")) {
             return readBase.read(context, "powerSupply.txt");
+        } else if (containsAnyNormalized(
+                tokens, "алкоголь","алкоголя","спиртное", "спиртных")) {
+            return readBase.read(context, "alcohol.txt");
+        } else if (containsAnyNormalized(
+                tokens, "молоко","молоком","количество","увеличить")) {
+            return readBase.read(context, "milkProblem.txt");
+        } else if (containsAnyNormalized(
+                tokens, "позы", "кормление","кормить")) {
+            return readBase.read(context, "feedingPoses.txt");
+        } else if (containsAnyNormalized(
+                tokens, "режим","режимы")) {
+            return readBase.read(context, "feedingMode.txt");
         }
-        return "Пока я не могу ответить вам на этот вопрос. Попробуйте его переформулировать.";
+            return "Пока я не могу ответить вам на этот вопрос. Попробуйте его переформулировать.";
+    }
+
+    // Проверка, содержит ли массив нормализованных строк хотя бы одну из заданных нормализованных строк
+    private boolean containsAnyNormalized(String[] array, String... normalizedValues) {
+        for (String normalizedValue: normalizedValues) {
+            for (String token: array) {
+                if (token.equalsIgnoreCase(normalizedValue)) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     public String inputValidation(Context context, String email, String password) {
@@ -140,6 +160,26 @@ public class Model {
         Matcher matcher = pattern.matcher(email);
 
         return matcher.matches();
+    }
+
+    public String checkTime(String timeNow){
+
+        LocalTime morningTime = LocalTime.of(5, 59);
+        LocalTime dayTime = LocalTime.of(11,59);
+        LocalTime eveningTime = LocalTime.of(16,59);
+        LocalTime nightTime = LocalTime.of(23,59);
+
+        LocalTime time = LocalTime.parse(timeNow);
+        if (time.isAfter(morningTime) && time.isBefore(dayTime)) {
+            return "Утренний сон!";
+        } if (time.isAfter(dayTime) && time.isBefore(eveningTime)) {
+            return "Дневной сон!";
+        } if (time.isAfter(eveningTime) && time.isBefore(nightTime)) {
+            return "Вечерний сон!";
+        } if (time.isAfter(nightTime) || time.isBefore(morningTime)) {
+            return "Ночной сон!";
+        }
+        return "Что-то не работет!";
     }
 }
 

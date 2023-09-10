@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/secondMainColor">
+
+    <LinearLayout
+        android:background="@color/maincolor"
+        android:id="@+id/header_linear_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:layout_gravity="center"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:background="@drawable/other_button"
+            android:text="@string/buttonBack"
+            android:id="@+id/back_button"
+            android:textSize="11sp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:fontFamily="monospace"
+            android:layout_marginStart="0dp"
+            android:layout_marginEnd="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:textSize="26sp"
+            android:textAlignment="center"
+            android:gravity="center"
+            android:background="@drawable/other_button"
+            android:text="@string/tictactoe"
+            android:textColor="@color/black"/>
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/content_wrapper"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:layout_below="@id/header_linear_layout">
+
+        <LinearLayout
+            android:id="@+id/first_linear_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp">
+
+            <include layout="@layout/button_layout"
+                android:id="@+id/bt1"/>
+            <include layout="@layout/button_layout"
+                android:id="@+id/bt2"/>
+            <include layout="@layout/button_layout"
+                android:id="@+id/bt3"/>
+            <include layout="@layout/button_layout"
+                android:id="@+id/bt4"/>
+            <include layout="@layout/button_layout"
+                android:id="@+id/bt5"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/second_linear_layout"
+            android:layout_below="@id/first_linear_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginTop="5dp">
+
+            <include layout="@layout/button_layout"
+                android:id="@+id/bt6"/>
+            <include layout="@layout/button_layout"
+                android:id="@+id/bt6"/>
+            <include layout="@layout/button_layout"
+                android:id="@+id/bt7"/>
+            <include layout="@layout/button_layout"
+                android:id="@+id/bt8"/>
+            <include layout="@layout/button_layout"
+                android:id="@+id/bt9"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/third_linear_layout"
+            android:layout_below="@id/second_linear_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginTop="5dp">
+
+            <include layout="@layout/button_layout"
+                android:id="@+id/bt10"/>
+            <include layout="@layout/button_layout"
+                android:id="@+id/bt11"/>
+            <include layout="@layout/button_layout"
+                android:id="@+id/bt12"/>
+            <include layout="@layout/button_layout"
+                android:id="@+id/bt13"/>
+            <include layout="@layout/button_layout"
+                android:id="@+id/bt14"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/fourth_linear_layout"
+            android:layout_below="@id/third_linear_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginTop="5dp">
+
+            <include layout="@layout/button_layout"
+                android:id="@+id/bt15"/>
+            <include layout="@layout/button_layout"
+                android:id="@+id/bt16"/>
+            <include layout="@layout/button_layout"
+                android:id="@+id/bt17"/>
+            <include layout="@layout/button_layout"
+                android:id="@+id/bt18"/>
+            <include layout="@layout/button_layout"
+                android:id="@+id/bt19"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_below="@id/fourth_linear_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginTop="5dp">
+
+            <include layout="@layout/button_layout"
+                android:id="@+id/bt20"/>
+            <include layout="@layout/button_layout"
+                android:id="@+id/bt21"/>
+            <include layout="@layout/button_layout"
+                android:id="@+id/bt22"/>
+            <include layout="@layout/button_layout"
+                android:id="@+id/bt23"/>
+            <include layout="@layout/button_layout"
+                android:id="@+id/bt24"/>
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</RelativeLayout>

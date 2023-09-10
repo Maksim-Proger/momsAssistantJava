@@ -32,7 +32,7 @@ public class SleepActivity extends AppCompatActivity {
     private AppDatabase appDatabase; // объявляем переменную
     private String fellAsleepString, wokeUpString;
     private Button fellAsleep,wokeUp,statistics,back_button_sleep,pause,cont;
-    private TextView fellAsleepView,wokeUpView,resultSleep;
+    private TextView fellAsleepView,wokeUpView,resultSleep,testClock;
     private TextView timer;
     private LocalBroadcastManager localBroadcastManager;
     private final ArrayList<String> resultArray = new ArrayList<>();
@@ -132,6 +132,7 @@ public class SleepActivity extends AppCompatActivity {
         fellAsleepView = findViewById(R.id.fellAsleepView);
         wokeUpView = findViewById(R.id.wokeUpView);
         resultSleep = findViewById(R.id.resultSleep);
+        testClock = findViewById(R.id.testClock);
 
         back_button_sleep.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -152,6 +153,14 @@ public class SleepActivity extends AppCompatActivity {
                 fellAsleepString = model.fixTime();
                 String string = "Заснул: " + fellAsleepString;
                 fellAsleepView.setText(string);
+
+
+
+                // Тестируем определение времени
+                String testTime = fellAsleepString;
+                testClock.setText(model.checkTime(testTime));
+
+
 
                 printSleepView(fellAsleepString);
 
@@ -262,25 +271,6 @@ public class SleepActivity extends AppCompatActivity {
         long differenceInMinutes = ChronoUnit.MINUTES.between(time1, time2);
         return String.valueOf(differenceInMinutes);
     }
-
-
-
-//    private void result(){
-//
-//        String first = resultArray.get(0);
-//        String second = resultArray.get(1);
-//
-//        LocalTime time1 = LocalTime.parse(first);
-//        LocalTime time2 = LocalTime.parse(second);
-//
-//        long differenceInMinutes = ChronoUnit.MINUTES.between(time1, time2);
-//        String differenceAsString = String.valueOf(differenceInMinutes);
-//        String string = "Спал: " + differenceAsString + " минут";
-//        resultSleep.setText(string);
-//
-//        resultArray.clear();
-//
-//    }
 
     private void updateTimer(long elapsedMillis) {
         int seconds = (int) (elapsedMillis / 1000); // Переводим миллисекунды в секунды
