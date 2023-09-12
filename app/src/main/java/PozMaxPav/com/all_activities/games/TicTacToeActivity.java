@@ -1,119 +1,90 @@
 package PozMaxPav.com.all_activities.games;
 
-import android.content.DialogInterface;
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
-import androidx.appcompat.app.AlertDialog;
+
 import androidx.appcompat.app.AppCompatActivity;
 import PozMaxPav.com.R;
 import PozMaxPav.com.model.LogicForTicTacToe;
 
 public class TicTacToeActivity extends AppCompatActivity {
 
+    private final Button[] buttons = new Button[25];
+    private boolean gameOver = false;
     private final LogicForTicTacToe logic = new LogicForTicTacToe(this);
-    private Button back_button;
-    private Button[] buttons = new Button[24];
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tictactoe);
 
-        back_button = findViewById(R.id.back_button);
-        back_button.setOnClickListener(new View.OnClickListener() {
+        fillArrayButtons();
+
+        Thread thread = new Thread(new Runnable() {
             @Override
-            public void onClick(View view) {
-                onBackPressed();
+            public void run() {
+                playGame();
             }
         });
-
-        lotteryDialog();
-        findButtons();
-
+        thread.start();
     }
 
-    private void findButtons() {
+
+    /**
+     * Находим все наши кнопки и заполняем ArrayList
+     */
+    private void fillArrayButtons(){
         for (int i = 0; i < buttons.length; i++) {
-            int buttonId = getResources().getIdentifier("bt" + (i + 1), "id",
-                    getPackageName());
+            @SuppressLint("DiscouragedApi") int buttonId = getResources().getIdentifier("bt" + (i + 1), "id", getPackageName());
             buttons[i] = findViewById(buttonId);
             logic.addNewButton(buttons[i]);
         }
     }
 
     private void playGame() {
-
-    }
-
-
-    private void lotteryDialog() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Сейчас мы разыграем кто будет ходить первым")
-                .setPositiveButton("Орёл", new DialogInterface.OnClickListener() {
+        while (!gameOver) {
+            boolean win = logic.checkWin();
+            player();
+            gameOver = logic.checkState();
+            if (gameOver) {
+                runOnUiThread(new Runnable() {
                     @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        runLottery("Орёл");
+                    public void run() {
+                        Toast.makeText(TicTacToeActivity.this, "Ничья!", Toast.LENGTH_SHORT).show();
                     }
-                })
-                .setNegativeButton("Решка", new DialogInterface.OnClickListener() {
+                });
+            }
+
+            if (win) {
+                runOnUiThread(new Runnable() {
                     @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        runLottery("Решка");
+                    public void run() {
+                        Toast.makeText(TicTacToeActivity.this, "Победа!", Toast.LENGTH_SHORT).show();
                     }
-                })
-                .show();
-    }
-
-    /**
-     *  метод runLotteryInBackground выполняет лотерею в фоновом потоке
-     */
-    private void runLottery(final String choice) {
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                boolean result = logic.isLottery(choice);
-                lotteryResult(result);
+                });
             }
-        }).start();
+
+            bot();
+            gameOver = logic.checkState();
+        }
     }
 
-    /**
-     * отображает результат в главном потоке с помощью runOnUiThread
-     * @param result
-     */
-    private void lotteryResult(final boolean result) {
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                if (result) {
-                    Toast.makeText(TicTacToeActivity.this, "Ура! Вы ходите (Х). ", Toast.LENGTH_SHORT).show();
-                } else {
-                    Toast.makeText(TicTacToeActivity.this, "Вы ходите (0).", Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
-    }
-
-
-    private void playerMove() {
-        // Обработчик нажатия на кнопку
-        for (Button button: logic.idButton) {
+    private void player() {
+        for (final Button button: logic.idButtons) {
             button.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    logic.playerMove(button);
+                    logic.playerLogic(button);
                 }
             });
         }
     }
 
-    private void botMove() {
-
+    private void bot() {
+        logic.botLogic();
     }
-
-
-
-
 }
