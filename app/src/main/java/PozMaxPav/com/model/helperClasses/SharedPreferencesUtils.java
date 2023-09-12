@@ -79,4 +79,30 @@ public class SharedPreferencesUtils {
         editor.apply();
     }
 
+
+
+
+
+    // Тестируем сохранения переменной заснул
+    private static final String KEY_SLEEP = "fellAsleepTest";
+
+    public static String getKeySleep(Context context) {
+        SharedPreferences sharedPreferences = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
+        return sharedPreferences.getString(KEY_SLEEP, null);
+    }
+
+    public static void saveCredentials2(Context context, String sleep) {
+        SharedPreferences sharedPreferences = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString(KEY_SLEEP, sleep);
+        editor.apply();
+    }
+
+    public static void removeCredentials2(Context context) {
+        SharedPreferences sharedPreferences = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.remove(KEY_SLEEP);
+        editor.apply();
+    }
+
 }

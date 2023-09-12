@@ -25,6 +25,7 @@ import PozMaxPav.com.model.database.AppDatabase;
 import PozMaxPav.com.model.database.MyApp;
 import PozMaxPav.com.model.database.User;
 import PozMaxPav.com.model.database.UserDao;
+import PozMaxPav.com.model.helperClasses.SharedPreferencesUtils;
 import PozMaxPav.com.model.helperClasses.TimerService;
 
 public class SleepActivity extends AppCompatActivity {
@@ -36,6 +37,7 @@ public class SleepActivity extends AppCompatActivity {
     private TextView timer;
     private LocalBroadcastManager localBroadcastManager;
     private final ArrayList<String> resultArray = new ArrayList<>();
+
 
     // Регистрируем BroadcastReceiver для обновления времени из сервиса
     private BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
@@ -51,6 +53,17 @@ public class SleepActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_sleep);
+
+
+
+        // Тестируем сохранение переменной
+        fellAsleepView = findViewById(R.id.fellAsleepView);
+//        fellAsleepView.setText("");
+        String name = SharedPreferencesUtils.getKeySleep(this);
+        if (name != null) {
+            fellAsleepView.setText(name);
+        }
+
 
         timer = findViewById(R.id.timer);
 
@@ -129,7 +142,7 @@ public class SleepActivity extends AppCompatActivity {
         back_button_sleep = findViewById(R.id.back_button_sleep);
         pause = findViewById(R.id.pause);
         cont = findViewById(R.id.cont);
-        fellAsleepView = findViewById(R.id.fellAsleepView);
+//        fellAsleepView = findViewById(R.id.fellAsleepView);
         wokeUpView = findViewById(R.id.wokeUpView);
         resultSleep = findViewById(R.id.resultSleep);
         testClock = findViewById(R.id.testClock);
@@ -153,6 +166,20 @@ public class SleepActivity extends AppCompatActivity {
                 fellAsleepString = model.fixTime();
                 String string = "Заснул: " + fellAsleepString;
                 fellAsleepView.setText(string);
+
+
+
+
+
+
+
+                // Тестируем сохранение переменной заснул
+                // Сохраняем
+                SharedPreferencesUtils.saveCredentials2(SleepActivity.this, string);
+
+
+
+
 
 
 
@@ -200,6 +227,13 @@ public class SleepActivity extends AppCompatActivity {
                 wokeUpView.setText(string);
 
                 printSleepView2(wokeUpString);
+
+
+
+                // Тестируем удаление сохраненной переменной
+                SharedPreferencesUtils.removeCredentials2(SleepActivity.this);
+
+
 
                 // Останавливаем секундомер
                 timer.setVisibility(View.GONE);
