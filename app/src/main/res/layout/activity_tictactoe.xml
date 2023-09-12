@@ -43,13 +43,60 @@
 
     </LinearLayout>
 
+    <LinearLayout
+        android:layout_below="@id/header_linear_layout"
+        android:id="@+id/lottery_linear_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="25dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/lottery"
+            android:textSize="25sp"
+            android:textColor="@color/black"
+            android:gravity="center"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="15dp">
+
+            <Button
+                android:id="@+id/cross_sign_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginStart="15dp"
+                android:layout_marginEnd="15dp"
+                android:textSize="20sp"
+                android:textColor="@color/black"
+                android:text="@string/cross_sign"/>
+
+            <Button
+                android:id="@+id/zero_sign_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginEnd="15dp"
+                android:textSize="20sp"
+                android:textColor="@color/black"
+                android:text="@string/zero_sign"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
     <RelativeLayout
         android:id="@+id/content_wrapper"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:gravity="center"
-        android:layout_below="@id/header_linear_layout">
+        android:layout_below="@id/lottery_linear_layout">
 
         <LinearLayout
             android:id="@+id/first_linear_layout"
@@ -85,13 +132,13 @@
             <include layout="@layout/button_layout"
                 android:id="@+id/bt6"/>
             <include layout="@layout/button_layout"
-                android:id="@+id/bt6"/>
-            <include layout="@layout/button_layout"
                 android:id="@+id/bt7"/>
             <include layout="@layout/button_layout"
                 android:id="@+id/bt8"/>
             <include layout="@layout/button_layout"
                 android:id="@+id/bt9"/>
+            <include layout="@layout/button_layout"
+                android:id="@+id/bt10"/>
 
         </LinearLayout>
 
@@ -106,8 +153,6 @@
             android:layout_marginTop="5dp">
 
             <include layout="@layout/button_layout"
-                android:id="@+id/bt10"/>
-            <include layout="@layout/button_layout"
                 android:id="@+id/bt11"/>
             <include layout="@layout/button_layout"
                 android:id="@+id/bt12"/>
@@ -115,6 +160,8 @@
                 android:id="@+id/bt13"/>
             <include layout="@layout/button_layout"
                 android:id="@+id/bt14"/>
+            <include layout="@layout/button_layout"
+                android:id="@+id/bt15"/>
 
         </LinearLayout>
 
@@ -129,8 +176,6 @@
             android:layout_marginTop="5dp">
 
             <include layout="@layout/button_layout"
-                android:id="@+id/bt15"/>
-            <include layout="@layout/button_layout"
                 android:id="@+id/bt16"/>
             <include layout="@layout/button_layout"
                 android:id="@+id/bt17"/>
@@ -138,6 +183,8 @@
                 android:id="@+id/bt18"/>
             <include layout="@layout/button_layout"
                 android:id="@+id/bt19"/>
+            <include layout="@layout/button_layout"
+                android:id="@+id/bt20"/>
 
         </LinearLayout>
 
@@ -151,8 +198,6 @@
             android:layout_marginTop="5dp">
 
             <include layout="@layout/button_layout"
-                android:id="@+id/bt20"/>
-            <include layout="@layout/button_layout"
                 android:id="@+id/bt21"/>
             <include layout="@layout/button_layout"
                 android:id="@+id/bt22"/>
@@ -160,6 +205,8 @@
                 android:id="@+id/bt23"/>
             <include layout="@layout/button_layout"
                 android:id="@+id/bt24"/>
+            <include layout="@layout/button_layout"
+                android:id="@+id/bt25"/>
 
         </LinearLayout>
 
