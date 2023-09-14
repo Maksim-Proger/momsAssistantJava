@@ -13,6 +13,7 @@ import PozMaxPav.com.model.LogicForTicTacToe;
 public class TicTacToeActivity extends AppCompatActivity {
 
     private final Button[] buttons = new Button[25];
+    private Button back_button;
     private boolean gameOver = false;
     private final LogicForTicTacToe logic = new LogicForTicTacToe(this);
 
@@ -31,6 +32,19 @@ public class TicTacToeActivity extends AppCompatActivity {
             }
         });
         thread.start();
+
+        addListenerOnButton();
+    }
+
+    private void addListenerOnButton() {
+        back_button = findViewById(R.id.back_button);
+        back_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+            }
+        });
+
     }
 
 
@@ -57,6 +71,7 @@ public class TicTacToeActivity extends AppCompatActivity {
                         Toast.makeText(TicTacToeActivity.this, "Ничья!", Toast.LENGTH_SHORT).show();
                     }
                 });
+                break;
             }
 
             if (win) {
@@ -66,6 +81,7 @@ public class TicTacToeActivity extends AppCompatActivity {
                         Toast.makeText(TicTacToeActivity.this, "Победа!", Toast.LENGTH_SHORT).show();
                     }
                 });
+                break;
             }
 
             bot();

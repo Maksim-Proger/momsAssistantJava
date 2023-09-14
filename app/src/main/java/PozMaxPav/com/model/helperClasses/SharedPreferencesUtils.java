@@ -13,6 +13,11 @@ public class SharedPreferencesUtils {
     private static final String KEY_PASSWORD = "password";
     private static final String KEY_LOGGED_IN = "is_logged_in";
 
+    // переменные из активности Сон
+    private static final String KEY_ASLEEP = "Asleep";
+    private static final String KEY_AWOKE = "Awoke";
+
+
 
     public static String getKeyName(Context context) {
         SharedPreferences sharedPreferences = context.getSharedPreferences(
@@ -35,12 +40,14 @@ public class SharedPreferencesUtils {
     }
 
     public static String getKeyEmail(Context context) {
-        SharedPreferences sharedPreferences = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
+        SharedPreferences sharedPreferences = context.getSharedPreferences(
+                PREFS_NAME, Context.MODE_PRIVATE);
         return sharedPreferences.getString(KEY_EMAIL, null);
     }
 
     public static String getKeyPassword(Context context) {
-        SharedPreferences sharedPreferences = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
+        SharedPreferences sharedPreferences = context.getSharedPreferences(
+                PREFS_NAME, Context.MODE_PRIVATE);
         return sharedPreferences.getString(KEY_PASSWORD, null);
     }
 
@@ -48,7 +55,8 @@ public class SharedPreferencesUtils {
             Context context, String name, String surname,
             String patronymic, String email, String password) {
 
-        SharedPreferences sharedPreferences = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
+        SharedPreferences sharedPreferences = context.getSharedPreferences(
+                PREFS_NAME, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString(KEY_NAME, name);
         editor.putString(KEY_SURNAME, surname);
@@ -58,9 +66,12 @@ public class SharedPreferencesUtils {
         editor.apply();
     }
 
+
+
     // Методы проверки наличия логина и пароля в SharedPreferences
     public boolean hasLoginAndPassword(Context context) {
-        SharedPreferences sharedPreferences = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
+        SharedPreferences sharedPreferences = context.getSharedPreferences(
+                PREFS_NAME, Context.MODE_PRIVATE);
         String savedEmail = sharedPreferences.getString(KEY_EMAIL, null);
         String savedPassword = sharedPreferences.getString(KEY_PASSWORD, null);
 
@@ -68,14 +79,56 @@ public class SharedPreferencesUtils {
     }
 
     public static boolean isLoggedIn(Context context) {
-        SharedPreferences sharedPreferences = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
+        SharedPreferences sharedPreferences = context.getSharedPreferences(
+                PREFS_NAME, Context.MODE_PRIVATE);
         return sharedPreferences.getBoolean(KEY_LOGGED_IN, false);
     }
 
     public static void setLoggedIn(Context context, boolean loggedIn) {
-        SharedPreferences sharedPreferences = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
+        SharedPreferences sharedPreferences = context.getSharedPreferences(
+                PREFS_NAME, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putBoolean(KEY_LOGGED_IN, loggedIn);
+        editor.apply();
+    }
+
+
+    // Активность Сон
+
+    public static String getKeyAsleep(Context context) {
+        SharedPreferences sharedPreferences = context.getSharedPreferences(
+                PREFS_NAME, Context.MODE_PRIVATE);
+        return sharedPreferences.getString(KEY_ASLEEP, null);
+    }
+
+    public static String getKeyAwoke(Context context) {
+        SharedPreferences sharedPreferences = context.getSharedPreferences(
+                PREFS_NAME, Context.MODE_PRIVATE);
+        return sharedPreferences.getString(KEY_AWOKE, null);
+    }
+
+    public static void saveKeyAsleep(Context context, String asleep) {
+        SharedPreferences sharedPreferences = context.getSharedPreferences(
+                PREFS_NAME, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString(KEY_ASLEEP, asleep);
+        editor.apply();
+    }
+
+    public static void saveKeyAwoke(Context context, String awoke) {
+        SharedPreferences sharedPreferences = context.getSharedPreferences(
+                PREFS_NAME, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString(KEY_AWOKE, awoke);
+        editor.apply();
+    }
+
+    public static void removeAll(Context context) {
+        SharedPreferences sharedPreferences = context.getSharedPreferences(
+                PREFS_NAME, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.remove(KEY_ASLEEP);
+        editor.remove(KEY_AWOKE);
         editor.apply();
     }
 

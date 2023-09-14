@@ -58,7 +58,7 @@
                 android:layout_width="120dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                tools:srcCompat="@drawable/tictac" />
+                app:srcCompat="@drawable/tictac" />
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/tictac"
@@ -83,7 +83,7 @@
                 android:layout_width="120dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                tools:srcCompat="@drawable/candies" />
+                app:srcCompat="@drawable/candies" />
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/button5"
@@ -108,7 +108,7 @@
                 android:layout_width="120dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                tools:srcCompat="@drawable/question" />
+                app:srcCompat="@drawable/question" />
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/button6"
