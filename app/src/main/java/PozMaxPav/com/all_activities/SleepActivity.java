@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -54,14 +55,12 @@ public class SleepActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_sleep);
 
-
-
-        // Тестируем сохранение переменной
+        // выводи сохраненную переменную
         fellAsleepView = findViewById(R.id.fellAsleepView);
-//        fellAsleepView.setText("");
-        String name = SharedPreferencesUtils.getKeySleep(this);
-        if (name != null) {
-            fellAsleepView.setText(name);
+        String returnAsleep = SharedPreferencesUtils.getKeyAsleep(this);
+        if (returnAsleep != null) {
+            String newReturnAsleep = "Заснул: " + returnAsleep;
+            fellAsleepView.setText(newReturnAsleep);
         }
 
 
@@ -142,7 +141,6 @@ public class SleepActivity extends AppCompatActivity {
         back_button_sleep = findViewById(R.id.back_button_sleep);
         pause = findViewById(R.id.pause);
         cont = findViewById(R.id.cont);
-//        fellAsleepView = findViewById(R.id.fellAsleepView);
         wokeUpView = findViewById(R.id.wokeUpView);
         resultSleep = findViewById(R.id.resultSleep);
         testClock = findViewById(R.id.testClock);
@@ -167,20 +165,8 @@ public class SleepActivity extends AppCompatActivity {
                 String string = "Заснул: " + fellAsleepString;
                 fellAsleepView.setText(string);
 
-
-
-
-
-
-
-                // Тестируем сохранение переменной заснул
-                // Сохраняем
-                SharedPreferencesUtils.saveCredentials2(SleepActivity.this, string);
-
-
-
-
-
+                // Сохраняем fellAsleepString в SharedPreferences
+                SharedPreferencesUtils.saveKeyAsleep(SleepActivity.this, fellAsleepString);
 
 
                 // Тестируем определение времени
@@ -188,8 +174,6 @@ public class SleepActivity extends AppCompatActivity {
                 testClock.setText(model.checkTime(testTime));
 
 
-
-                printSleepView(fellAsleepString);
 
                 // Запускаем секундомер
                 timer.setVisibility(View.VISIBLE);
@@ -226,14 +210,10 @@ public class SleepActivity extends AppCompatActivity {
                 String string = "Проснулся: " + wokeUpString;
                 wokeUpView.setText(string);
 
-                printSleepView2(wokeUpString);
+                // записываем wokeUpString
+                SharedPreferencesUtils.saveKeyAwoke(SleepActivity.this, wokeUpString);
 
-
-
-                // Тестируем удаление сохраненной переменной
-                SharedPreferencesUtils.removeCredentials2(SleepActivity.this);
-
-
+                printSleepView2();
 
                 // Останавливаем секундомер
                 timer.setVisibility(View.GONE);
@@ -254,21 +234,15 @@ public class SleepActivity extends AppCompatActivity {
     }
 
 
-    private void printSleepView(String first) {
-        resultArray.add(first);
-    }
-
-
-    private void printSleepView2(String second) {
-        resultArray.add(second);
-        if (resultArray.size() >= 2) {
+    private void printSleepView2() {
+        String asleep = SharedPreferencesUtils.getKeyAsleep(SleepActivity.this);
+        String awoke = SharedPreferencesUtils.getKeyAwoke(SleepActivity.this);
+        if (asleep != null && awoke != null) {
             // Выполняем вставку нового пользователя в базу данных в фоновом потоке
             ExecutorService executor = Executors.newSingleThreadExecutor();
             executor.execute(new Runnable() {
                 @Override
                 public void run() {
-                    String first = resultArray.get(0);
-                    String second = resultArray.get(1);
                     String result = result();
 
                     // Получаем DAO для работы с таблицей пользователей
@@ -280,14 +254,14 @@ public class SleepActivity extends AppCompatActivity {
                     // Создаем нового пользователя и вставляем его в базу данных с уникальным id
                     User newUser = new User();
                     newUser.setId(users.size() + 1); // Устанавливаем уникальный id
-                    newUser.setSleep1(first);
-                    newUser.setSleep2(second);
+                    newUser.setSleep1(asleep);
+                    newUser.setSleep2(awoke);
                     newUser.setSleep3(result);
                     insertOrUpdateUser(newUser);
                     resultSleep.setText(result);
 
-                    // Очищаем список после обработки
-                    resultArray.clear();
+                    // удаляем значения переменных asleep и awoke
+                    SharedPreferencesUtils.removeAll(SleepActivity.this);
                 }
             });
             executor.shutdown();
@@ -296,8 +270,8 @@ public class SleepActivity extends AppCompatActivity {
 
 
     private String result(){
-        String first = resultArray.get(0);
-        String second = resultArray.get(1);
+        String first = SharedPreferencesUtils.getKeyAsleep(SleepActivity.this);
+        String second = SharedPreferencesUtils.getKeyAwoke(SleepActivity.this);
 
         LocalTime time1 = LocalTime.parse(first);
         LocalTime time2 = LocalTime.parse(second);
