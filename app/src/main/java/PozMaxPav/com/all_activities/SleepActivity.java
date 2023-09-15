@@ -6,14 +6,12 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import java.time.LocalTime;
 import java.time.temporal.ChronoUnit;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import java.util.concurrent.Callable;
@@ -26,6 +24,8 @@ import PozMaxPav.com.model.database.AppDatabase;
 import PozMaxPav.com.model.database.MyApp;
 import PozMaxPav.com.model.database.User;
 import PozMaxPav.com.model.database.UserDao;
+import PozMaxPav.com.model.helperClasses.ForegroundService;
+import PozMaxPav.com.model.helperClasses.NotificationClass;
 import PozMaxPav.com.model.helperClasses.SharedPreferencesUtils;
 import PozMaxPav.com.model.helperClasses.TimerService;
 
@@ -37,7 +37,8 @@ public class SleepActivity extends AppCompatActivity {
     private TextView fellAsleepView,wokeUpView,resultSleep,testClock;
     private TextView timer;
     private LocalBroadcastManager localBroadcastManager;
-    private final ArrayList<String> resultArray = new ArrayList<>();
+    private NotificationClass notificationClass;
+
 
 
     // Регистрируем BroadcastReceiver для обновления времени из сервиса
@@ -63,6 +64,9 @@ public class SleepActivity extends AppCompatActivity {
             fellAsleepView.setText(newReturnAsleep);
         }
 
+        // Создаем экземпляр NotificationClass при инициализации Activity
+        notificationClass = new NotificationClass(this);
+
 
         timer = findViewById(R.id.timer);
 
@@ -76,8 +80,18 @@ public class SleepActivity extends AppCompatActivity {
         localBroadcastManager = LocalBroadcastManager.getInstance(this);
 
         addListenerOnButton();
-
     }
+
+    // фоновая работа
+//    @Override
+//    protected void onPause() {
+//        super.onPause();
+//
+//        Intent serviceIntent = new Intent(this, ForegroundService.class);
+//        startForegroundService(serviceIntent);
+//    }
+
+
 
     @Override
     protected void onDestroy() {
@@ -169,10 +183,13 @@ public class SleepActivity extends AppCompatActivity {
                 SharedPreferencesUtils.saveKeyAsleep(SleepActivity.this, fellAsleepString);
 
 
+                // Создаем уведомление
+                notificationClass.showNotification();
+
+
                 // Тестируем определение времени
                 String testTime = fellAsleepString;
                 testClock.setText(model.checkTime(testTime));
-
 
 
                 // Запускаем секундомер
@@ -212,6 +229,9 @@ public class SleepActivity extends AppCompatActivity {
 
                 // записываем wokeUpString
                 SharedPreferencesUtils.saveKeyAwoke(SleepActivity.this, wokeUpString);
+
+                // останавливаем код создающий уведомления
+                notificationClass.stopNotificationTimer();
 
                 printSleepView2();
 
