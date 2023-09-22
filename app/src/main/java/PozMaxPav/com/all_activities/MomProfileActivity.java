@@ -9,7 +9,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import PozMaxPav.com.R;
 import PozMaxPav.com.model.helperClasses.SharedPreferencesUtils;
 
-public class MomProfileActivity extends AppCompatActivity {
+public class MomProfileActivity extends BaseActivity {
 
     private Button back_button;
     private EditText editName,editSurname,editPatronymic,editEmail,editPassword;

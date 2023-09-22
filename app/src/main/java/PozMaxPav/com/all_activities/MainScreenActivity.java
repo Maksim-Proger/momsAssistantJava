@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.provider.Settings;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import java.util.ArrayList;
 import PozMaxPav.com.R;
@@ -18,9 +19,9 @@ import PozMaxPav.com.model.helperClasses.ForegroundService;
 import PozMaxPav.com.model.helperClasses.SharedPreferencesUtils;
 import PozMaxPav.com.model.mainmenu.Category;
 
-public class MainScreenActivity extends AppCompatActivity {
+public class MainScreenActivity extends BaseActivity {
 
-    private Button sleep_button, diary_button, assistant_button, button_show_popup_menu;
+    private ImageButton sleep_button, diary_button, assistant_button, button_show_popup_menu;
     private TextView fieldName;
 
     // Проверка наличия уведомлений
@@ -54,20 +55,12 @@ public class MainScreenActivity extends AppCompatActivity {
     }
 
 
-//    @Override
-//    protected void onPause() {
-//        super.onPause();
-//        Intent serviceIntent = new Intent(this, ForegroundService.class);
-//        startForegroundService(serviceIntent);
-//    }
-
-
     private void addListenerOnButton() {
         Model model = new Model();
-        sleep_button = (Button)findViewById(R.id.sleep_button);
-        diary_button = (Button)findViewById(R.id.diary_button);
-        assistant_button = (Button)findViewById(R.id.assistant_button);
-        button_show_popup_menu = (Button)findViewById(R.id.button_show_popup_menu);
+        sleep_button = (ImageButton) findViewById(R.id.sleep_button);
+        diary_button = (ImageButton)findViewById(R.id.diary_button);
+        assistant_button = (ImageButton)findViewById(R.id.assistant_button);
+        button_show_popup_menu = (ImageButton)findViewById(R.id.button_show_popup_menu);
 
         sleep_button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -101,15 +94,13 @@ public class MainScreenActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 ArrayList<Category> categories = new ArrayList<>();
-                categories.add(new Category(1,"Добавить вашего малыша", ChildrenProfileActivity.class));
                 categories.add(new Category(2,"Профиль малыша", ChildrenProfileActivity.class));
                 categories.add(new Category(3, "Профиль мамы", MomProfileActivity.class));
                 categories.add(new Category(4,"Давай поиграем", GamesActivity.class));
                 categories.add(new Category(5,"Сон", SleepActivity.class));
-                categories.add(new Category(6,"Оставь тут свои заметки", NotesActivity.class));
-//                categories.add(new Category(6,"Первый"));
-//                categories.add(new Category(7,"Первый"));
-//                categories.add(new Category(8,"Первый"));
+                categories.add(new Category(6,"Полезные статьи", ArticlesActivity.class));
+                categories.add(new Category(7,"Дневник малыша", DiaryActivity.class));
+                categories.add(new Category(8,"Статистика сна", SleepStatistics.class));
 
                 model.showPopupMenu(MainScreenActivity.this,view,categories);
             }
@@ -120,7 +111,8 @@ public class MainScreenActivity extends AppCompatActivity {
     private void showPermissionDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Разрешение на отправку уведомлений")
-                .setMessage("Вы хотите предоставить разрешение на отправку уведомлений?")
+                .setMessage("Вы хотите предоставить разрешение на отправку уведомлений, это " +
+                        "необходимо для выполнения важных функций приложения?")
                 .setPositiveButton("Да", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {

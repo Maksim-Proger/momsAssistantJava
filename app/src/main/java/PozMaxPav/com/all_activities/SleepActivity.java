@@ -29,7 +29,7 @@ import PozMaxPav.com.model.helperClasses.NotificationClass;
 import PozMaxPav.com.model.helperClasses.SharedPreferencesUtils;
 import PozMaxPav.com.model.helperClasses.TimerService;
 
-public class SleepActivity extends AppCompatActivity {
+public class SleepActivity extends BaseActivity {
 
     private AppDatabase appDatabase; // объявляем переменную
     private String fellAsleepString, wokeUpString;
@@ -67,7 +67,6 @@ public class SleepActivity extends AppCompatActivity {
         // Создаем экземпляр NotificationClass при инициализации Activity
         notificationClass = new NotificationClass(this);
 
-
         timer = findViewById(R.id.timer);
 
         // Инициализируем экземляр базы данных
@@ -81,16 +80,6 @@ public class SleepActivity extends AppCompatActivity {
 
         addListenerOnButton();
     }
-
-    // фоновая работа
-//    @Override
-//    protected void onPause() {
-//        super.onPause();
-//
-//        Intent serviceIntent = new Intent(this, ForegroundService.class);
-//        startForegroundService(serviceIntent);
-//    }
-
 
 
     @Override
@@ -280,6 +269,9 @@ public class SleepActivity extends AppCompatActivity {
                     insertOrUpdateUser(newUser);
                     resultSleep.setText(result);
 
+                    // передаем переменную проснулся до ее удаления
+                    timeSinceLastSleep(awoke);
+
                     // удаляем значения переменных asleep и awoke
                     SharedPreferencesUtils.removeAll(SleepActivity.this);
                 }
@@ -310,6 +302,10 @@ public class SleepActivity extends AppCompatActivity {
                 Locale.getDefault(), "%02d:%02d:%02d",
                 hours, minutes, seconds); // Форматируем время в "чч:мм:сс"
         timer.setText(time); // Устанавливаем отформатированное время в TextView
+    }
+
+    private void timeSinceLastSleep(String awoke) {
+
     }
 
 }

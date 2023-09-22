@@ -8,7 +8,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import PozMaxPav.com.R;
 import PozMaxPav.com.all_activities.games.TicTacToeActivity;
 
-public class GamesActivity extends AppCompatActivity {
+public class GamesActivity extends BaseActivity {
 
     private Button back_button_games, ticTac;
 
