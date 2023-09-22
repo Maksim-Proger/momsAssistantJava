@@ -23,12 +23,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/button_on_login_page"
-            android:text="@string/popupMenu"
             android:textColor="@color/black"
             android:layout_weight="1"
             android:layout_marginStart="10dp"
             tools:layout_editor_absoluteX="323dp"
-            tools:layout_editor_absoluteY="172dp" />
+            tools:layout_editor_absoluteY="172dp"
+            android:src="@drawable/menuicon" />
 
         <TextView
             android:id="@+id/fieldName"

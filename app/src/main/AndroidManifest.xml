@@ -49,11 +49,6 @@
             tools:ignore="LockedOrientationActivity"/>
 
         <activity
-            android:name=".all_activities.NotesActivity"
-            android:screenOrientation="portrait"
-            tools:ignore="LockedOrientationActivity"/>
-
-        <activity
             android:name=".all_activities.SleepActivity"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity"/>

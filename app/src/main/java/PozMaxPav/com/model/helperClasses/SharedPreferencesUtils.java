@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 
 public class SharedPreferencesUtils {
 
+    // переменные для активности регистрации
     private static final String PREFS_NAME = "MyPrefs";
     private static final String KEY_NAME = "name";
     private static final String KEY_SURNAME = "surname";
@@ -13,10 +14,16 @@ public class SharedPreferencesUtils {
     private static final String KEY_PASSWORD = "password";
     private static final String KEY_LOGGED_IN = "is_logged_in";
 
-    // переменные из активности Сон
+    // переменные для активности Сон
     private static final String KEY_ASLEEP = "Asleep";
     private static final String KEY_AWOKE = "Awoke";
 
+    // переменные для активности детского профиля
+    private static final String KEY_CHILDREN_NAME = "Children_name";
+    private static final String KEY_CHILDREN_AGE = "Children_age";
+    private static final String KEY_CHILDREN_WEIGHT = "Children_weight";
+    private static final String KEY_CHILDREN_HEIGHT = "Children_height";
+    private static final String KEY_CHILDREN_GENDER = "Children_gender";
 
 
     public static String getKeyName(Context context) {
@@ -129,6 +136,48 @@ public class SharedPreferencesUtils {
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.remove(KEY_ASLEEP);
         editor.remove(KEY_AWOKE);
+        editor.apply();
+    }
+
+    // Активность деткого профиля
+
+    public static String getKeyChildrenName(Context context) {
+        SharedPreferences sharedPreferences = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
+        return sharedPreferences.getString(KEY_CHILDREN_NAME, null);
+    }
+
+    public static String getKeyChildrenAge(Context context) {
+        SharedPreferences sharedPreferences = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
+        return sharedPreferences.getString(KEY_CHILDREN_AGE, null);
+    }
+
+    public static String getKeyChildrenWeight(Context context) {
+        SharedPreferences sharedPreferences = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
+        return sharedPreferences.getString(KEY_CHILDREN_WEIGHT, null);
+    }
+
+    public static String getKeyChildrenHeight(Context context) {
+        SharedPreferences sharedPreferences = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
+        return sharedPreferences.getString(KEY_CHILDREN_HEIGHT, null);
+    }
+
+    public static String getKeyChildrenGender(Context context) {
+        SharedPreferences sharedPreferences = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
+        return sharedPreferences.getString(KEY_CHILDREN_GENDER, null);
+    }
+
+    public static void saveChildrenProfile(
+            Context context, String name, String age,
+            String weight, String height, String gender) {
+
+        SharedPreferences sharedPreferences = context.getSharedPreferences(
+                PREFS_NAME, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString(KEY_CHILDREN_NAME, name);
+        editor.putString(KEY_CHILDREN_AGE, age);
+        editor.putString(KEY_CHILDREN_WEIGHT, weight);
+        editor.putString(KEY_CHILDREN_HEIGHT, height);
+        editor.putString(KEY_CHILDREN_GENDER, gender);
         editor.apply();
     }
 

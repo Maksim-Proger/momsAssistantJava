@@ -83,11 +83,11 @@
                         android:text="Возраст:" />
 
                     <EditText
+                        android:id="@+id/edit_age"
                         android:layout_width="match_parent"
                         android:layout_height="48dp"
                         android:layout_weight="1"
-                        android:layout_marginEnd="10dp"
-                        android:text="ddd"/>
+                        android:layout_marginEnd="10dp"/>
 
                 </LinearLayout>
 
@@ -104,11 +104,11 @@
                         android:text="Вес:" />
 
                     <EditText
+                        android:id="@+id/edit_weight"
                         android:layout_width="match_parent"
                         android:layout_height="48dp"
                         android:layout_weight="1"
-                        android:layout_marginEnd="10dp"
-                        android:text="ddd"/>
+                        android:layout_marginEnd="10dp"/>
 
                 </LinearLayout>
 
@@ -125,11 +125,11 @@
                         android:text="Рост:" />
 
                     <EditText
+                        android:id="@+id/edit_height"
                         android:layout_width="match_parent"
                         android:layout_height="48dp"
                         android:layout_weight="1"
-                        android:layout_marginEnd="10dp"
-                        android:text="ddd"/>
+                        android:layout_marginEnd="10dp"/>
 
                 </LinearLayout>
 
@@ -146,11 +146,11 @@
                         android:text="Пол:" />
 
                     <EditText
+                        android:id="@+id/edit_gender"
                         android:layout_width="match_parent"
                         android:layout_height="48dp"
                         android:layout_weight="1"
-                        android:layout_marginEnd="10dp"
-                        android:text="ddd"/>
+                        android:layout_marginEnd="10dp"/>
 
                 </LinearLayout>
 
@@ -159,10 +159,9 @@
         </LinearLayout>
 
         <EditText
-            android:id="@+id/textView10"
+            android:id="@+id/edit_name"
             android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:text="@string/name_field" />
+            android:layout_height="48dp" />
 
         <EditText
             android:id="@+id/textView17"
@@ -177,13 +176,13 @@
             android:text="Что-то еще" />
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/button3"
+            android:id="@+id/save_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/button_on_login_page"
             android:layout_marginLeft="40dp"
-            android:layout_marginRight="40dp"
             android:layout_marginTop="25dp"
+            android:layout_marginRight="40dp"
+            android:background="@drawable/button_on_login_page"
             android:gravity="center"
             android:text="@string/save" />
     </LinearLayout>
