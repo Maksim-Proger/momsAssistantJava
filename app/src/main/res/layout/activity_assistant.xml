@@ -12,8 +12,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:orientation="horizontal"
-        android:layout_margin="5dp">
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="5dp"
+        android:layout_marginBottom="5dp"
+        android:orientation="horizontal">
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/back_button_assistant"
@@ -24,21 +27,21 @@
             android:background="@drawable/other_button"
             android:text="@string/buttonBack"
             android:textColor="@color/black"
-            android:textSize="11sp"/>
+            android:textSize="11sp" />
 
         <TextView
             android:layout_width="0dp"
             android:layout_height="48dp"
-            android:layout_weight="1"
-            android:text="@string/assistant"
-            android:fontFamily="monospace"
             android:layout_marginStart="0dp"
             android:layout_marginEnd="5dp"
-            android:textSize="26sp"
-            android:textAlignment="center"
-            android:gravity="center"
+            android:layout_weight="1"
             android:background="@drawable/other_button"
-            android:textColor="@color/black"/>
+            android:fontFamily="monospace"
+            android:gravity="center"
+            android:text="@string/assistant"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="26sp" />
 
     </LinearLayout>
 

@@ -3,13 +3,14 @@ package PozMaxPav.com.all_activities;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 
 import androidx.appcompat.app.AppCompatActivity;
 import PozMaxPav.com.R;
 
 public class ArticlesActivity extends BaseActivity {
 
-    private Button back_button;
+    private ImageButton back_button;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

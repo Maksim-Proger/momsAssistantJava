@@ -8,42 +8,69 @@
     tools:context=".all_activities.MainScreenActivity">
 
     <LinearLayout
+        android:id="@+id/linearLayout3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.009">
+        android:layout_marginTop="15dp"
+        app:layout_constraintTop_toTopOf="parent" >
 
-        <androidx.appcompat.widget.AppCompatButton
+        <ImageButton
             android:id="@+id/button_show_popup_menu"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/button_on_login_page"
-            android:textColor="@color/black"
+            android:layout_width="55dp"
+            android:layout_height="55dp"
             android:layout_weight="1"
-            android:layout_marginStart="10dp"
-            tools:layout_editor_absoluteX="323dp"
-            tools:layout_editor_absoluteY="172dp"
-            android:src="@drawable/menuicon" />
+            android:background="@color/maincolor"
+            android:src="@drawable/menuicon"
+            android:textColor="@color/black" />
 
         <TextView
             android:id="@+id/fieldName"
-            android:layout_width="170dp"
-            android:layout_height="45dp"
+            android:layout_width="240dp"
+            android:layout_height="55dp"
+            android:layout_weight="1"
             android:background="@drawable/other_button"
             android:fontFamily="monospace"
             android:gravity="center"
             android:textColor="@color/black"
-            android:layout_weight="1"
-            android:layout_marginStart="45dp"
-            android:layout_marginEnd="10dp"
+            android:textSize="25sp"
             tools:layout_editor_absoluteX="241dp"
             tools:layout_editor_absoluteY="771dp" />
 
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="25dp"
+        app:layout_constraintTop_toBottomOf="@id/linearLayout3" >
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="125dp"
+            android:layout_weight="1"
+            android:background="@drawable/for_button_send"
+            android:gravity="center"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="25dp"
+
+            android:hint="Время с последнего пробуждения будет позде"
+            android:textAlignment="center"
+            android:textSize="20sp"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="125dp"
+            android:layout_weight="1"
+            android:background="@drawable/for_button_send"
+            android:gravity="center"
+            android:layout_marginEnd="10dp"
+
+            android:hint="Погода будет позже"
+            android:textAlignment="center"
+            android:textSize="20sp" />
 
     </LinearLayout>
 
@@ -52,49 +79,32 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.992"
-        tools:layout_editor_absoluteX="0dp">
+        android:layout_marginBottom="15dp"
+        app:layout_constraintBottom_toBottomOf="parent" >
 
-        <androidx.appcompat.widget.AppCompatButton
+        <ImageButton
             android:id="@+id/sleep_button"
-            android:layout_width="125dp"
+            android:layout_width="0dp"
             android:layout_height="50dp"
-            android:layout_gravity="center"
-            android:layout_marginStart="5dp"
-            android:layout_marginEnd="10dp"
             android:layout_weight="1"
-            android:background="@drawable/button_on_login_page"
-            android:text="Сон"
-            android:textAlignment="center"
-            android:textColor="@color/black" />
+            android:background="@color/maincolor"
+            android:src="@drawable/sleepicon" />
 
-        <androidx.appcompat.widget.AppCompatButton
+        <ImageButton
             android:id="@+id/diary_button"
-            android:layout_width="125dp"
+            android:layout_width="0dp"
             android:layout_height="50dp"
-            android:layout_gravity="center"
-            android:layout_marginStart="0dp"
-            android:layout_marginEnd="10dp"
             android:layout_weight="1"
-            android:background="@drawable/button_on_login_page"
-            android:text="Дневник"
-            android:textAlignment="center"
-            android:textColor="@color/black" />
+            android:background="@color/maincolor"
+            android:src="@drawable/diaryicon" />
 
-        <androidx.appcompat.widget.AppCompatButton
+        <ImageButton
             android:id="@+id/assistant_button"
-            android:layout_width="125dp"
+            android:layout_width="0dp"
             android:layout_height="50dp"
-            android:layout_gravity="center"
-            android:layout_marginStart="0dp"
-            android:layout_marginEnd="5dp"
             android:layout_weight="1"
-            android:background="@drawable/button_on_login_page"
-            android:text="Помощник"
-            android:textAlignment="center"
-            android:textColor="@color/black" />
+            android:background="@color/maincolor"
+            android:src="@drawable/assistanticon" />
 
     </LinearLayout>
 
