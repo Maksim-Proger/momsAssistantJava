@@ -41,4 +41,6 @@
     <string name="lottery">Играть будете Х или 0 ?</string>
     <string name="cross_sign">Х</string>
     <string name="zero_sign">0</string>
+    <string name="addNewSleep">Добавить сон</string>
+    <string name="removeSleep">Удалить сон</string>
 </resources>

@@ -3,21 +3,36 @@ package PozMaxPav.com.model.helperClasses;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.content.Context;
+import android.content.Intent;
+import android.os.Handler;
+import android.util.Log;
+
 import androidx.core.app.NotificationCompat;
+
+import java.time.LocalTime;
+import java.time.temporal.ChronoUnit;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
+
 import PozMaxPav.com.R;
+import PozMaxPav.com.all_activities.SleepActivity;
 
 public class NotificationClass {
     private static final String CHANNEL_ID = "Channel_id";
     private static final int NOTIFICATION_ID = 2;
     private Context context;
-    private Timer timer;
 
     // делаем builder членом класса. Это нужно чтобы изменять существующее уведомление
     // и не создавать каждый раз новое.
     private NotificationCompat.Builder builder;
-    private int minutesPassed = 0;
+
+    // для логики отсчета сна
+    String notificationTime;
+    private Handler handler = new Handler();
+    private static final long DELAY = 5000; // 5 секунд в миллисекундах
 
     public NotificationClass(Context context) {
         this.context = context;
@@ -26,21 +41,18 @@ public class NotificationClass {
     }
 
     private void startNotificationTimer() {
-        timer = new Timer();
-        TimerTask timerTask = new TimerTask() {
+
+        updateNotification();
+        // Запустите обновление каждые 5 секунд
+        handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                minutesPassed++; // Увеличиваем количество минут
-                updateNotification(); // Обновляем текст уведомления
+                updateNotification();
+                // Повторно запустите обновление через 5 секунд
+                handler.postDelayed(this, DELAY); // разобраться с этой строкой
             }
-        };
-        timer.schedule(timerTask, 60000, 60000);
-    }
+        }, DELAY);
 
-    public void stopNotificationTimer() {
-        if (timer != null) {
-            timer.cancel();
-        }
     }
 
     public void createNotificationChannel() {
@@ -61,7 +73,7 @@ public class NotificationClass {
         builder = new NotificationCompat.Builder(context, CHANNEL_ID)
                 .setSmallIcon(R.drawable.notification_icon)
                 .setContentTitle("Продолжительность сна")
-                .setContentText("Спит уже: " + minutesPassed + correctWord())
+                .setContentText("Спит уже: " + notificationTime + correctWord())
                 .setPriority(NotificationCompat.PRIORITY_DEFAULT)
                 .setSound(null)
                 .setAutoCancel(true);
@@ -75,18 +87,37 @@ public class NotificationClass {
     }
 
     private void updateNotification() {
-        builder.setContentText("Спит уже: " + minutesPassed + correctWord());
-        NotificationManager notificationManager = context.getSystemService(NotificationManager.class);
-        notificationManager.notify(NOTIFICATION_ID, builder.build());
+        String timerStart = SharedPreferencesUtils.getKeyAsleep(context);
+
+        if (timerStart != null) {
+            LocalTime time1 = LocalTime.parse(timerStart);
+            LocalTime timerStop = LocalTime.now();
+
+            long differenceInMinutes = ChronoUnit.MINUTES.between(time1, timerStop);
+            notificationTime = String.valueOf(differenceInMinutes);
+
+            if (builder != null) {
+                builder.setContentText("Спит уже: " + notificationTime + correctWord());
+                NotificationManager notificationManager = context.getSystemService(NotificationManager.class);
+                notificationManager.notify(NOTIFICATION_ID, builder.build());
+            }
+        }
     }
 
     private String correctWord() {
-        if (minutesPassed % 10 == 1) {
+        int newNotificationTime = 0;
+
+        if (notificationTime != null) {
+            newNotificationTime = Integer.parseInt(notificationTime);
+        }
+
+        if (newNotificationTime % 10 == 1) {
             return " минуту";
-        } else if (minutesPassed % 10 > 1 && minutesPassed % 10 < 5) {
+        } else if (newNotificationTime % 10 > 1 && newNotificationTime % 10 < 5) {
             return " минуты";
         } else {
             return " минут";
         }
+
     }
 }
