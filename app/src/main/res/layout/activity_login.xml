@@ -67,7 +67,8 @@
                 android:layout_gravity="bottom"
                 android:background="@drawable/button_on_login_page"
                 android:fontFamily="monospace"
-                android:text="@string/enter" />
+                android:text="@string/enter"
+                android:textAllCaps="false" />
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/register"
@@ -79,7 +80,8 @@
                 android:layout_gravity="bottom"
                 android:background="@drawable/button_on_login_page"
                 android:fontFamily="monospace"
-                android:text="@string/register" />
+                android:text="@string/register"
+                android:textAllCaps="false" />
         </LinearLayout>
     </LinearLayout>
 

@@ -24,7 +24,8 @@
             android:background="@drawable/other_button"
             android:text="@string/buttonBack"
             android:id="@+id/back_button"
-            android:textSize="11sp"/>
+            android:textSize="15sp"
+            android:textAllCaps="false"/>
 
         <TextView
             android:layout_width="match_parent"

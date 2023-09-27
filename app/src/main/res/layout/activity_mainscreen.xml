@@ -48,6 +48,7 @@
         app:layout_constraintTop_toBottomOf="@id/linearLayout3" >
 
         <TextView
+            android:id="@+id/textViewMainScreen"
             android:layout_width="0dp"
             android:layout_height="125dp"
             android:layout_weight="1"
@@ -55,8 +56,7 @@
             android:gravity="center"
             android:layout_marginStart="10dp"
             android:layout_marginEnd="25dp"
-
-            android:hint="Время с последнего пробуждения будет позде"
+            android:hint="Время бодрствования"
             android:textAlignment="center"
             android:textSize="20sp"/>
 

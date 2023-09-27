@@ -1,28 +1,33 @@
 package PozMaxPav.com.all_activities;
 
 import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.NotificationManager;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.provider.Settings;
+import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
+
+import java.time.LocalTime;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import PozMaxPav.com.R;
 import PozMaxPav.com.model.Model;
-import PozMaxPav.com.model.helperClasses.ForegroundService;
 import PozMaxPav.com.model.helperClasses.SharedPreferencesUtils;
 import PozMaxPav.com.model.mainmenu.Category;
 
 public class MainScreenActivity extends BaseActivity {
 
     private ImageButton sleep_button, diary_button, assistant_button, button_show_popup_menu;
-    private TextView fieldName;
+    private TextView fieldName, textViewMainScreen;
+
+    // тестируем обновление переменной бодрствования
+    private Handler handler = new Handler();
+    private static final long DELAY = 5000;
 
     // Проверка наличия уведомлений
     private boolean hasNotificationPermission() {
@@ -41,7 +46,6 @@ public class MainScreenActivity extends BaseActivity {
             showPermissionDialog();
         }
 
-
         // Получение и вывод имени пользователя и вывод в поле fieldName
         fieldName = findViewById(R.id.fieldName);
         String name = SharedPreferencesUtils.getKeyName(this);
@@ -50,17 +54,67 @@ public class MainScreenActivity extends BaseActivity {
             fieldName.setText(welcome);
         }
 
+        // время бодровствования
+        textViewMainScreen = findViewById(R.id.textViewMainScreen);
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                updateTextViewMainScreen();
+                handler.postDelayed(this, DELAY);
+            }
+        }, DELAY);
+
+//        String wakingTime = SharedPreferencesUtils.getKeyDifferenceTime(MainScreenActivity.this);
+//        if (wakingTime != null) {
+//            String string = wakingTime + " мин";
+//            textViewMainScreen.setText(string);
+//        }
+
 
         addListenerOnButton();
+    }
+
+    private void timeSinceLastSleep() {
+        String time = SharedPreferencesUtils.getKeyWakingTime(MainScreenActivity.this);
+        if (time != null) {
+            LocalTime awokeTime = LocalTime.parse(time);
+            LocalTime localTime = LocalTime.now();
+            long differenceTime = ChronoUnit.MINUTES.between(awokeTime, localTime);
+
+            String stringDifferenceTime = String.valueOf(differenceTime);
+            Log.d("Время бодрствования: ", stringDifferenceTime);
+            SharedPreferencesUtils.saveDifferenceTime(MainScreenActivity.this, stringDifferenceTime);
+        }
+    }
+
+    private void startTimeSinceLastSleep() {
+        timeSinceLastSleep();
+
+        // Запускаем обновление
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                timeSinceLastSleep();
+            }
+        }, DELAY);
+    }
+
+    private void updateTextViewMainScreen() {
+        timeSinceLastSleep();
+        String wakingTime = SharedPreferencesUtils.getKeyDifferenceTime(MainScreenActivity.this);
+        if (wakingTime != null) {
+            String string = wakingTime + " мин";
+            textViewMainScreen.setText(string);
+        }
     }
 
 
     private void addListenerOnButton() {
         Model model = new Model();
-        sleep_button = (ImageButton) findViewById(R.id.sleep_button);
-        diary_button = (ImageButton)findViewById(R.id.diary_button);
-        assistant_button = (ImageButton)findViewById(R.id.assistant_button);
-        button_show_popup_menu = (ImageButton)findViewById(R.id.button_show_popup_menu);
+        sleep_button = findViewById(R.id.sleep_button);
+        diary_button = findViewById(R.id.diary_button);
+        assistant_button = findViewById(R.id.assistant_button);
+        button_show_popup_menu = findViewById(R.id.button_show_popup_menu);
 
         sleep_button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -107,7 +161,7 @@ public class MainScreenActivity extends BaseActivity {
         });
     }
 
-    // Запрос на утправку уведослений
+    // Запрос на отправку уведомлений
     private void showPermissionDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Разрешение на отправку уведомлений")

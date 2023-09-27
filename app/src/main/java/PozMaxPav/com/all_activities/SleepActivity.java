@@ -5,7 +5,9 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -38,6 +40,10 @@ public class SleepActivity extends BaseActivity {
     private TextView timer;
     private LocalBroadcastManager localBroadcastManager;
     private NotificationClass notificationClass;
+
+    // тестируем обновление переменной бодрствования
+    private Handler handler = new Handler();
+    private static final long DELAY = 5000;
 
 
 
@@ -77,6 +83,9 @@ public class SleepActivity extends BaseActivity {
 
         // Инициализируем LocalBroadcastManager
         localBroadcastManager = LocalBroadcastManager.getInstance(this);
+
+        // Метод обновления времени бодрствования
+//        startTimeSinceLastSleep();
 
         addListenerOnButton();
     }
@@ -171,15 +180,16 @@ public class SleepActivity extends BaseActivity {
                 // Сохраняем fellAsleepString в SharedPreferences
                 SharedPreferencesUtils.saveKeyAsleep(SleepActivity.this, fellAsleepString);
 
+                // Очищаем значения переменных wakingTime и differenceTime
+                SharedPreferencesUtils.removeWakingTime(SleepActivity.this);
+                SharedPreferencesUtils.removeDifferenceTime(SleepActivity.this);
 
                 // Создаем уведомление
                 notificationClass.showNotification();
 
-
                 // Тестируем определение времени
                 String testTime = fellAsleepString;
                 testClock.setText(model.checkTime(testTime));
-
 
                 // Запускаем секундомер
                 timer.setVisibility(View.VISIBLE);
@@ -219,8 +229,8 @@ public class SleepActivity extends BaseActivity {
                 // записываем wokeUpString
                 SharedPreferencesUtils.saveKeyAwoke(SleepActivity.this, wokeUpString);
 
-                // останавливаем код создающий уведомления
-                notificationClass.stopNotificationTimer();
+                // записываем wokeUpString для бодрствования
+                SharedPreferencesUtils.saveWakingTime(SleepActivity.this, wokeUpString);
 
                 printSleepView2();
 
@@ -269,9 +279,6 @@ public class SleepActivity extends BaseActivity {
                     insertOrUpdateUser(newUser);
                     resultSleep.setText(result);
 
-                    // передаем переменную проснулся до ее удаления
-                    timeSinceLastSleep(awoke);
-
                     // удаляем значения переменных asleep и awoke
                     SharedPreferencesUtils.removeAll(SleepActivity.this);
                 }
@@ -280,14 +287,12 @@ public class SleepActivity extends BaseActivity {
         }
     }
 
-
     private String result(){
         String first = SharedPreferencesUtils.getKeyAsleep(SleepActivity.this);
         String second = SharedPreferencesUtils.getKeyAwoke(SleepActivity.this);
 
         LocalTime time1 = LocalTime.parse(first);
         LocalTime time2 = LocalTime.parse(second);
-
         long differenceInMinutes = ChronoUnit.MINUTES.between(time1, time2);
         return String.valueOf(differenceInMinutes);
     }
@@ -304,8 +309,28 @@ public class SleepActivity extends BaseActivity {
         timer.setText(time); // Устанавливаем отформатированное время в TextView
     }
 
-    private void timeSinceLastSleep(String awoke) {
-
-    }
+//    private void timeSinceLastSleep() {
+//        String time = SharedPreferencesUtils.getKeyWakingTime(SleepActivity.this);
+//        if (time != null) {
+//            LocalTime awokeTime = LocalTime.parse(time);
+//            LocalTime localTime = LocalTime.now();
+//            long differenceTime = ChronoUnit.MINUTES.between(awokeTime, localTime);
+//
+//            String stringDifferenceTime = String.valueOf(differenceTime);
+//            SharedPreferencesUtils.saveDifferenceTime(SleepActivity.this, stringDifferenceTime);
+//        }
+//    }
+//
+//    private void startTimeSinceLastSleep() {
+//        timeSinceLastSleep();
+//
+//        // Запускаем обновление
+//        handler.postDelayed(new Runnable() {
+//            @Override
+//            public void run() {
+//                timeSinceLastSleep();
+//            }
+//        }, DELAY);
+//    }
 
 }

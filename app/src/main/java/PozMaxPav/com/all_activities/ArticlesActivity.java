@@ -10,7 +10,7 @@ import PozMaxPav.com.R;
 
 public class ArticlesActivity extends BaseActivity {
 
-    private ImageButton back_button;
+    private Button back_button;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

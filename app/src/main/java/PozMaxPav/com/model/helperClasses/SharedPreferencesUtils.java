@@ -25,6 +25,10 @@ public class SharedPreferencesUtils {
     private static final String KEY_CHILDREN_HEIGHT = "Children_height";
     private static final String KEY_CHILDREN_GENDER = "Children_gender";
 
+    // переменная для отсчета времения бодрствования
+    private static final String KEY_WAKING_TIME = "waking_time";
+    private static final String KEY_DIFFERENCE_TIME = "difference_Time";
+
 
     public static String getKeyName(Context context) {
         SharedPreferences sharedPreferences = context.getSharedPreferences(
@@ -178,6 +182,44 @@ public class SharedPreferencesUtils {
         editor.putString(KEY_CHILDREN_WEIGHT, weight);
         editor.putString(KEY_CHILDREN_HEIGHT, height);
         editor.putString(KEY_CHILDREN_GENDER, gender);
+        editor.apply();
+    }
+
+    // для отсчета времения бодрствования
+    public static String getKeyWakingTime(Context context) {
+        SharedPreferences sharedPreferences = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
+        return sharedPreferences.getString(KEY_WAKING_TIME, null);
+    }
+
+    public static void saveWakingTime(Context context, String wakingTime) {
+        SharedPreferences sharedPreferences = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString(KEY_WAKING_TIME, wakingTime);
+        editor.apply();
+    }
+
+    public static void removeWakingTime(Context context) {
+        SharedPreferences sharedPreferences = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.remove(KEY_WAKING_TIME);
+        editor.apply();
+    }
+
+    public static String getKeyDifferenceTime(Context context) {
+        SharedPreferences sharedPreferences = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
+        return sharedPreferences.getString(KEY_DIFFERENCE_TIME, null);
+    }
+
+    public static void saveDifferenceTime(Context context, String differenceTime) {
+        SharedPreferences sharedPreferences = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString(KEY_DIFFERENCE_TIME, differenceTime);
+        editor.apply();
+    }
+    public static void removeDifferenceTime(Context context) {
+        SharedPreferences sharedPreferences = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.remove(KEY_DIFFERENCE_TIME);
         editor.apply();
     }
 
