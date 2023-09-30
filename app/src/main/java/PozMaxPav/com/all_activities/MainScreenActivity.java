@@ -24,8 +24,6 @@ public class MainScreenActivity extends BaseActivity {
 
     private ImageButton sleep_button, diary_button, assistant_button, button_show_popup_menu;
     private TextView fieldName, textViewMainScreen;
-
-    // тестируем обновление переменной бодрствования
     private Handler handler = new Handler();
     private static final long DELAY = 5000;
 
@@ -64,15 +62,9 @@ public class MainScreenActivity extends BaseActivity {
             }
         }, DELAY);
 
-//        String wakingTime = SharedPreferencesUtils.getKeyDifferenceTime(MainScreenActivity.this);
-//        if (wakingTime != null) {
-//            String string = wakingTime + " мин";
-//            textViewMainScreen.setText(string);
-//        }
-
-
         addListenerOnButton();
     }
+
 
     private void timeSinceLastSleep() {
         String time = SharedPreferencesUtils.getKeyWakingTime(MainScreenActivity.this);
@@ -82,22 +74,10 @@ public class MainScreenActivity extends BaseActivity {
             long differenceTime = ChronoUnit.MINUTES.between(awokeTime, localTime);
 
             String stringDifferenceTime = String.valueOf(differenceTime);
-            Log.d("Время бодрствования: ", stringDifferenceTime);
             SharedPreferencesUtils.saveDifferenceTime(MainScreenActivity.this, stringDifferenceTime);
         }
     }
 
-    private void startTimeSinceLastSleep() {
-        timeSinceLastSleep();
-
-        // Запускаем обновление
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                timeSinceLastSleep();
-            }
-        }, DELAY);
-    }
 
     private void updateTextViewMainScreen() {
         timeSinceLastSleep();

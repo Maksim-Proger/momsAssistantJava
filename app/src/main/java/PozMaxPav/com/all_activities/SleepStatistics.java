@@ -78,7 +78,7 @@ public class SleepStatistics extends BaseActivity {
     private void showStatistics(List<User> users) {
         StringBuilder stringBuilder = new StringBuilder();
         for (User item: users) {
-            stringBuilder.append("№: ").append(item.getId()).append(") ")
+            stringBuilder.append(item.getDate()).append(", ")
                     .append(item.getSleep1()).append(" - ")
                     .append(item.getSleep2()).append(", Итого: ")
                     .append(item.getSleep3()).append(" минут").append("\n");

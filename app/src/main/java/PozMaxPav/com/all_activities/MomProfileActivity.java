@@ -1,9 +1,12 @@
 package PozMaxPav.com.all_activities;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import PozMaxPav.com.R;
@@ -11,8 +14,11 @@ import PozMaxPav.com.model.helperClasses.SharedPreferencesUtils;
 
 public class MomProfileActivity extends BaseActivity {
 
-    private Button back_button;
+    private Button back_button, change_profile_image_button;
     private EditText editName,editSurname,editPatronymic,editEmail,editPassword;
+
+    private ImageView profile_image;
+    final int SELECT_IMAGE_CODE = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,5 +68,28 @@ public class MomProfileActivity extends BaseActivity {
             }
         });
 
+        change_profile_image_button = findViewById(R.id.change_profile_image_button);
+        profile_image = findViewById(R.id.profile_image);
+        change_profile_image_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+                intent.setType("image/*");
+                startActivityForResult(Intent.createChooser(intent, "Добавить фотографию"), SELECT_IMAGE_CODE);
+            }
+        });
+
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == SELECT_IMAGE_CODE && resultCode == RESULT_OK && data != null) {
+            Uri imageUri = data.getData();
+            if (imageUri != null) {
+                ImageView profile_image = findViewById(R.id.profile_image);
+                profile_image.setImageURI(imageUri);
+            }
+        }
     }
 }

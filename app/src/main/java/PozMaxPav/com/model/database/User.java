@@ -8,6 +8,7 @@ import androidx.room.PrimaryKey;
 public class User {
     @PrimaryKey
     private int id;
+    private String date;
     private String sleep1;
     private String sleep2;
     private String sleep3;
@@ -33,6 +34,14 @@ public class User {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
     }
 
     public void setSleep1(String sleep1) {

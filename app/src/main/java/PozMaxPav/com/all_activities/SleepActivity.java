@@ -5,13 +5,12 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.os.Handler;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import androidx.appcompat.app.AppCompatActivity;
+
+import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
@@ -19,6 +18,7 @@ import java.util.Locale;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.ForkJoinPool;
 import java.util.concurrent.Future;
 import PozMaxPav.com.R;
 import PozMaxPav.com.model.Model;
@@ -26,25 +26,24 @@ import PozMaxPav.com.model.database.AppDatabase;
 import PozMaxPav.com.model.database.MyApp;
 import PozMaxPav.com.model.database.User;
 import PozMaxPav.com.model.database.UserDao;
-import PozMaxPav.com.model.helperClasses.ForegroundService;
 import PozMaxPav.com.model.helperClasses.NotificationClass;
 import PozMaxPav.com.model.helperClasses.SharedPreferencesUtils;
 import PozMaxPav.com.model.helperClasses.TimerService;
+import PozMaxPav.com.model.helperClasses.addNewTime.AddTimeLogic;
 
-public class SleepActivity extends BaseActivity {
+public class SleepActivity extends BaseActivity implements AddTimeLogic.ListenerInterface {
 
-    private AppDatabase appDatabase; // объявляем переменную
+    private AppDatabase appDatabase;
     private String fellAsleepString, wokeUpString;
-    private Button fellAsleep,wokeUp,statistics,back_button_sleep,pause,cont;
-    private TextView fellAsleepView,wokeUpView,resultSleep,testClock;
+    private Button fellAsleep,wokeUp,statistics,back_button_sleep,pause,cont,addButton;
+    private TextView fellAsleepView,wokeUpView,resultSleep, testtesttets;
     private TextView timer;
     private LocalBroadcastManager localBroadcastManager;
     private NotificationClass notificationClass;
-
-    // тестируем обновление переменной бодрствования
-    private Handler handler = new Handler();
-    private static final long DELAY = 5000;
-
+    private AddTimeLogic addTimeLogic;
+    private int selectedTimeFlag = 1; // Флаг для отслеживания выбора времени (1 или 2)
+    private String firstSelectedTime = "";
+    private String secondSelectedTime = "";
 
 
     // Регистрируем BroadcastReceiver для обновления времени из сервиса
@@ -70,6 +69,10 @@ public class SleepActivity extends BaseActivity {
             fellAsleepView.setText(newReturnAsleep);
         }
 
+        // Создаем экземпляр AddTimeLogic
+        addTimeLogic = new AddTimeLogic(SleepActivity.this,SleepActivity.this);
+        testtesttets = findViewById(R.id.testtesttets);
+
         // Создаем экземпляр NotificationClass при инициализации Activity
         notificationClass = new NotificationClass(this);
 
@@ -83,9 +86,6 @@ public class SleepActivity extends BaseActivity {
 
         // Инициализируем LocalBroadcastManager
         localBroadcastManager = LocalBroadcastManager.getInstance(this);
-
-        // Метод обновления времени бодрствования
-//        startTimeSinceLastSleep();
 
         addListenerOnButton();
     }
@@ -155,7 +155,7 @@ public class SleepActivity extends BaseActivity {
         cont = findViewById(R.id.cont);
         wokeUpView = findViewById(R.id.wokeUpView);
         resultSleep = findViewById(R.id.resultSleep);
-        testClock = findViewById(R.id.testClock);
+        addButton = findViewById(R.id.addButton);
 
         back_button_sleep.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -187,9 +187,9 @@ public class SleepActivity extends BaseActivity {
                 // Создаем уведомление
                 notificationClass.showNotification();
 
-                // Тестируем определение времени
-                String testTime = fellAsleepString;
-                testClock.setText(model.checkTime(testTime));
+                // Тестируем определение времени поле вывода удалил
+//                String testTime = fellAsleepString;
+//                testClock.setText(model.checkTime(testTime));
 
                 // Запускаем секундомер
                 timer.setVisibility(View.VISIBLE);
@@ -250,6 +250,15 @@ public class SleepActivity extends BaseActivity {
                 startActivity(intent);
             }
         });
+
+        addButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Вызываем showTimePickerDialog для первого времени
+                selectedTimeFlag = 1;
+                addTimeLogic.showTimePickerDialog();
+            }
+        });
     }
 
 
@@ -273,6 +282,7 @@ public class SleepActivity extends BaseActivity {
                     // Создаем нового пользователя и вставляем его в базу данных с уникальным id
                     User newUser = new User();
                     newUser.setId(users.size() + 1); // Устанавливаем уникальный id
+                    newUser.setDate(checkDate());
                     newUser.setSleep1(asleep);
                     newUser.setSleep2(awoke);
                     newUser.setSleep3(result);
@@ -309,28 +319,60 @@ public class SleepActivity extends BaseActivity {
         timer.setText(time); // Устанавливаем отформатированное время в TextView
     }
 
-//    private void timeSinceLastSleep() {
-//        String time = SharedPreferencesUtils.getKeyWakingTime(SleepActivity.this);
-//        if (time != null) {
-//            LocalTime awokeTime = LocalTime.parse(time);
-//            LocalTime localTime = LocalTime.now();
-//            long differenceTime = ChronoUnit.MINUTES.between(awokeTime, localTime);
-//
-//            String stringDifferenceTime = String.valueOf(differenceTime);
-//            SharedPreferencesUtils.saveDifferenceTime(SleepActivity.this, stringDifferenceTime);
-//        }
-//    }
-//
-//    private void startTimeSinceLastSleep() {
-//        timeSinceLastSleep();
-//
-//        // Запускаем обновление
-//        handler.postDelayed(new Runnable() {
-//            @Override
-//            public void run() {
-//                timeSinceLastSleep();
-//            }
-//        }, DELAY);
-//    }
+    @Override
+    public void listenerMethod(String selectedTime) {
+        // сохраняем первое время
+        if (selectedTimeFlag == 1) {
+            firstSelectedTime = selectedTime;
+            // После выбора первого времени вызываем showTimePickerDialog для второго времени
+            selectedTimeFlag = 2;
+            addTimeLogic.showTimePickerDialog();
+        } else {
+            // Сохраняем второе время
+            secondSelectedTime = selectedTime;
+        }
+        if (!firstSelectedTime.isEmpty() && !secondSelectedTime.isEmpty()) {
+            saveNewSleep();
+        }
+    }
+
+    public void saveNewSleep() {
+        if (!firstSelectedTime.isEmpty() && !secondSelectedTime.isEmpty()) {
+            LocalTime firstTime = LocalTime.parse(firstSelectedTime);
+            LocalTime secondTime = LocalTime.parse(secondSelectedTime);
+            long differenceInMinutes = ChronoUnit.MINUTES.between(firstTime, secondTime);
+            String resultSelectedTime = String.valueOf(differenceInMinutes);
+
+            if (firstTime != null && secondTime != null) {
+                ExecutorService executorService = Executors.newSingleThreadExecutor();
+                executorService.execute(new Runnable() {
+                    @Override
+                    public void run() {
+                        UserDao userDao = appDatabase.getUserDao();
+                        List<User> users = userDao.getAllUsers();
+                        User newUser = new User();
+                        newUser.setId(users.size() + 1);
+                        newUser.setDate(checkDate());
+                        newUser.setSleep1(firstSelectedTime);
+                        newUser.setSleep2(secondSelectedTime);
+                        newUser.setSleep3(resultSelectedTime);
+                        insertOrUpdateUser(newUser);
+
+                        // Сброс значений после сохранения
+                        firstSelectedTime = "";
+                        secondSelectedTime = "";
+                    }
+                });
+            }
+        }
+    }
+
+    public String checkDate() {
+        LocalDate localDate = LocalDate.now();
+        int day = localDate.getDayOfMonth();
+        int month = localDate.getMonthValue();
+        int year = localDate.getYear();
+        return day + "." + month + "." + year;
+    }
 
 }

@@ -5,7 +5,7 @@ import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
 
-@Database(entities = {User.class}, version = 2) // тут указываем все наши классы сущностей
+@Database(entities = {User.class}, version = 3) // тут указываем все наши классы сущностей
 public abstract class AppDatabase extends RoomDatabase {
     public abstract UserDao getUserDao(); // абстрактный метод для каждой сущности
     private static AppDatabase INSTANCE;
