@@ -54,8 +54,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/secondMainColor"
-                android:textAlignment="center"
                 android:textColor="@color/black"
+                android:paddingLeft="10dp"
                 android:id="@+id/statisticsView"
                 android:textSize="20sp"/>
 

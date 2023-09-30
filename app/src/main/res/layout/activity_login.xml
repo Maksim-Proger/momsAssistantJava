@@ -7,29 +7,28 @@
 
 
     <LinearLayout
+        android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" >
 
         <ImageView
             android:id="@+id/imageView"
             android:layout_width="match_parent"
-            android:layout_height="413dp"
+            android:layout_height="450dp"
+            android:scaleType="fitXY"
             app:srcCompat="@drawable/forlogin" />
 
         <EditText
             android:id="@+id/email"
             android:layout_width="match_parent"
             android:layout_height="48dp"
-            android:layout_marginLeft="40sp"
-            android:layout_marginTop="40sp"
-            android:layout_marginRight="40sp"
+            android:layout_marginLeft="40dp"
+            android:layout_marginTop="60dp"
+            android:layout_marginRight="40dp"
             android:background="@drawable/fields_for_login_page"
-            android:padding="10sp"
+            android:padding="10dp"
             android:ems="10"
             android:fontFamily="monospace"
             android:hint="@string/email"
@@ -51,38 +50,40 @@
             android:inputType="textPassword"
             android:textAlignment="center" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal" >
+    </LinearLayout>
 
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/enter"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:layout_marginEnd="45sp"
-                android:layout_marginStart="15sp"
-                android:layout_marginBottom="10sp"
-                android:layout_gravity="bottom"
-                android:background="@drawable/button_on_login_page"
-                android:fontFamily="monospace"
-                android:text="@string/enter"
-                android:textAllCaps="false" />
+    <LinearLayout
+        android:id="@+id/linearLayoutButtons"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginBottom="15dp"
+        app:layout_constraintBottom_toBottomOf="parent" >
 
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/register"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:layout_marginEnd="15sp"
-                android:layout_marginBottom="10sp"
-                android:layout_gravity="bottom"
-                android:background="@drawable/button_on_login_page"
-                android:fontFamily="monospace"
-                android:text="@string/register"
-                android:textAllCaps="false" />
-        </LinearLayout>
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/enter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginStart="20sp"
+            android:background="@drawable/button_on_login_page"
+            android:fontFamily="monospace"
+            android:text="@string/enter"
+            android:textSize="15sp"
+            android:textAllCaps="false" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/register"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginStart="25dp"
+            android:layout_marginEnd="20sp"
+            android:background="@drawable/button_on_login_page"
+            android:fontFamily="monospace"
+            android:text="@string/register"
+            android:textSize="15sp"
+            android:textAllCaps="false" />
     </LinearLayout>
 
 

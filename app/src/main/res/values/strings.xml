@@ -14,10 +14,6 @@
     <string name="photo_field">Фотография</string>
     <string name="registration_button">Зарегистрироваться</string>
     <string name="childrenProfile">Профиль малыша</string>
-    <string name="forNotes1">Напоминание о заметке</string>
-    <string name="forNotes2">Все</string>
-    <string name="forNotes3">Добавить</string>
-    <string name="forNotes4">Удалить</string>
     <string name="sleepProfile">Сон</string>
     <string name="fellAsleep">Заснул</string>
     <string name="wokeUp">Проснулся</string>
