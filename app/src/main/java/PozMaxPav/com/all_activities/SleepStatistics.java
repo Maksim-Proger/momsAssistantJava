@@ -1,6 +1,7 @@
 package PozMaxPav.com.all_activities;
 
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -77,9 +78,17 @@ public class SleepStatistics extends BaseActivity {
 
     private void showStatistics(List<User> users) {
         StringBuilder stringBuilder = new StringBuilder();
+        String currentGroupDate = null; // Дата текущей группы
         for (User item: users) {
-            stringBuilder.append(item.getDate()).append(", ")
-                    .append(item.getSleep1()).append(" - ")
+            String groupDate = item.getDate(); // Получаем дату создания группы из записи
+
+            // Если дата создания группы изменилась, создаем новую группу
+            if (!TextUtils.equals(currentGroupDate, groupDate)) {
+                currentGroupDate = groupDate;
+                stringBuilder.append("\nДата ").append(groupDate).append("\n");
+            }
+
+            stringBuilder.append(item.getSleep1()).append(" - ")
                     .append(item.getSleep2()).append(", Итого: ")
                     .append(item.getSleep3()).append(" минут").append("\n");
         }

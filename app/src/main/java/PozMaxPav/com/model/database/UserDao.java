@@ -9,14 +9,14 @@ import java.util.List;
 @Dao
 public interface UserDao {
 
-    @Query("SELECT * FROM statistic")
-    List<User> getAllUsers();
+    @Insert
+    void insertUser(User user);
+
+    @Query("SELECT * FROM statistic ORDER BY date, id DESC")
+    List<User> getAllUsers(); // Запрос для получения записей с учетом даты создания группы
 
     @Query("SELECT * FROM statistic WHERE id = :userId")
     User getUserById(int userId);
-
-    @Insert
-    void insertUser(User user);
 
     @Update
     void updateUser(User user);

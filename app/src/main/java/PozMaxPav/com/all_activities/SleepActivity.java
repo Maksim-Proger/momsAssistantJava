@@ -10,9 +10,11 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.temporal.ChronoUnit;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.util.concurrent.Callable;
@@ -273,16 +275,12 @@ public class SleepActivity extends BaseActivity implements AddTimeLogic.Listener
                 public void run() {
                     String result = result();
 
-                    // Получаем DAO для работы с таблицей пользователей
-                    UserDao userDao = appDatabase.getUserDao();
-
-                    // Получаем список всех пользователей из базы данных
-                    List<User> users = userDao.getAllUsers();
+                    // Получаем текущую дату как дату создания группы
+                    String groupDate = getCurrentDate();
 
                     // Создаем нового пользователя и вставляем его в базу данных с уникальным id
                     User newUser = new User();
-                    newUser.setId(users.size() + 1); // Устанавливаем уникальный id
-                    newUser.setDate(checkDate());
+                    newUser.setDate(groupDate); // Устанавливаем дату создания группы
                     newUser.setSleep1(asleep);
                     newUser.setSleep2(awoke);
                     newUser.setSleep3(result);
@@ -336,6 +334,7 @@ public class SleepActivity extends BaseActivity implements AddTimeLogic.Listener
         }
     }
 
+    // доработать этот метод
     public void saveNewSleep() {
         if (!firstSelectedTime.isEmpty() && !secondSelectedTime.isEmpty()) {
             LocalTime firstTime = LocalTime.parse(firstSelectedTime);
@@ -348,11 +347,8 @@ public class SleepActivity extends BaseActivity implements AddTimeLogic.Listener
                 executorService.execute(new Runnable() {
                     @Override
                     public void run() {
-                        UserDao userDao = appDatabase.getUserDao();
-                        List<User> users = userDao.getAllUsers();
                         User newUser = new User();
-                        newUser.setId(users.size() + 1);
-                        newUser.setDate(checkDate());
+                        newUser.setDate(getCurrentDate());
                         newUser.setSleep1(firstSelectedTime);
                         newUser.setSleep2(secondSelectedTime);
                         newUser.setSleep3(resultSelectedTime);
@@ -367,12 +363,9 @@ public class SleepActivity extends BaseActivity implements AddTimeLogic.Listener
         }
     }
 
-    public String checkDate() {
-        LocalDate localDate = LocalDate.now();
-        int day = localDate.getDayOfMonth();
-        int month = localDate.getMonthValue();
-        int year = localDate.getYear();
-        return day + "." + month + "." + year;
+    public String getCurrentDate() {
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());
+        return sdf.format(new Date());
     }
 
 }

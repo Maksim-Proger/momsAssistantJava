@@ -6,14 +6,12 @@ import androidx.room.PrimaryKey;
 
 @Entity(tableName = "statistic")
 public class User {
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
     private int id;
-    private String date;
+    private String date; // дата создания группы
     private String sleep1;
     private String sleep2;
     private String sleep3;
-
-    // Создаем гетеры и сетеры
 
 
     public int getId() {
