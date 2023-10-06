@@ -7,6 +7,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.PopupMenu;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Date;
@@ -55,6 +57,30 @@ public class Model {
         SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
         return sdf.format(dateNow);
     }
+
+
+
+    // разбираемся с фоновой работой уведомлений
+    public boolean checkTimeLastSleep(String wakingTime) {
+        int hours = 0;
+        int minutes = 0;
+
+        if (wakingTime != null && !wakingTime.isEmpty()) {
+            LocalTime localTime = LocalTime.parse(wakingTime);
+            hours = localTime.getHour();
+            minutes = localTime.getMinute();
+        }
+
+        if (minutes > 1) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+
+
+
 
     public void fillingArrayListAnswer() {
         answerOptions.add("Привет!");

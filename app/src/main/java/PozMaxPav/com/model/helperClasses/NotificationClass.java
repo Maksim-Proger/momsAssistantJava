@@ -3,22 +3,11 @@ package PozMaxPav.com.model.helperClasses;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.content.Context;
-import android.content.Intent;
 import android.os.Handler;
-import android.util.Log;
-
 import androidx.core.app.NotificationCompat;
-
 import java.time.LocalTime;
 import java.time.temporal.ChronoUnit;
-import java.util.Timer;
-import java.util.TimerTask;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
-
 import PozMaxPav.com.R;
-import PozMaxPav.com.all_activities.SleepActivity;
 
 public class NotificationClass {
     private static final String CHANNEL_ID = "Channel_id";
@@ -118,6 +107,5 @@ public class NotificationClass {
         } else {
             return " минут";
         }
-
     }
 }

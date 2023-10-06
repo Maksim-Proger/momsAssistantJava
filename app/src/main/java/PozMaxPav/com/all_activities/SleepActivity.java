@@ -6,12 +6,15 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
+import android.os.Handler;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.temporal.ChronoUnit;
 import java.util.Date;
@@ -38,7 +41,7 @@ public class SleepActivity extends BaseActivity implements AddTimeLogic.Listener
     private AppDatabase appDatabase;
     private String fellAsleepString, wokeUpString;
     private Button fellAsleep,wokeUp,statistics,back_button_sleep,pause,cont,addButton;
-    private TextView fellAsleepView,wokeUpView,resultSleep, testtesttets;
+    private TextView fellAsleepView,wokeUpView,resultSleep,testtesttets,text_view_timeSinceLastSleep;
     private TextView timer;
     private LocalBroadcastManager localBroadcastManager;
     private NotificationClass notificationClass;
@@ -46,6 +49,8 @@ public class SleepActivity extends BaseActivity implements AddTimeLogic.Listener
     private int selectedTimeFlag = 1; // Флаг для отслеживания выбора времени (1 или 2)
     private String firstSelectedTime = "";
     private String secondSelectedTime = "";
+    private Handler handler = new Handler();
+    private static final long DELAY = 1000;
 
 
     // Регистрируем BroadcastReceiver для обновления времени из сервиса
@@ -70,6 +75,20 @@ public class SleepActivity extends BaseActivity implements AddTimeLogic.Listener
             String newReturnAsleep = "Заснул: " + returnAsleep;
             fellAsleepView.setText(newReturnAsleep);
         }
+
+        // время бодровствования
+        text_view_timeSinceLastSleep = findViewById(R.id.text_view_timeSinceLastSleep);
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                String wakingTime = SharedPreferencesUtils.getKeyDifferenceTime(SleepActivity.this);
+                if (wakingTime != null) {
+                    String wakingTimeResult = "Ваш малыш не спит:\n" + wakingTime;
+                    text_view_timeSinceLastSleep.setText(wakingTimeResult);
+                    handler.postDelayed(this, DELAY);
+                }
+            }
+        }, DELAY);
 
         // Создаем экземпляр AddTimeLogic
         addTimeLogic = new AddTimeLogic(SleepActivity.this,SleepActivity.this);
