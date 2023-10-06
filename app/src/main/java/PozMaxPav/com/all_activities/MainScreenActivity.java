@@ -7,16 +7,17 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.provider.Settings;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
-
-import java.time.LocalTime;
-import java.time.temporal.ChronoUnit;
+import java.time.Duration;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Locale;
 import PozMaxPav.com.R;
 import PozMaxPav.com.model.Model;
+import PozMaxPav.com.model.helperClasses.GeneralNotificationClass;
 import PozMaxPav.com.model.helperClasses.SharedPreferencesUtils;
 import PozMaxPav.com.model.mainmenu.Category;
 
@@ -25,7 +26,12 @@ public class MainScreenActivity extends BaseActivity {
     private ImageButton sleep_button, diary_button, assistant_button, button_show_popup_menu;
     private TextView fieldName, textViewMainScreen;
     private Handler handler = new Handler();
-    private static final long DELAY = 5000;
+    private static final long DELAY = 1000;
+
+    // тестируем новые уведомления
+    private GeneralNotificationClass notificationClass;
+    Model model = new Model();
+
 
     // Проверка наличия уведомлений
     private boolean hasNotificationPermission() {
@@ -52,12 +58,25 @@ public class MainScreenActivity extends BaseActivity {
             fieldName.setText(welcome);
         }
 
+        // тестируем новые уведомления
+        notificationClass = new GeneralNotificationClass(MainScreenActivity.this, "Пора спать");
+
         // время бодровствования
         textViewMainScreen = findViewById(R.id.textViewMainScreen);
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
                 updateTextViewMainScreen();
+
+
+                // тестируем новые уведомления
+                String wakingTime = SharedPreferencesUtils.
+                        getKeyDifferenceTime(MainScreenActivity.this);
+                if (model.checkTimeLastSleep(wakingTime)) {
+                    notificationClass.showNotification();
+                }
+
+
                 handler.postDelayed(this, DELAY);
             }
         }, DELAY);
@@ -69,11 +88,24 @@ public class MainScreenActivity extends BaseActivity {
     private void timeSinceLastSleep() {
         String time = SharedPreferencesUtils.getKeyWakingTime(MainScreenActivity.this);
         if (time != null) {
-            LocalTime awokeTime = LocalTime.parse(time);
-            LocalTime localTime = LocalTime.now();
-            long differenceTime = ChronoUnit.MINUTES.between(awokeTime, localTime);
 
-            String stringDifferenceTime = String.valueOf(differenceTime);
+            // Тестируем решение проблемы с переходом через полночь
+            String timeWithDate = LocalDate.now() + "T" + time;
+            LocalDateTime  awokeTime = LocalDateTime.parse(timeWithDate);
+            LocalDateTime currentTime = LocalDateTime.now();
+
+            if (currentTime.isBefore(awokeTime)) {
+                // Перешли через полночь, обновляем дату бодрствования
+                awokeTime = awokeTime.minusDays(1);
+            }
+
+            Duration durationDifferenceTime = Duration.between(awokeTime, currentTime);
+            long hours = durationDifferenceTime.toHours();
+            long minutes = durationDifferenceTime.toMinutes() - (hours * 60); // вычитаем минуты, учтенные как часы
+
+            // String stringDifferenceTime = String.format(Locale.getDefault(), "%d часов %d минут", hours, minutes);
+            String stringDifferenceTime = String.format(Locale.getDefault(), "%02d:%02d", hours, minutes);
+
             SharedPreferencesUtils.saveDifferenceTime(MainScreenActivity.this, stringDifferenceTime);
         }
     }
@@ -83,8 +115,8 @@ public class MainScreenActivity extends BaseActivity {
         timeSinceLastSleep();
         String wakingTime = SharedPreferencesUtils.getKeyDifferenceTime(MainScreenActivity.this);
         if (wakingTime != null) {
-            String string = wakingTime + " мин";
-            textViewMainScreen.setText(string);
+            String wakingTimeResult = "Ваш малыш не спит:\n" + wakingTime;
+            textViewMainScreen.setText(wakingTimeResult);
         }
     }
 
