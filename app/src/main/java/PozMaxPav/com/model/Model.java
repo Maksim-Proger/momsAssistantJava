@@ -7,14 +7,18 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.PopupMenu;
 import java.text.SimpleDateFormat;
+import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Locale;
 import java.util.Random;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import PozMaxPav.com.all_activities.MainScreenActivity;
 import PozMaxPav.com.model.helperClasses.ReadBase;
 import PozMaxPav.com.model.helperClasses.SharedPreferencesUtils;
 import PozMaxPav.com.model.mainmenu.Category;
@@ -76,6 +80,65 @@ public class Model {
         } else {
             return false;
         }
+    }
+
+    // метод правильного склонения минут
+    public String correctWordMinutes(long minutes) {
+
+        if (minutes % 10 == 1 && minutes % 100 != 11) {
+            return " минуту";
+        } else if ((minutes % 10 > 2 && minutes % 10 <= 4) && (minutes % 100 < 10 || minutes % 100 >= 20)) {
+            return " минуты";
+        } else {
+            return " минут";
+        }
+    }
+
+    // метод правильного склонения часов
+    public String correctWordHours(long hours) {
+
+        if (hours == 1) {
+            return " час";
+        } else if (hours > 1 && hours < 5) {
+            return " часа";
+        } else {
+            return " часов";
+        }
+    }
+
+
+
+
+    // выносим метод из главной активности
+    public String timeSinceLastSleep(String time, Context context) {
+        String stringDifferenceTimeView = "";
+        if (time != null) {
+
+            // Тестируем решение проблемы с переходом через полночь
+            String timeWithDate = LocalDate.now() + "T" + time;
+            LocalDateTime awokeTime = LocalDateTime.parse(timeWithDate);
+            LocalDateTime currentTime = LocalDateTime.now();
+
+            if (currentTime.isBefore(awokeTime)) {
+                // Перешли через полночь, обновляем дату бодрствования
+                awokeTime = awokeTime.minusDays(1);
+            }
+
+            Duration durationDifferenceTime = Duration.between(awokeTime, currentTime);
+            long hours = durationDifferenceTime.toHours();
+            long minutes = durationDifferenceTime.toMinutes() - (hours * 60); // вычитаем минуты, учтенные как часы
+            String stringDifferenceTime = String.format(Locale.getDefault(), "%02d:%02d", hours, minutes);
+            SharedPreferencesUtils.saveDifferenceTime(context, stringDifferenceTime); // записываем в SharedPreference
+
+            // переменная для вывода
+            if (hours != 0) {
+                stringDifferenceTimeView =
+                        hours + correctWordHours(hours) + " " + minutes + correctWordMinutes(minutes);
+            } else {
+                stringDifferenceTimeView = minutes + correctWordMinutes(minutes);
+            }
+        }
+        return stringDifferenceTimeView;
     }
 
 

@@ -100,9 +100,10 @@ public class NotificationClass {
             newNotificationTime = Integer.parseInt(notificationTime);
         }
 
-        if (newNotificationTime % 10 == 1) {
+        if (newNotificationTime % 10 == 1 && newNotificationTime % 100 != 11) {
             return " минуту";
-        } else if (newNotificationTime % 10 > 1 && newNotificationTime % 10 < 5) {
+        } else if ((newNotificationTime % 10 > 2 && newNotificationTime % 10 <= 4) &&
+                (newNotificationTime % 100 < 10 || newNotificationTime % 100 >= 20)) {
             return " минуты";
         } else {
             return " минут";
