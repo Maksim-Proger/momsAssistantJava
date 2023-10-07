@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.provider.Settings;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -29,8 +30,8 @@ public class MainScreenActivity extends BaseActivity {
     private static final long DELAY = 1000;
 
     // тестируем новые уведомления
-    private GeneralNotificationClass notificationClass;
-    Model model = new Model();
+    private GeneralNotificationClass generalNotificationClass;
+    private Model model = new Model();
 
 
     // Проверка наличия уведомлений
@@ -59,7 +60,7 @@ public class MainScreenActivity extends BaseActivity {
         }
 
         // тестируем новые уведомления
-        notificationClass = new GeneralNotificationClass(MainScreenActivity.this, "Пора спать");
+        generalNotificationClass = new GeneralNotificationClass(MainScreenActivity.this, "Пора спать");
 
         // время бодровствования
         textViewMainScreen = findViewById(R.id.textViewMainScreen);
@@ -70,11 +71,11 @@ public class MainScreenActivity extends BaseActivity {
 
 
                 // тестируем новые уведомления
-                String wakingTime = SharedPreferencesUtils.
-                        getKeyDifferenceTime(MainScreenActivity.this);
-                if (model.checkTimeLastSleep(wakingTime)) {
-                    notificationClass.showNotification();
-                }
+//                String wakingTime = SharedPreferencesUtils.
+//                        getKeyDifferenceTime(MainScreenActivity.this);
+//                if (model.checkTimeLastSleep(wakingTime)) {
+//                    generalNotificationClass.showNotification();
+//                }
 
 
                 handler.postDelayed(this, DELAY);
@@ -85,35 +86,44 @@ public class MainScreenActivity extends BaseActivity {
     }
 
 
-    private void timeSinceLastSleep() {
-        String time = SharedPreferencesUtils.getKeyWakingTime(MainScreenActivity.this);
-        if (time != null) {
-
-            // Тестируем решение проблемы с переходом через полночь
-            String timeWithDate = LocalDate.now() + "T" + time;
-            LocalDateTime  awokeTime = LocalDateTime.parse(timeWithDate);
-            LocalDateTime currentTime = LocalDateTime.now();
-
-            if (currentTime.isBefore(awokeTime)) {
-                // Перешли через полночь, обновляем дату бодрствования
-                awokeTime = awokeTime.minusDays(1);
-            }
-
-            Duration durationDifferenceTime = Duration.between(awokeTime, currentTime);
-            long hours = durationDifferenceTime.toHours();
-            long minutes = durationDifferenceTime.toMinutes() - (hours * 60); // вычитаем минуты, учтенные как часы
-
-            // String stringDifferenceTime = String.format(Locale.getDefault(), "%d часов %d минут", hours, minutes);
-            String stringDifferenceTime = String.format(Locale.getDefault(), "%02d:%02d", hours, minutes);
-
-            SharedPreferencesUtils.saveDifferenceTime(MainScreenActivity.this, stringDifferenceTime);
-        }
-    }
+//    private String timeSinceLastSleep() {
+//        String time = SharedPreferencesUtils.getKeyWakingTime(MainScreenActivity.this);
+//        String stringDifferenceTimeView = "";
+//        if (time != null) {
+//
+//            // Тестируем решение проблемы с переходом через полночь
+//            String timeWithDate = LocalDate.now() + "T" + time;
+//            LocalDateTime  awokeTime = LocalDateTime.parse(timeWithDate);
+//            LocalDateTime currentTime = LocalDateTime.now();
+//
+//            if (currentTime.isBefore(awokeTime)) {
+//                // Перешли через полночь, обновляем дату бодрствования
+//                awokeTime = awokeTime.minusDays(1);
+//            }
+//
+//            Duration durationDifferenceTime = Duration.between(awokeTime, currentTime);
+//            long hours = durationDifferenceTime.toHours();
+//            long minutes = durationDifferenceTime.toMinutes() - (hours * 60); // вычитаем минуты, учтенные как часы
+//            String stringDifferenceTime = String.format(Locale.getDefault(), "%02d:%02d", hours, minutes);
+//            SharedPreferencesUtils.saveDifferenceTime(MainScreenActivity.this, stringDifferenceTime); // записываем в SharedPreference
+//
+//            // переменная для вывода
+//            if (hours != 0) {
+//                stringDifferenceTimeView =
+//                        hours + model.correctWordHours(hours) + " " + minutes + model.correctWordMinutes(minutes);
+//            } else {
+//                stringDifferenceTimeView = minutes + model.correctWordMinutes(minutes);
+//            }
+//        }
+//        return stringDifferenceTimeView;
+//    }
 
 
     private void updateTextViewMainScreen() {
-        timeSinceLastSleep();
-        String wakingTime = SharedPreferencesUtils.getKeyDifferenceTime(MainScreenActivity.this);
+//        String wakingTime = timeSinceLastSleep();
+        String time = SharedPreferencesUtils.getKeyWakingTime(MainScreenActivity.this);
+        String wakingTime = model.timeSinceLastSleep(time, MainScreenActivity.this);
+
         if (wakingTime != null) {
             String wakingTimeResult = "Ваш малыш не спит:\n" + wakingTime;
             textViewMainScreen.setText(wakingTimeResult);

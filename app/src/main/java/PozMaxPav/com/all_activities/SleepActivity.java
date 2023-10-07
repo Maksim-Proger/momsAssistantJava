@@ -51,6 +51,7 @@ public class SleepActivity extends BaseActivity implements AddTimeLogic.Listener
     private String secondSelectedTime = "";
     private Handler handler = new Handler();
     private static final long DELAY = 1000;
+    private Model model = new Model();
 
 
     // Регистрируем BroadcastReceiver для обновления времени из сервиса
@@ -81,12 +82,8 @@ public class SleepActivity extends BaseActivity implements AddTimeLogic.Listener
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                String wakingTime = SharedPreferencesUtils.getKeyDifferenceTime(SleepActivity.this);
-                if (wakingTime != null) {
-                    String wakingTimeResult = "Ваш малыш не спит:\n" + wakingTime;
-                    text_view_timeSinceLastSleep.setText(wakingTimeResult);
-                    handler.postDelayed(this, DELAY);
-                }
+                updateTextViewMainScreen();
+                handler.postDelayed(this, DELAY);
             }
         }, DELAY);
 
@@ -167,7 +164,7 @@ public class SleepActivity extends BaseActivity implements AddTimeLogic.Listener
 
 
     private void addListenerOnButton() {
-        Model model = new Model();
+//        Model model = new Model();
         fellAsleep = findViewById(R.id.fellAsleep);
         wokeUp = findViewById(R.id.wokeUp);
         statistics = findViewById(R.id.statistics);
@@ -385,6 +382,17 @@ public class SleepActivity extends BaseActivity implements AddTimeLogic.Listener
     public String getCurrentDate() {
         SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());
         return sdf.format(new Date());
+    }
+
+    // метод для вывода времени бодрствования
+    private void updateTextViewMainScreen() {
+        String time = SharedPreferencesUtils.getKeyWakingTime(SleepActivity.this);
+        String wakingTime = model.timeSinceLastSleep(time, SleepActivity.this);
+
+        if (wakingTime != null) {
+            String wakingTimeResult = "Ваш малыш не спит:\n" + wakingTime;
+            text_view_timeSinceLastSleep.setText(wakingTimeResult);
+        }
     }
 
 }
