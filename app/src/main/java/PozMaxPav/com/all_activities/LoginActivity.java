@@ -9,8 +9,8 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import PozMaxPav.com.R;
 import PozMaxPav.com.model.Model;
-import PozMaxPav.com.model.helperClasses.ForegroundService;
-import PozMaxPav.com.model.helperClasses.SharedPreferencesUtils;
+import PozMaxPav.com.model.helperClasses.foreground.ForegroundService;
+import PozMaxPav.com.model.helperClasses.sharedPreference.SharedPreferencesUtils;
 
 public class LoginActivity extends AppCompatActivity {
 

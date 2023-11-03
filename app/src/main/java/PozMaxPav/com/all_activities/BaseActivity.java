@@ -5,10 +5,7 @@ import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
-import PozMaxPav.com.model.Model;
-import PozMaxPav.com.model.helperClasses.ForegroundService;
-import PozMaxPav.com.model.helperClasses.GeneralNotificationClass;
-import PozMaxPav.com.model.helperClasses.SharedPreferencesUtils;
+import PozMaxPav.com.model.helperClasses.foreground.ForegroundService;
 
 public class BaseActivity extends AppCompatActivity {
 

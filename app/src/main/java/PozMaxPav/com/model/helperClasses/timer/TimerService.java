@@ -1,4 +1,4 @@
-package PozMaxPav.com.model.helperClasses;
+package PozMaxPav.com.model.helperClasses.timer;
 
 import android.app.Service;
 import android.content.Intent;

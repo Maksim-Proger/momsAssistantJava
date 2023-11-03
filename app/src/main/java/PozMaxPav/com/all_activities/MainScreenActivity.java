@@ -7,20 +7,17 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.provider.Settings;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
-import java.time.Duration;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
+
 import java.util.ArrayList;
-import java.util.Locale;
+
 import PozMaxPav.com.R;
 import PozMaxPav.com.model.Model;
-import PozMaxPav.com.model.helperClasses.GeneralNotificationClass;
-import PozMaxPav.com.model.helperClasses.SharedPreferencesUtils;
-import PozMaxPav.com.model.mainmenu.Category;
+import PozMaxPav.com.model.helperClasses.notifications.GeneralNotificationClass;
+import PozMaxPav.com.model.helperClasses.sharedPreference.SharedPreferencesUtils;
+import PozMaxPav.com.model.mainMenu.Category;
 
 public class MainScreenActivity extends BaseActivity {
 
@@ -34,7 +31,7 @@ public class MainScreenActivity extends BaseActivity {
     private Model model = new Model();
 
 
-    // Проверка наличия уведомлений
+    // Проверка наличия разрешения для уведомлений
     private boolean hasNotificationPermission() {
         NotificationManager notificationManager = getSystemService(NotificationManager.class);
         return notificationManager.areNotificationsEnabled();
@@ -51,13 +48,14 @@ public class MainScreenActivity extends BaseActivity {
             showPermissionDialog();
         }
 
-        // Получение и вывод имени пользователя и вывод в поле fieldName
+        // region Получение и вывод имени пользователя и вывод в поле fieldName
         fieldName = findViewById(R.id.fieldName);
         String name = SharedPreferencesUtils.getKeyName(this);
         if (name != null) {
             String welcome = "Привет " + name;
             fieldName.setText(welcome);
         }
+        // endregion
 
         // тестируем новые уведомления
         generalNotificationClass = new GeneralNotificationClass(MainScreenActivity.this, "Пора спать");
@@ -86,41 +84,8 @@ public class MainScreenActivity extends BaseActivity {
     }
 
 
-//    private String timeSinceLastSleep() {
-//        String time = SharedPreferencesUtils.getKeyWakingTime(MainScreenActivity.this);
-//        String stringDifferenceTimeView = "";
-//        if (time != null) {
-//
-//            // Тестируем решение проблемы с переходом через полночь
-//            String timeWithDate = LocalDate.now() + "T" + time;
-//            LocalDateTime  awokeTime = LocalDateTime.parse(timeWithDate);
-//            LocalDateTime currentTime = LocalDateTime.now();
-//
-//            if (currentTime.isBefore(awokeTime)) {
-//                // Перешли через полночь, обновляем дату бодрствования
-//                awokeTime = awokeTime.minusDays(1);
-//            }
-//
-//            Duration durationDifferenceTime = Duration.between(awokeTime, currentTime);
-//            long hours = durationDifferenceTime.toHours();
-//            long minutes = durationDifferenceTime.toMinutes() - (hours * 60); // вычитаем минуты, учтенные как часы
-//            String stringDifferenceTime = String.format(Locale.getDefault(), "%02d:%02d", hours, minutes);
-//            SharedPreferencesUtils.saveDifferenceTime(MainScreenActivity.this, stringDifferenceTime); // записываем в SharedPreference
-//
-//            // переменная для вывода
-//            if (hours != 0) {
-//                stringDifferenceTimeView =
-//                        hours + model.correctWordHours(hours) + " " + minutes + model.correctWordMinutes(minutes);
-//            } else {
-//                stringDifferenceTimeView = minutes + model.correctWordMinutes(minutes);
-//            }
-//        }
-//        return stringDifferenceTimeView;
-//    }
-
-
+    // метод для вывода времени бодрствования
     private void updateTextViewMainScreen() {
-//        String wakingTime = timeSinceLastSleep();
         String time = SharedPreferencesUtils.getKeyWakingTime(MainScreenActivity.this);
         String wakingTime = model.timeSinceLastSleep(time, MainScreenActivity.this);
 
@@ -199,6 +164,7 @@ public class MainScreenActivity extends BaseActivity {
                 .show();
     }
 
+    // метод для открытия настроек телефона
     private void openNotificationSettings() {
         Intent intent = new Intent(Settings.ACTION_APP_NOTIFICATION_SETTINGS)
                 .putExtra(Settings.EXTRA_APP_PACKAGE, getPackageName());

@@ -4,9 +4,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import androidx.appcompat.app.AppCompatActivity;
+
 import PozMaxPav.com.R;
-import PozMaxPav.com.all_activities.games.TicTacToeActivity;
+import PozMaxPav.com.all_activities.gamesActivities.TicTacToeActivity;
 
 public class GamesActivity extends BaseActivity {
 

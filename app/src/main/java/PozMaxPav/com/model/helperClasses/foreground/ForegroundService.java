@@ -1,4 +1,4 @@
-package PozMaxPav.com.model.helperClasses;
+package PozMaxPav.com.model.helperClasses.foreground;
 
 import android.app.Notification;
 import android.app.NotificationChannel;

@@ -11,6 +11,7 @@ import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
@@ -18,10 +19,9 @@ import java.util.Random;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import PozMaxPav.com.all_activities.MainScreenActivity;
-import PozMaxPav.com.model.helperClasses.ReadBase;
-import PozMaxPav.com.model.helperClasses.SharedPreferencesUtils;
-import PozMaxPav.com.model.mainmenu.Category;
+import PozMaxPav.com.model.helperClasses.readBasePackage.ReadBase;
+import PozMaxPav.com.model.helperClasses.sharedPreference.SharedPreferencesUtils;
+import PozMaxPav.com.model.mainMenu.Category;
 import opennlp.tools.stemmer.PorterStemmer;
 import opennlp.tools.tokenize.SimpleTokenizer;
 
@@ -56,13 +56,14 @@ public class Model {
         popupMenu.show();
     }
 
+    // region методы для работы со временем и датой
+
+    // метод для фиксации времени
     public String fixTime() {
         Date dateNow = new Date();
         SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
         return sdf.format(dateNow);
     }
-
-
 
     // разбираемся с фоновой работой уведомлений
     public boolean checkTimeLastSleep(String wakingTime) {
@@ -93,7 +94,6 @@ public class Model {
             return " минут";
         }
     }
-
     // метод правильного склонения часов
     public String correctWordHours(long hours) {
 
@@ -107,14 +107,12 @@ public class Model {
     }
 
 
-
-
-    // выносим метод из главной активности
+    // метод расчета времени бодрствования
     public String timeSinceLastSleep(String time, Context context) {
         String stringDifferenceTimeView = "";
         if (time != null) {
 
-            // Тестируем решение проблемы с переходом через полночь
+            // region блок отвечающий за переход через полночь
             String timeWithDate = LocalDate.now() + "T" + time;
             LocalDateTime awokeTime = LocalDateTime.parse(timeWithDate);
             LocalDateTime currentTime = LocalDateTime.now();
@@ -123,14 +121,15 @@ public class Model {
                 // Перешли через полночь, обновляем дату бодрствования
                 awokeTime = awokeTime.minusDays(1);
             }
+            // endregion
 
             Duration durationDifferenceTime = Duration.between(awokeTime, currentTime);
             long hours = durationDifferenceTime.toHours();
             long minutes = durationDifferenceTime.toMinutes() - (hours * 60); // вычитаем минуты, учтенные как часы
             String stringDifferenceTime = String.format(Locale.getDefault(), "%02d:%02d", hours, minutes);
+
             SharedPreferencesUtils.saveDifferenceTime(context, stringDifferenceTime); // записываем в SharedPreference
 
-            // переменная для вывода
             if (hours != 0) {
                 stringDifferenceTimeView =
                         hours + correctWordHours(hours) + " " + minutes + correctWordMinutes(minutes);
@@ -142,9 +141,47 @@ public class Model {
     }
 
 
+    // метод для определения времени суток
+    public String checkTime(String timeNow){
 
+        LocalTime morningTime = LocalTime.of(5, 59);
+        LocalTime dayTime = LocalTime.of(11,59);
+        LocalTime eveningTime = LocalTime.of(16,59);
+        LocalTime nightTime = LocalTime.of(23,59);
 
+        LocalTime time = LocalTime.parse(timeNow);
+        if (time.isAfter(morningTime) && time.isBefore(dayTime)) {
+            return "Утренний сон!";
+        } if (time.isAfter(dayTime) && time.isBefore(eveningTime)) {
+            return "Дневной сон!";
+        } if (time.isAfter(eveningTime) && time.isBefore(nightTime)) {
+            return "Вечерний сон!";
+        } if (time.isAfter(nightTime) || time.isBefore(morningTime)) {
+            return "Ночной сон!";
+        }
+        return "Что-то не работет!";
+    }
 
+    // метод вычисляет разницу между временем для дальнейшей записи в базу данных
+    public String result(Context context){
+        String first = SharedPreferencesUtils.getKeyAsleep(context);
+        String second = SharedPreferencesUtils.getKeyAwoke(context);
+
+        LocalTime time1 = LocalTime.parse(first);
+        LocalTime time2 = LocalTime.parse(second);
+        long differenceInMinutes = ChronoUnit.MINUTES.between(time1, time2);
+        return String.valueOf(differenceInMinutes);
+    }
+
+    // метод определения даты
+    public String getCurrentDate() {
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());
+        return sdf.format(new Date());
+    }
+
+    // endregion
+
+    // region методы для ассистента
     public void fillingArrayListAnswer() {
         answerOptions.add("Привет!");
         answerOptions.add("Рад вас видеть!");
@@ -212,7 +249,10 @@ public class Model {
         }
         return false;
     }
+    // endregion
 
+    // region методы регистрации
+    // метод для для проверки наличия профиля пользователя
     public String inputValidation(Context context, String email, String password) {
         String emailSharedPreferences = SharedPreferencesUtils.getKeyEmail(context);
         String passwordSharedPreferencesUtils = SharedPreferencesUtils.getKeyPassword(context);
@@ -228,6 +268,7 @@ public class Model {
         }
     }
 
+    // валидация правильности введения данных регистрации
     public String checkValidation(String name, String surname, String patronymic, String email, String password) {
 
         boolean isValid = isValidEmail(email);
@@ -248,6 +289,7 @@ public class Model {
         return "Пользователь зарегистрирован!";
     }
 
+    // метод для проверки email
     public static boolean isValidEmail(String email) {
         // Шаблон для проверки email
         String emailPattern = "^[A-Za-z0-9+_.-]+@(.+)$";
@@ -257,26 +299,8 @@ public class Model {
 
         return matcher.matches();
     }
+    // endregion
 
-    public String checkTime(String timeNow){
-
-        LocalTime morningTime = LocalTime.of(5, 59);
-        LocalTime dayTime = LocalTime.of(11,59);
-        LocalTime eveningTime = LocalTime.of(16,59);
-        LocalTime nightTime = LocalTime.of(23,59);
-
-        LocalTime time = LocalTime.parse(timeNow);
-        if (time.isAfter(morningTime) && time.isBefore(dayTime)) {
-            return "Утренний сон!";
-        } if (time.isAfter(dayTime) && time.isBefore(eveningTime)) {
-            return "Дневной сон!";
-        } if (time.isAfter(eveningTime) && time.isBefore(nightTime)) {
-            return "Вечерний сон!";
-        } if (time.isAfter(nightTime) || time.isBefore(morningTime)) {
-            return "Ночной сон!";
-        }
-        return "Что-то не работет!";
-    }
 }
 
 

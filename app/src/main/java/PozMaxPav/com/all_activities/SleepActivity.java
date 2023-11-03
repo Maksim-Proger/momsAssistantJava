@@ -7,23 +7,16 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
 import android.os.Handler;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.temporal.ChronoUnit;
-import java.util.Date;
-import java.util.List;
 import java.util.Locale;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import java.util.concurrent.ForkJoinPool;
 import java.util.concurrent.Future;
 import PozMaxPav.com.R;
 import PozMaxPav.com.model.Model;
@@ -31,12 +24,14 @@ import PozMaxPav.com.model.database.AppDatabase;
 import PozMaxPav.com.model.database.MyApp;
 import PozMaxPav.com.model.database.User;
 import PozMaxPav.com.model.database.UserDao;
-import PozMaxPav.com.model.helperClasses.NotificationClass;
-import PozMaxPav.com.model.helperClasses.SharedPreferencesUtils;
-import PozMaxPav.com.model.helperClasses.TimerService;
+import PozMaxPav.com.model.helperClasses.notifications.NotificationClass;
+import PozMaxPav.com.model.helperClasses.sharedPreference.SharedPreferencesUtils;
+import PozMaxPav.com.model.helperClasses.timer.TimerService;
 import PozMaxPav.com.model.helperClasses.addNewTime.AddTimeLogic;
 
 public class SleepActivity extends BaseActivity implements AddTimeLogic.ListenerInterface {
+
+    // region переменные
 
     private AppDatabase appDatabase;
     private String fellAsleepString, wokeUpString;
@@ -53,6 +48,9 @@ public class SleepActivity extends BaseActivity implements AddTimeLogic.Listener
     private static final long DELAY = 1000;
     private Model model = new Model();
 
+    // endregion
+
+    // region Регистрируем BroadcastReceiver
 
     // Регистрируем BroadcastReceiver для обновления времени из сервиса
     private BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
@@ -63,6 +61,9 @@ public class SleepActivity extends BaseActivity implements AddTimeLogic.Listener
         }
     };
 
+    // endregion
+
+    // region метод onCreate
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -107,7 +108,7 @@ public class SleepActivity extends BaseActivity implements AddTimeLogic.Listener
 
         addListenerOnButton();
     }
-
+    // endregion
 
     @Override
     protected void onDestroy() {
@@ -115,19 +116,19 @@ public class SleepActivity extends BaseActivity implements AddTimeLogic.Listener
         LocalBroadcastManager.getInstance(this).unregisterReceiver(broadcastReceiver);
     }
 
+    // region DataBase
+
     @Override
     protected void onStart() {
         super.onStart();
         localBroadcastManager.registerReceiver(broadcastReceiver,
                 new IntentFilter("UPDATE_TIME"));
     }
-
     @Override
     protected void onStop() {
         super.onStop();
         localBroadcastManager.unregisterReceiver(broadcastReceiver);
     }
-
     private void insertOrUpdateUser(User user) {
         ExecutorService executor = Executors.newSingleThreadExecutor();
         Future<Void> future = executor.submit(new InsertOrUpdateUserCalleble(user));
@@ -138,7 +139,6 @@ public class SleepActivity extends BaseActivity implements AddTimeLogic.Listener
         }
         executor.shutdown();
     }
-
     public class InsertOrUpdateUserCalleble implements Callable<Void> {
         private User user;
         public InsertOrUpdateUserCalleble(User user) {
@@ -162,9 +162,10 @@ public class SleepActivity extends BaseActivity implements AddTimeLogic.Listener
         }
     }
 
+    // endregion
 
     private void addListenerOnButton() {
-//        Model model = new Model();
+        // region находим поля
         fellAsleep = findViewById(R.id.fellAsleep);
         wokeUp = findViewById(R.id.wokeUp);
         statistics = findViewById(R.id.statistics);
@@ -174,6 +175,7 @@ public class SleepActivity extends BaseActivity implements AddTimeLogic.Listener
         wokeUpView = findViewById(R.id.wokeUpView);
         resultSleep = findViewById(R.id.resultSleep);
         addButton = findViewById(R.id.addButton);
+        // endregion
 
         back_button_sleep.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -195,7 +197,7 @@ public class SleepActivity extends BaseActivity implements AddTimeLogic.Listener
                 String string = "Заснул: " + fellAsleepString;
                 fellAsleepView.setText(string);
 
-                // Сохраняем fellAsleepString в SharedPreferences
+                // Сохраняем fellAsleepString (время заснул) в SharedPreferences
                 SharedPreferencesUtils.saveKeyAsleep(SleepActivity.this, fellAsleepString);
 
                 // Очищаем значения переменных wakingTime и differenceTime
@@ -209,7 +211,7 @@ public class SleepActivity extends BaseActivity implements AddTimeLogic.Listener
 //                String testTime = fellAsleepString;
 //                testClock.setText(model.checkTime(testTime));
 
-                // Запускаем секундомер
+                // TODO Запускаем секундомер (разобраться с проблемой сброса секундомера)
                 timer.setVisibility(View.VISIBLE);
                 Intent serviceIntent = new Intent(SleepActivity.this, TimerService.class);
                 serviceIntent.setAction(TimerService.ACTION_START);
@@ -289,10 +291,12 @@ public class SleepActivity extends BaseActivity implements AddTimeLogic.Listener
             executor.execute(new Runnable() {
                 @Override
                 public void run() {
-                    String result = result();
+//                    String result = result();
+                    String result = model.result(SleepActivity.this);
 
                     // Получаем текущую дату как дату создания группы
-                    String groupDate = getCurrentDate();
+//                    String groupDate = getCurrentDate();
+                    String groupDate = model.getCurrentDate();
 
                     // Создаем нового пользователя и вставляем его в базу данных с уникальным id
                     User newUser = new User();
@@ -311,16 +315,18 @@ public class SleepActivity extends BaseActivity implements AddTimeLogic.Listener
         }
     }
 
-    private String result(){
-        String first = SharedPreferencesUtils.getKeyAsleep(SleepActivity.this);
-        String second = SharedPreferencesUtils.getKeyAwoke(SleepActivity.this);
+    // метод вычисляет разницу между временем для дальнейшей записи в базу данных
+//    private String result(){
+//        String first = SharedPreferencesUtils.getKeyAsleep(SleepActivity.this);
+//        String second = SharedPreferencesUtils.getKeyAwoke(SleepActivity.this);
+//
+//        LocalTime time1 = LocalTime.parse(first);
+//        LocalTime time2 = LocalTime.parse(second);
+//        long differenceInMinutes = ChronoUnit.MINUTES.between(time1, time2);
+//        return String.valueOf(differenceInMinutes);
+//    }
 
-        LocalTime time1 = LocalTime.parse(first);
-        LocalTime time2 = LocalTime.parse(second);
-        long differenceInMinutes = ChronoUnit.MINUTES.between(time1, time2);
-        return String.valueOf(differenceInMinutes);
-    }
-
+    // метод для вывода информации секундомера
     private void updateTimer(long elapsedMillis) {
         int seconds = (int) (elapsedMillis / 1000); // Переводим миллисекунды в секунды
         int minutes = seconds / 60; // Получаем количество минут
@@ -350,7 +356,7 @@ public class SleepActivity extends BaseActivity implements AddTimeLogic.Listener
         }
     }
 
-    // доработать этот метод
+    // TODO доработать этот метод
     public void saveNewSleep() {
         if (!firstSelectedTime.isEmpty() && !secondSelectedTime.isEmpty()) {
             LocalTime firstTime = LocalTime.parse(firstSelectedTime);
@@ -364,7 +370,8 @@ public class SleepActivity extends BaseActivity implements AddTimeLogic.Listener
                     @Override
                     public void run() {
                         User newUser = new User();
-                        newUser.setDate(getCurrentDate());
+//                        newUser.setDate(getCurrentDate());
+                        newUser.setDate(model.getCurrentDate());
                         newUser.setSleep1(firstSelectedTime);
                         newUser.setSleep2(secondSelectedTime);
                         newUser.setSleep3(resultSelectedTime);
@@ -379,10 +386,12 @@ public class SleepActivity extends BaseActivity implements AddTimeLogic.Listener
         }
     }
 
-    public String getCurrentDate() {
-        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());
-        return sdf.format(new Date());
-    }
+    // метод определения даты
+//    public String getCurrentDate() {
+//        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());
+//        return sdf.format(new Date());
+//    }
+
 
     // метод для вывода времени бодрствования
     private void updateTextViewMainScreen() {

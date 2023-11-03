@@ -1,4 +1,4 @@
-package PozMaxPav.com.model;
+package PozMaxPav.com.model.logicForGames;
 
 import android.content.Context;
 import android.widget.Button;

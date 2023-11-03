@@ -1,4 +1,4 @@
-package PozMaxPav.com.model.helperClasses;
+package PozMaxPav.com.model.helperClasses.sharedPreference;
 
 import android.content.Context;
 import android.content.SharedPreferences;
