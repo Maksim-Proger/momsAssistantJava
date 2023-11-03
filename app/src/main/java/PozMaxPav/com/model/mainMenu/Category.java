@@ -1,4 +1,4 @@
-package PozMaxPav.com.model.mainmenu;
+package PozMaxPav.com.model.mainMenu;
 
 public class Category {
     protected int id;

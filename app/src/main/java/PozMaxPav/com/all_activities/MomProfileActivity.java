@@ -8,9 +8,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 
-import androidx.appcompat.app.AppCompatActivity;
 import PozMaxPav.com.R;
-import PozMaxPav.com.model.helperClasses.SharedPreferencesUtils;
+import PozMaxPav.com.model.helperClasses.sharedPreference.SharedPreferencesUtils;
 
 public class MomProfileActivity extends BaseActivity {
 

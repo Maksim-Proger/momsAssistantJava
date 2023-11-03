@@ -1,4 +1,4 @@
-package PozMaxPav.com.model.helperClasses;
+package PozMaxPav.com.model.helperClasses.notifications;
 
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
@@ -8,6 +8,7 @@ import androidx.core.app.NotificationCompat;
 import java.time.LocalTime;
 import java.time.temporal.ChronoUnit;
 import PozMaxPav.com.R;
+import PozMaxPav.com.model.helperClasses.sharedPreference.SharedPreferencesUtils;
 
 public class NotificationClass {
     private static final String CHANNEL_ID = "Channel_id";

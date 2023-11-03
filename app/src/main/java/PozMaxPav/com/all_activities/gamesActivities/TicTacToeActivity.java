@@ -1,4 +1,4 @@
-package PozMaxPav.com.all_activities.games;
+package PozMaxPav.com.all_activities.gamesActivities;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
@@ -7,7 +7,7 @@ import android.widget.Button;
 import android.widget.Toast;
 import PozMaxPav.com.R;
 import PozMaxPav.com.all_activities.BaseActivity;
-import PozMaxPav.com.model.LogicForTicTacToe;
+import PozMaxPav.com.model.logicForGames.LogicForTicTacToe;
 
 public class TicTacToeActivity extends BaseActivity {
 

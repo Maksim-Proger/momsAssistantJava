@@ -1,4 +1,4 @@
-package PozMaxPav.com.model.helperClasses;
+package PozMaxPav.com.model.helperClasses.readBasePackage;
 
 import android.content.Context;
 import java.io.BufferedReader;
