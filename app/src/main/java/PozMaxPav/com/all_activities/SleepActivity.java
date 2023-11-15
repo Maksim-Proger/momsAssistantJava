@@ -171,13 +171,12 @@ public class SleepActivity extends AppCompatActivity implements AddTimeLogic.Lis
         wokeUpView = findViewById(R.id.wokeUpView);
         resultSleep = findViewById(R.id.resultSleep);
         addButton = findViewById(R.id.addButton);
-        // endregion b и
+        // endregion
 
         back_button_sleep.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(SleepActivity.this,MainScreenActivity.class);
-                startActivity(intent);
+                getOnBackPressedDispatcher().onBackPressed();
             }
         });
 
