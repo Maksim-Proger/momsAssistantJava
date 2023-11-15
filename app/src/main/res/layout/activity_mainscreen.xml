@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/maincolor">
+    android:background="@color/mainColor">
 
 <!--    Верхний Layout с кнопкой меню-->
     <LinearLayout
@@ -20,7 +20,7 @@
             android:layout_width="55dp"
             android:layout_height="55dp"
             android:layout_weight="1"
-            android:background="@color/maincolor"
+            android:background="@color/mainColor"
             android:src="@drawable/menuicon"
             android:textColor="@color/black" />
 
@@ -30,7 +30,7 @@
             android:layout_height="55dp"
             android:layout_weight="1"
             android:background="@drawable/other_button"
-            android:fontFamily="monospace"
+            android:layout_marginEnd="10dp"
             android:gravity="center"
             android:textColor="@color/black"
             android:textSize="25sp"
@@ -57,8 +57,8 @@
             android:layout_marginStart="10dp"
             android:layout_marginEnd="25dp"
             android:textColor="@color/black"
-            android:textColorHint="@color/black"
-            android:hint="Время бодрствования"
+            android:textColorHint="@color/textColor2"
+            android:hint="Время \nбодрствования"
             android:textAlignment="center"
             android:textSize="17sp"/>
 
@@ -70,10 +70,10 @@
             android:gravity="center"
             android:layout_marginEnd="10dp"
             android:textColor="@color/black"
-            android:textColorHint="@color/black"
-            android:hint="Пока не знаю, что тут будет"
+            android:textColorHint="@color/textColor2"
+            android:hint="Пока не знаю, что \nтут будет"
             android:textAlignment="center"
-            android:textSize="20sp" />
+            android:textSize="17sp" />
 
     </LinearLayout>
 
@@ -91,29 +91,51 @@
             android:layout_marginStart="10dp"
             android:background="@drawable/for_button_send"
             android:textColor="@color/black"
-            android:textColorHint="@color/black"
+            android:textColorHint="@color/textColor2"
             android:hint="Погода будет позже"
             android:textAlignment="center"
             android:gravity="center"
-            android:textSize="20sp" />
+            android:textSize="17sp" />
 
     </LinearLayout>
 
-    <TextView
-        android:layout_below="@+id/linearLayout3"
+    <LinearLayout
         android:id="@+id/Calendar"
-        android:layout_marginTop="25dp"
+        android:layout_below="@+id/linearLayout3"
+        android:layout_marginTop="20dp"
         android:layout_width="match_parent"
         android:layout_height="80dp"
-        android:background="@drawable/for_button_send"
-        android:layout_marginStart="10dp"
-        android:layout_marginEnd="10dp"
-        android:textColor="@color/black"
-        android:textColorHint="@color/black"
-        android:hint="Календарь будет позже"
-        android:textAlignment="center"
-        android:gravity="center"
-        android:textSize="20sp" />
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_marginStart="10dp"
+            android:layout_height="match_parent"
+            android:background="@drawable/for_button_send"
+            android:textColor="@color/black"
+            android:textColorHint="@color/textColor2"
+            android:hint="Календарь будет позже"
+            android:textAlignment="center"
+            android:gravity="center"
+            android:textSize="17sp" />
+
+        <TextView
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_height="match_parent"
+            android:background="@drawable/for_button_send"
+            android:textColor="@color/black"
+            android:textColorHint="@color/textColor2"
+            android:hint="Время будет позже"
+            android:textAlignment="center"
+            android:gravity="center"
+            android:textSize="17sp"/>
+
+    </LinearLayout>
+
 
     <!-- RecyclerView с прозрачным фоном -->
     <FrameLayout
@@ -150,7 +172,7 @@
                 android:layout_width="0dp"
                 android:layout_height="50dp"
                 android:layout_weight="1"
-                android:background="@color/maincolor"
+                android:background="@color/mainColor"
                 android:src="@drawable/sleepicon" />
 
             <ImageButton
@@ -158,7 +180,7 @@
                 android:layout_width="0dp"
                 android:layout_height="50dp"
                 android:layout_weight="1"
-                android:background="@color/maincolor"
+                android:background="@color/mainColor"
                 android:src="@drawable/diaryicon" />
 
             <ImageButton
@@ -166,7 +188,7 @@
                 android:layout_width="0dp"
                 android:layout_height="50dp"
                 android:layout_weight="1"
-                android:background="@color/maincolor"
+                android:background="@color/mainColor"
                 android:src="@drawable/assistanticon" />
 
         </LinearLayout>

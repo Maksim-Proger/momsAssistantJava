@@ -7,7 +7,7 @@
     android:background="@color/secondMainColor">
 
     <LinearLayout
-        android:background="@color/maincolor"
+        android:background="@color/mainColor"
         android:id="@+id/header_linear_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -30,7 +30,6 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="48dp"
-            android:fontFamily="monospace"
             android:layout_marginStart="0dp"
             android:layout_marginEnd="5dp"
             android:layout_marginTop="5dp"
@@ -66,7 +65,7 @@
             android:orientation="horizontal"
             android:layout_marginTop="15dp">
 
-            <Button
+            <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/cross_sign_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -74,16 +73,18 @@
                 android:layout_marginStart="15dp"
                 android:layout_marginEnd="15dp"
                 android:textSize="20sp"
+                android:background="@drawable/other_field_with_frames"
                 android:textColor="@color/black"
                 android:text="@string/cross_sign"/>
 
-            <Button
+            <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/zero_sign_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:layout_marginEnd="15dp"
                 android:textSize="20sp"
+                android:background="@drawable/other_field_with_frames"
                 android:textColor="@color/black"
                 android:text="@string/zero_sign"/>
 

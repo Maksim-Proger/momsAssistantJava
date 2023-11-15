@@ -36,7 +36,7 @@ public class SleepActivity extends AppCompatActivity implements AddTimeLogic.Lis
     private AppDatabase appDatabase;
     private String fellAsleepString, wokeUpString;
     private Button fellAsleep,wokeUp,statistics,back_button_sleep,pause,cont,addButton;
-    private TextView fellAsleepView,wokeUpView,resultSleep,testtesttets,text_view_timeSinceLastSleep;
+    private TextView fellAsleepView,wokeUpView,resultSleep,text_view_timeSinceLastSleep;
     private TextView timer;
     private LocalBroadcastManager localBroadcastManager;
     private AddTimeLogic addTimeLogic;
@@ -89,7 +89,6 @@ public class SleepActivity extends AppCompatActivity implements AddTimeLogic.Lis
 
         // Создаем экземпляр AddTimeLogic
         addTimeLogic = new AddTimeLogic(SleepActivity.this,SleepActivity.this);
-        testtesttets = findViewById(R.id.testtesttets);
 
         // Поле для вывода таймера
         timer = findViewById(R.id.timer);
@@ -294,11 +293,9 @@ public class SleepActivity extends AppCompatActivity implements AddTimeLogic.Lis
             executor.execute(new Runnable() {
                 @Override
                 public void run() {
-//                    String result = result();
                     String result = model.result(SleepActivity.this);
 
                     // Получаем текущую дату как дату создания группы
-//                    String groupDate = getCurrentDate();
                     String groupDate = model.getCurrentDate();
 
                     // Создаем нового пользователя и вставляем его в базу данных с уникальным id
@@ -317,17 +314,6 @@ public class SleepActivity extends AppCompatActivity implements AddTimeLogic.Lis
             executor.shutdown();
         }
     }
-
-    // метод вычисляет разницу между временем для дальнейшей записи в базу данных
-//    private String result(){
-//        String first = SharedPreferencesUtils.getKeyAsleep(SleepActivity.this);
-//        String second = SharedPreferencesUtils.getKeyAwoke(SleepActivity.this);
-//
-//        LocalTime time1 = LocalTime.parse(first);
-//        LocalTime time2 = LocalTime.parse(second);
-//        long differenceInMinutes = ChronoUnit.MINUTES.between(time1, time2);
-//        return String.valueOf(differenceInMinutes);
-//    }
 
     // метод для вывода информации секундомера
     private void updateTimer(long elapsedMillis) {
@@ -359,7 +345,6 @@ public class SleepActivity extends AppCompatActivity implements AddTimeLogic.Lis
         }
     }
 
-    // TODO доработать этот метод
     public void saveNewSleep() {
         if (!firstSelectedTime.isEmpty() && !secondSelectedTime.isEmpty()) {
             LocalTime firstTime = LocalTime.parse(firstSelectedTime);
@@ -373,7 +358,6 @@ public class SleepActivity extends AppCompatActivity implements AddTimeLogic.Lis
                     @Override
                     public void run() {
                         User newUser = new User();
-//                        newUser.setDate(getCurrentDate());
                         newUser.setDate(model.getCurrentDate());
                         newUser.setSleep1(firstSelectedTime);
                         newUser.setSleep2(secondSelectedTime);
@@ -388,12 +372,6 @@ public class SleepActivity extends AppCompatActivity implements AddTimeLogic.Lis
             }
         }
     }
-
-    // метод определения даты
-//    public String getCurrentDate() {
-//        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());
-//        return sdf.format(new Date());
-//    }
 
 
     // метод для вывода времени бодрствования

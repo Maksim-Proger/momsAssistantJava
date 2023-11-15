@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@color/maincolor"
+    android:background="@color/mainColor"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -30,9 +30,8 @@
             android:background="@drawable/fields_for_login_page"
             android:padding="10dp"
             android:ems="10"
-            android:fontFamily="monospace"
             android:textColor="@color/black"
-            android:textColorHint="@color/black"
+            android:textColorHint="@color/textColor2"
             android:hint="@string/email"
             android:inputType="textEmailAddress"
             android:textAlignment="center" />
@@ -47,9 +46,8 @@
             android:background="@drawable/fields_for_login_page"
             android:padding="10sp"
             android:ems="10"
-            android:fontFamily="monospace"
             android:textColor="@color/black"
-            android:textColorHint="@color/black"
+            android:textColorHint="@color/textColor2"
             android:hint="@string/password"
             android:inputType="textPassword"
             android:textAlignment="center" />
@@ -85,7 +83,6 @@
             android:layout_marginStart="25dp"
             android:layout_marginEnd="20sp"
             android:background="@drawable/button_on_login_page"
-            android:fontFamily="monospace"
             android:textColor="@color/black"
             android:text="@string/register"
             android:textSize="15sp"

@@ -6,6 +6,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
+
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutorService;
@@ -79,6 +82,15 @@ public class SleepStatistics extends AppCompatActivity {
     private void showStatistics(List<User> users) {
         StringBuilder stringBuilder = new StringBuilder();
         String currentGroupDate = null; // Дата текущей группы
+
+        // Сортируем список по sleep1
+        Collections.sort(users, new Comparator<User>() {
+            @Override
+            public int compare(User o1, User o2) {
+                return o1.getSleep1().compareTo(o2.getSleep1());
+            }
+        });
+
         for (User item: users) {
             String groupDate = item.getDate(); // Получаем дату создания группы из записи
 

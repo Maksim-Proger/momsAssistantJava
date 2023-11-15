@@ -4,7 +4,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/maincolor"
+    android:background="@color/mainColor"
     android:fitsSystemWindows="true">
 
     <LinearLayout
@@ -37,7 +37,6 @@
             android:layout_marginEnd="5dp"
             android:layout_weight="1"
             android:background="@drawable/other_button"
-            android:fontFamily="monospace"
             android:gravity="center"
             android:text="@string/assistant"
             android:textAlignment="center"
@@ -80,6 +79,7 @@
             android:layout_marginStart="10dp"
             android:layout_marginEnd="15dp"
             android:hint="Задайте тут свой вопрос:"
+            android:textColorHint="@color/textColor2"
             android:textAlignment="center"
             android:background="@drawable/other_button" />
 

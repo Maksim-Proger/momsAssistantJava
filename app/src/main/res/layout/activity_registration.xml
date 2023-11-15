@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/maincolor">
+    android:background="@color/mainColor">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -39,7 +39,6 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
-                android:fontFamily="monospace"
                 android:layout_marginStart="0dp"
                 android:layout_marginEnd="5dp"
                 android:layout_marginTop="5dp"
@@ -61,9 +60,8 @@
             android:layout_marginTop="60sp"
             android:layout_marginRight="15sp"
             android:background="@drawable/fields_for_login_page"
-            android:fontFamily="monospace"
             android:textColor="@color/black"
-            android:textColorHint="@color/black"
+            android:textColorHint="@color/textColor2"
             android:hint="@string/name_field"
             android:padding="10sp"
             android:textAlignment="center" />
@@ -76,9 +74,8 @@
             android:layout_marginTop="30sp"
             android:layout_marginRight="15sp"
             android:background="@drawable/fields_for_login_page"
-            android:fontFamily="monospace"
             android:textColor="@color/black"
-            android:textColorHint="@color/black"
+            android:textColorHint="@color/textColor2"
             android:hint="@string/surname_field"
             android:padding="10sp"
             android:textAlignment="center" />
@@ -91,9 +88,8 @@
             android:layout_marginTop="30sp"
             android:layout_marginRight="15sp"
             android:background="@drawable/fields_for_login_page"
-            android:fontFamily="monospace"
             android:textColor="@color/black"
-            android:textColorHint="@color/black"
+            android:textColorHint="@color/textColor2"
             android:hint="@string/patronymic_field"
             android:padding="10sp"
             android:textAlignment="center" />
@@ -106,9 +102,8 @@
             android:layout_marginTop="30sp"
             android:layout_marginRight="15sp"
             android:background="@drawable/fields_for_login_page"
-            android:fontFamily="monospace"
             android:textColor="@color/black"
-            android:textColorHint="@color/black"
+            android:textColorHint="@color/textColor2"
             android:hint="@string/email_field"
             android:padding="10sp"
             android:textAlignment="center" />
@@ -121,9 +116,8 @@
             android:layout_marginTop="30sp"
             android:layout_marginRight="15sp"
             android:background="@drawable/fields_for_login_page"
-            android:fontFamily="monospace"
             android:textColor="@color/black"
-            android:textColorHint="@color/black"
+            android:textColorHint="@color/textColor2"
             android:hint="@string/password_field"
             android:padding="10sp"
             android:textAlignment="center" />
@@ -138,8 +132,8 @@
             android:layout_marginTop="70sp"
             android:layout_marginRight="70sp"
             android:layout_marginBottom="20sp"
+            android:textSize="17sp"
             android:background="@drawable/button_on_login_page"
-            android:fontFamily="monospace"
             android:textColor="@color/black"
             android:textColorHint="@color/black"
             android:text="@string/registration_button"
