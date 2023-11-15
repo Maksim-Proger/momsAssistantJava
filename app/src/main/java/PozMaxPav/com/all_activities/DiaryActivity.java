@@ -7,7 +7,7 @@ import android.widget.Button;
 import androidx.appcompat.app.AppCompatActivity;
 import PozMaxPav.com.R;
 
-public class DiaryActivity extends BaseActivity {
+public class DiaryActivity extends AppCompatActivity {
 
     private Button back_button_diary;
 

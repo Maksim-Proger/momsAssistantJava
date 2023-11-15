@@ -4,7 +4,7 @@
 
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS"/>
-    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_DATA_SYNC" />
+<!--    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_DATA_SYNC" />-->
 
     <application
         android:name=".model.database.MyApp"
@@ -73,11 +73,7 @@
             tools:ignore="LockedOrientationActivity"/>
 
         <service android:name=".model.helperClasses.timer.TimerService" />
-        <service
-            android:name=".model.helperClasses.foreground.ForegroundService"
-            android:enabled="true"
-            android:exported="false"
-            android:foregroundServiceType="dataSync"/>
+        <service android:name=".model.helperClasses.notifications.NotificationService"/>
 
         <activity android:name=".all_activities.LoginActivity"
             android:exported="true">

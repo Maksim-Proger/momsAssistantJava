@@ -72,6 +72,7 @@ public class RegistrationActivity extends AppCompatActivity {
         });
     }
 
+    // Метод сохранения данных пользователя
     private void saveCredentials(String name, String surname,
                                  String patronymic, String email, String password) {
         SharedPreferencesUtils.saveCredentials(this, name,

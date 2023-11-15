@@ -5,10 +5,12 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import PozMaxPav.com.R;
 import PozMaxPav.com.model.helperClasses.sharedPreference.SharedPreferencesUtils;
 
-public class ChildrenProfileActivity extends BaseActivity {
+public class ChildrenProfileActivity extends AppCompatActivity {
 
     private Button back_button, save_button;
     private EditText edit_name, edit_age, edit_weight, edit_height, edit_gender;

@@ -5,11 +5,13 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
+
 import PozMaxPav.com.R;
-import PozMaxPav.com.all_activities.BaseActivity;
 import PozMaxPav.com.model.logicForGames.LogicForTicTacToe;
 
-public class TicTacToeActivity extends BaseActivity {
+public class TicTacToeActivity extends AppCompatActivity {
 
     private final Button[] buttons = new Button[25];
     private Button back_button;
