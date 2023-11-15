@@ -17,7 +17,7 @@ import PozMaxPav.com.model.database.MyApp;
 import PozMaxPav.com.model.database.User;
 import PozMaxPav.com.model.database.UserDao;
 
-public class SleepStatistics extends BaseActivity {
+public class SleepStatistics extends AppCompatActivity {
 
     private Button back_button_statistics;
     private TextView statisticsView;

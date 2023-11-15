@@ -8,10 +8,12 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import PozMaxPav.com.R;
 import PozMaxPav.com.model.helperClasses.sharedPreference.SharedPreferencesUtils;
 
-public class MomProfileActivity extends BaseActivity {
+public class MomProfileActivity extends AppCompatActivity {
 
     private Button back_button, change_profile_image_button;
     private EditText editName,editSurname,editPatronymic,editEmail,editPassword;

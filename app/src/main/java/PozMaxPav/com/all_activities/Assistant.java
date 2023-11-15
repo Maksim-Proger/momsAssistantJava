@@ -15,7 +15,7 @@ import PozMaxPav.com.model.Model;
 import PozMaxPav.com.model.helperClasses.classesForAssistant.ChatAdapter;
 import PozMaxPav.com.model.helperClasses.classesForAssistant.ChatMessage;
 
-public class Assistant extends BaseActivity {
+public class Assistant extends AppCompatActivity {
 
     private EditText editAssistant;
     private Button back_button_assistant;

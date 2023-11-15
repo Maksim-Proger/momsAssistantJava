@@ -1,6 +1,10 @@
 package PozMaxPav.com.all_activities;
 
 import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import android.app.NotificationManager;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -12,23 +16,24 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import PozMaxPav.com.R;
 import PozMaxPav.com.model.Model;
-import PozMaxPav.com.model.helperClasses.notifications.GeneralNotificationClass;
 import PozMaxPav.com.model.helperClasses.sharedPreference.SharedPreferencesUtils;
 import PozMaxPav.com.model.mainMenu.Category;
+import PozMaxPav.com.model.mainMenu.CategoryAdapter;
 
-public class MainScreenActivity extends BaseActivity {
+public class MainScreenActivity extends AppCompatActivity {
 
     private ImageButton sleep_button, diary_button, assistant_button, button_show_popup_menu;
     private TextView fieldName, textViewMainScreen;
     private Handler handler = new Handler();
     private static final long DELAY = 1000;
-
-    // тестируем новые уведомления
-    private GeneralNotificationClass generalNotificationClass;
     private Model model = new Model();
+    private RecyclerView categoryRecycler;
+    private CategoryAdapter categoryAdapter;
+    private boolean isRecyclerViewVisible = false;
 
 
     // Проверка наличия разрешения для уведомлений
@@ -57,28 +62,28 @@ public class MainScreenActivity extends BaseActivity {
         }
         // endregion
 
-        // тестируем новые уведомления
-        generalNotificationClass = new GeneralNotificationClass(MainScreenActivity.this, "Пора спать");
-
         // время бодровствования
         textViewMainScreen = findViewById(R.id.textViewMainScreen);
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
                 updateTextViewMainScreen();
-
-
-                // тестируем новые уведомления
-//                String wakingTime = SharedPreferencesUtils.
-//                        getKeyDifferenceTime(MainScreenActivity.this);
-//                if (model.checkTimeLastSleep(wakingTime)) {
-//                    generalNotificationClass.showNotification();
-//                }
-
-
                 handler.postDelayed(this, DELAY);
             }
         }, DELAY);
+
+        // Создаем наше меню
+        List<Category> categoryList = new ArrayList<>();
+        categoryList.add(new Category(2,"Профиль малыша", ChildrenProfileActivity.class));
+        categoryList.add(new Category(3, "Профиль мамы", MomProfileActivity.class));
+        categoryList.add(new Category(4,"Давай поиграем", GamesActivity.class));
+        categoryList.add(new Category(5,"Сон", SleepActivity.class));
+        categoryList.add(new Category(6,"Полезные статьи", ArticlesActivity.class));
+        categoryList.add(new Category(7,"Дневник малыша", DiaryActivity.class));
+        categoryList.add(new Category(8,"Статистика сна", SleepStatistics.class));
+
+        categoryRecycler = findViewById(R.id.categoryRecycler);
+        setCategoryRecycler(categoryList);
 
         addListenerOnButton();
     }
@@ -134,18 +139,26 @@ public class MainScreenActivity extends BaseActivity {
         button_show_popup_menu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ArrayList<Category> categories = new ArrayList<>();
-                categories.add(new Category(2,"Профиль малыша", ChildrenProfileActivity.class));
-                categories.add(new Category(3, "Профиль мамы", MomProfileActivity.class));
-                categories.add(new Category(4,"Давай поиграем", GamesActivity.class));
-                categories.add(new Category(5,"Сон", SleepActivity.class));
-                categories.add(new Category(6,"Полезные статьи", ArticlesActivity.class));
-                categories.add(new Category(7,"Дневник малыша", DiaryActivity.class));
-                categories.add(new Category(8,"Статистика сна", SleepStatistics.class));
-
-                model.showPopupMenu(MainScreenActivity.this,view,categories);
+                toggleRecyclerViewVisibility();
             }
         });
+    }
+
+    private void setCategoryRecycler(List<Category> categoryList) {
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this, RecyclerView.VERTICAL, false);
+        categoryRecycler.setLayoutManager(layoutManager);
+
+        categoryAdapter = new CategoryAdapter(this, categoryList);
+        categoryRecycler.setAdapter(categoryAdapter);
+
+        // Скрываем RecyclerView при создании активности
+        categoryRecycler.setVisibility(View.GONE);
+    }
+
+    private void toggleRecyclerViewVisibility() {
+        // Переключаем видимость RecyclerView при каждом нажатии на кнопку
+        isRecyclerViewVisible = !isRecyclerViewVisible;
+        categoryRecycler.setVisibility(isRecyclerViewVisible ? View.VISIBLE : View.GONE);
     }
 
     // Запрос на отправку уведомлений

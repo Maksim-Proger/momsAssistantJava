@@ -5,10 +5,12 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import PozMaxPav.com.R;
 import PozMaxPav.com.all_activities.gamesActivities.TicTacToeActivity;
 
-public class GamesActivity extends BaseActivity {
+public class GamesActivity extends AppCompatActivity {
 
     private Button back_button_games, ticTac;
 

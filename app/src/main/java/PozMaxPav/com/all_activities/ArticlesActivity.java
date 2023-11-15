@@ -8,7 +8,7 @@ import android.widget.ImageButton;
 import androidx.appcompat.app.AppCompatActivity;
 import PozMaxPav.com.R;
 
-public class ArticlesActivity extends BaseActivity {
+public class ArticlesActivity extends AppCompatActivity {
 
     private Button back_button;
 

@@ -9,7 +9,6 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import PozMaxPav.com.R;
 import PozMaxPav.com.model.Model;
-import PozMaxPav.com.model.helperClasses.foreground.ForegroundService;
 import PozMaxPav.com.model.helperClasses.sharedPreference.SharedPreferencesUtils;
 
 public class LoginActivity extends AppCompatActivity {
@@ -75,13 +74,4 @@ public class LoginActivity extends AppCompatActivity {
         startActivity(intent);
         finish();
     }
-
-    // Метод запускающий фоновый режим
-    @Override
-    protected void onPause() {
-        super.onPause();
-        Intent intent = new Intent(this, ForegroundService.class);
-        startForegroundService(intent);
-    }
-
 }

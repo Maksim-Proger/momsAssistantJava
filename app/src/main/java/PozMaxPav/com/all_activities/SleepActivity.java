@@ -1,5 +1,6 @@
 package PozMaxPav.com.all_activities;
 
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -10,7 +11,6 @@ import android.os.Handler;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-
 import java.time.LocalTime;
 import java.time.temporal.ChronoUnit;
 import java.util.Locale;
@@ -24,12 +24,12 @@ import PozMaxPav.com.model.database.AppDatabase;
 import PozMaxPav.com.model.database.MyApp;
 import PozMaxPav.com.model.database.User;
 import PozMaxPav.com.model.database.UserDao;
-import PozMaxPav.com.model.helperClasses.notifications.NotificationClass;
+import PozMaxPav.com.model.helperClasses.notifications.NotificationService;
 import PozMaxPav.com.model.helperClasses.sharedPreference.SharedPreferencesUtils;
 import PozMaxPav.com.model.helperClasses.timer.TimerService;
 import PozMaxPav.com.model.helperClasses.addNewTime.AddTimeLogic;
 
-public class SleepActivity extends BaseActivity implements AddTimeLogic.ListenerInterface {
+public class SleepActivity extends AppCompatActivity implements AddTimeLogic.ListenerInterface {
 
     // region переменные
 
@@ -39,7 +39,6 @@ public class SleepActivity extends BaseActivity implements AddTimeLogic.Listener
     private TextView fellAsleepView,wokeUpView,resultSleep,testtesttets,text_view_timeSinceLastSleep;
     private TextView timer;
     private LocalBroadcastManager localBroadcastManager;
-    private NotificationClass notificationClass;
     private AddTimeLogic addTimeLogic;
     private int selectedTimeFlag = 1; // Флаг для отслеживания выбора времени (1 или 2)
     private String firstSelectedTime = "";
@@ -92,9 +91,7 @@ public class SleepActivity extends BaseActivity implements AddTimeLogic.Listener
         addTimeLogic = new AddTimeLogic(SleepActivity.this,SleepActivity.this);
         testtesttets = findViewById(R.id.testtesttets);
 
-        // Создаем экземпляр NotificationClass при инициализации Activity
-        notificationClass = new NotificationClass(this);
-
+        // Поле для вывода таймера
         timer = findViewById(R.id.timer);
 
         // Инициализируем экземляр базы данных
@@ -165,7 +162,7 @@ public class SleepActivity extends BaseActivity implements AddTimeLogic.Listener
     // endregion
 
     private void addListenerOnButton() {
-        // region находим поля
+        // region находим поля и кнопки
         fellAsleep = findViewById(R.id.fellAsleep);
         wokeUp = findViewById(R.id.wokeUp);
         statistics = findViewById(R.id.statistics);
@@ -175,7 +172,7 @@ public class SleepActivity extends BaseActivity implements AddTimeLogic.Listener
         wokeUpView = findViewById(R.id.wokeUpView);
         resultSleep = findViewById(R.id.resultSleep);
         addButton = findViewById(R.id.addButton);
-        // endregion
+        // endregion b и
 
         back_button_sleep.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -204,10 +201,12 @@ public class SleepActivity extends BaseActivity implements AddTimeLogic.Listener
                 SharedPreferencesUtils.removeWakingTime(SleepActivity.this);
                 SharedPreferencesUtils.removeDifferenceTime(SleepActivity.this);
 
-                // Создаем уведомление
-                notificationClass.showNotification();
+                // TODO Создаем уведомление
+                Intent notificationServiceIntent = new Intent(SleepActivity.this, NotificationService.class);
+                notificationServiceIntent.setAction(NotificationService.ACTION_START);
+                startService(notificationServiceIntent);
 
-                // Тестируем определение времени поле вывода удалил
+                // TODO Тестируем определение времени поле вывода удалил
 //                String testTime = fellAsleepString;
 //                testClock.setText(model.checkTime(testTime));
 
@@ -245,6 +244,10 @@ public class SleepActivity extends BaseActivity implements AddTimeLogic.Listener
                 wokeUpString = model.fixTime();
                 String string = "Проснулся: " + wokeUpString;
                 wokeUpView.setText(string);
+
+                // Останавливаем NotificationService
+                Intent notificationServiceIntent = new Intent(SleepActivity.this, NotificationService.class);
+                stopService(notificationServiceIntent);
 
                 // записываем wokeUpString
                 SharedPreferencesUtils.saveKeyAwoke(SleepActivity.this, wokeUpString);
