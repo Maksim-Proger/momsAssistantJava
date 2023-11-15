@@ -1,0 +1,42 @@
+<resources>
+    <string name="app_name">Moms Assistant</string>
+    <string name="momsProfile">Мамин профиль</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="enter">Войти</string>
+    <string name="register">Зарегистрироваться</string>
+    <string name="registration_field">Регистрация</string>
+    <string name="name_field">Имя</string>
+    <string name="surname_field">Фамилия</string>
+    <string name="patronymic_field">Отчество</string>
+    <string name="email_field">Email</string>
+    <string name="password_field">Пароль</string>
+    <string name="photo_field">Фотография</string>
+    <string name="registration_button">Зарегистрироваться</string>
+    <string name="childrenProfile">Профиль малыша</string>
+    <string name="sleepProfile">Сон</string>
+    <string name="fellAsleep">Заснул</string>
+    <string name="wokeUp">Проснулся</string>
+    <string name="sleepStatistics">Статистика сна</string>
+    <string name="articlesProfile">Полезные статьи</string>
+    <string name="resetStats">Сбросить статистику</string>
+    <string name="headerSleepStatistics">Статистика сна</string>
+    <string name="headerDiary">Дневник</string>
+    <string name="assistant">Помощник</string>
+    <string name="buttonBack">Назад</string>
+    <string name="popupMenu">Меню</string>
+    <string name="save">Сохранить</string>
+    <string name="play">Играть</string>
+    <string name="hint">
+        Это помощник маме. Если вы не знаете что спросить,
+        то можете начать с простых веще, например: У ребенка температура.
+        Как правильно одевать ребенка на улицу? Грудное вскармливание.
+        Как правильно прикладывать ребенка к груди?
+    </string>
+    <string name="tictactoe">Крестики нолики</string>
+    <string name="lottery">Играть будете Х или 0 ?</string>
+    <string name="cross_sign">Х</string>
+    <string name="zero_sign">0</string>
+    <string name="addNewSleep">Добавить сон</string>
+    <string name="removeSleep">Удалить сон</string>
+</resources>
