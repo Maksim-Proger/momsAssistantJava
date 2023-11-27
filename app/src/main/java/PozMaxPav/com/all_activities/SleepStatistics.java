@@ -50,13 +50,18 @@ public class SleepStatistics extends AppCompatActivity {
         addListenerOnButton();
     }
 
+    // Объявление внутреннего статического класса GetUsersCallable, реализующего интерфейс Callable<List<User>>
     private static class GetUsersCallable implements Callable<List<User>> {
+
+        // Приватное поле для хранения объекта базы данных
         private final AppDatabase appDatabase;
 
+        // Конструктор класса, принимающий объект базы данных в качестве параметра и сохраняющий его в локальной переменной
         public GetUsersCallable(AppDatabase appDatabase) {
             this.appDatabase = appDatabase;
         }
 
+        // Переопределение метода call() интерфейса Callable
         @Override
         public List<User> call() throws Exception {
             // Получаем DAO для работы с таблицей пользователей
@@ -74,7 +79,7 @@ public class SleepStatistics extends AppCompatActivity {
         back_button_statistics.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                onBackPressed();
+                getOnBackPressedDispatcher().onBackPressed();
             }
         });
     }

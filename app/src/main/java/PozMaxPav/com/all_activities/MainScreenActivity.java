@@ -27,8 +27,8 @@ import PozMaxPav.com.model.mainMenu.CategoryAdapter;
 public class MainScreenActivity extends AppCompatActivity {
 
     private ImageButton sleep_button, diary_button, assistant_button, button_show_popup_menu;
-    private TextView fieldName, textViewMainScreen;
-    private Handler handler = new Handler();
+    private TextView fieldName, textViewMainScreen, fieldTime, fieldCalendar;
+    private final Handler handler = new Handler();
     private static final long DELAY = 1000;
     private Model model = new Model();
     private RecyclerView categoryRecycler;
@@ -49,7 +49,7 @@ public class MainScreenActivity extends AppCompatActivity {
         setContentView(R.layout.activity_mainscreen);
 
         if (!hasNotificationPermission()) {
-            // Запрос на утправку уведомлений
+            // Запрос на отправку уведомлений
             showPermissionDialog();
         }
 
@@ -62,12 +62,18 @@ public class MainScreenActivity extends AppCompatActivity {
         }
         // endregion
 
-        // время бодровствования
+        // выводим дату
+        fieldCalendar = findViewById(R.id.fieldCalendar);
+        fieldCalendar.setText(model.sourceDate());
+
+        // время бодрствования и вывод текущего времени
+        fieldTime = findViewById(R.id.fieldTime);
         textViewMainScreen = findViewById(R.id.textViewMainScreen);
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
                 updateTextViewMainScreen();
+                fieldTime.setText(model.fixTime());
                 handler.postDelayed(this, DELAY);
             }
         }, DELAY);
@@ -95,7 +101,7 @@ public class MainScreenActivity extends AppCompatActivity {
         String wakingTime = model.timeSinceLastSleep(time, MainScreenActivity.this);
 
         if (wakingTime != null) {
-            String wakingTimeResult = "Ваш малыш не спит:\n" + wakingTime;
+            String wakingTimeResult = "Ваш малыш не\nспит:\n" + wakingTime;
             textViewMainScreen.setText(wakingTimeResult);
         }
     }

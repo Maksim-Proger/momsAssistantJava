@@ -8,6 +8,7 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 import java.util.Random;
@@ -24,30 +25,39 @@ public class Model {
 
     // region методы для работы со временем и датой
 
+    // выводим текущую дату с днем недели (класс Calendar)
+    public String sourceDate() {
+        Calendar calendar = Calendar.getInstance();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("EEEE: dd.MM.yyyy", Locale.getDefault());
+        String currentDate = dateFormat.format(calendar.getTime());
+        // Преобразование первой буквы дня недели в заглавную
+        return currentDate.substring(0, 1).toUpperCase() + currentDate.substring(1);
+    }
+
     // метод для фиксации времени
     public String fixTime() {
         Date dateNow = new Date();
-        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
+        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm", Locale.getDefault()); // добавил тут Locale.getDefault()
         return sdf.format(dateNow);
     }
 
     // разбираемся с фоновой работой уведомлений
-    public boolean checkTimeLastSleep(String wakingTime) {
-        int hours = 0;
-        int minutes = 0;
-
-        if (wakingTime != null && !wakingTime.isEmpty()) {
-            LocalTime localTime = LocalTime.parse(wakingTime);
-            hours = localTime.getHour();
-            minutes = localTime.getMinute();
-        }
-
-        if (minutes > 1) {
-            return true;
-        } else {
-            return false;
-        }
-    }
+//    public boolean checkTimeLastSleep(String wakingTime) {
+//        int hours = 0;
+//        int minutes = 0;
+//
+//        if (wakingTime != null && !wakingTime.isEmpty()) {
+//            LocalTime localTime = LocalTime.parse(wakingTime);
+//            hours = localTime.getHour();
+//            minutes = localTime.getMinute();
+//        }
+//
+//        if (minutes > 1) {
+//            return true;
+//        } else {
+//            return false;
+//        }
+//    }
 
     // метод правильного склонения минут
     public String correctWordMinutes(long minutes) {
@@ -125,7 +135,7 @@ public class Model {
         } if (time.isAfter(nightTime) || time.isBefore(morningTime)) {
             return "Ночной сон!";
         }
-        return "Что-то не работет!";
+        return "Что-то не работает!";
     }
 
     // метод вычисляет разницу между временем для дальнейшей записи в базу данных
@@ -248,7 +258,7 @@ public class Model {
         } else if (email.equals("")) {
             return "Введите email";
         } else if (!isValid) {
-            return "Введен некоректный email";
+            return "Введен некорректный email";
         } else if (password.equals("")) {
             return "Введите пароль";
         }

@@ -45,35 +45,22 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
+        android:gravity="end"
         android:layout_marginTop="25dp">
 
         <TextView
             android:id="@+id/textViewMainScreen"
-            android:layout_width="0dp"
+            android:layout_width="200dp"
             android:layout_height="125dp"
-            android:layout_weight="1"
             android:background="@drawable/for_button_send"
             android:gravity="center"
             android:layout_marginStart="10dp"
-            android:layout_marginEnd="25dp"
-            android:textColor="@color/black"
+            android:layout_marginEnd="10dp"
+            android:textColor="@color/textColor2"
             android:textColorHint="@color/textColor2"
             android:hint="Время \nбодрствования"
             android:textAlignment="center"
-            android:textSize="17sp"/>
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="125dp"
-            android:layout_weight="1"
-            android:background="@drawable/for_button_send"
-            android:gravity="center"
-            android:layout_marginEnd="10dp"
-            android:textColor="@color/black"
-            android:textColorHint="@color/textColor2"
-            android:hint="Пока не знаю, что \nтут будет"
-            android:textAlignment="center"
-            android:textSize="17sp" />
+            android:textSize="20sp"/>
 
     </LinearLayout>
 
@@ -83,6 +70,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
+        android:gravity="start"
         android:layout_marginTop="25dp" >
 
         <TextView
@@ -92,10 +80,10 @@
             android:background="@drawable/for_button_send"
             android:textColor="@color/black"
             android:textColorHint="@color/textColor2"
-            android:hint="Погода будет позже"
+            android:hint="Погода будет\nпозже"
             android:textAlignment="center"
             android:gravity="center"
-            android:textSize="17sp" />
+            android:textSize="20sp" />
 
     </LinearLayout>
 
@@ -108,31 +96,29 @@
         android:orientation="horizontal">
 
         <TextView
+            android:id="@+id/fieldCalendar"
             android:layout_weight="1"
             android:layout_width="0dp"
             android:layout_marginStart="10dp"
             android:layout_height="match_parent"
             android:background="@drawable/for_button_send"
-            android:textColor="@color/black"
-            android:textColorHint="@color/textColor2"
-            android:hint="Календарь будет позже"
+            android:textColor="@color/textColor2"
             android:textAlignment="center"
             android:gravity="center"
-            android:textSize="17sp" />
+            android:textSize="20sp" />
 
         <TextView
-            android:layout_weight="1"
+            android:id="@+id/fieldTime"
+            android:layout_weight="0.5"
             android:layout_width="0dp"
             android:layout_marginStart="10dp"
             android:layout_marginEnd="10dp"
             android:layout_height="match_parent"
             android:background="@drawable/for_button_send"
-            android:textColor="@color/black"
-            android:textColorHint="@color/textColor2"
-            android:hint="Время будет позже"
+            android:textColor="@color/textColor2"
             android:textAlignment="center"
             android:gravity="center"
-            android:textSize="17sp"/>
+            android:textSize="25sp"/>
 
     </LinearLayout>
 
