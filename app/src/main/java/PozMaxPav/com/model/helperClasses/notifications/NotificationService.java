@@ -4,6 +4,7 @@ import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.Service;
 import android.content.Intent;
+import android.content.pm.ServiceInfo;
 import android.os.Handler;
 import android.os.IBinder;
 import android.os.SystemClock;
@@ -62,8 +63,12 @@ public class NotificationService extends Service {
         }
         showNotification();
 
-        // startForeground чтобы избежать случайного закрытия службы системой
-        startForeground(NOTIFICATION_ID, builder.build());
+        // startForeground нужен, чтобы избежать случайного закрытия службы системой
+        startForeground(NOTIFICATION_ID, builder.build()); // после обновления до android 14
+                                                           // пришлось явно указать тип переднего
+                                                           // плана для службы в манифесте
+                                                           // и добавить разрешение
+
         // Возвращаем START_STICKY, чтобы сервис автоматически
         // перезапускался, если его убьет система.
         return START_STICKY;
