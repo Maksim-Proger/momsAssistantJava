@@ -101,7 +101,7 @@ public class MainScreenActivity extends AppCompatActivity {
         String wakingTime = model.timeSinceLastSleep(time, MainScreenActivity.this);
 
         if (wakingTime != null) {
-            String wakingTimeResult = "Ваш малыш не\nспит:\n" + wakingTime;
+            String wakingTimeResult = "Ваш малыш не спит:\n" + wakingTime;
             textViewMainScreen.setText(wakingTimeResult);
         }
     }

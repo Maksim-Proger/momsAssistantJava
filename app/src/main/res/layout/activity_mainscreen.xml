@@ -22,7 +22,7 @@
             android:layout_weight="1"
             android:background="@color/mainColor"
             android:src="@drawable/menuicon"
-            android:textColor="@color/black" />
+            android:textColor="@color/textColor2" />
 
         <TextView
             android:id="@+id/fieldName"
@@ -30,7 +30,7 @@
             android:layout_height="55dp"
             android:layout_weight="1"
             android:background="@drawable/other_button"
-            android:layout_marginEnd="10dp"
+            android:layout_marginEnd="15dp"
             android:gravity="center"
             android:textColor="@color/black"
             android:textSize="25sp"
@@ -44,23 +44,37 @@
         android:id="@+id/linearLayout2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="end"
-        android:layout_marginTop="25dp">
+        android:orientation="vertical"
+        android:layout_marginTop="30dp">
 
         <TextView
-            android:id="@+id/textViewMainScreen"
-            android:layout_width="200dp"
-            android:layout_height="125dp"
-            android:background="@drawable/for_button_send"
+            android:id="@+id/fieldTime"
+            android:layout_width="250dp"
+            android:layout_height="60dp"
+            android:layout_marginEnd="15dp"
             android:gravity="center"
-            android:layout_marginStart="10dp"
-            android:layout_marginEnd="10dp"
+            android:layout_gravity="right"
+
+            android:background="@drawable/for_button_send"
             android:textColor="@color/textColor2"
             android:textColorHint="@color/textColor2"
-            android:hint="Время \nбодрствования"
-            android:textAlignment="center"
-            android:textSize="20sp"/>
+            android:hint="Время"
+            android:textSize="25sp"/>
+
+        <TextView
+            android:id="@+id/fieldCalendar"
+            android:layout_width="250dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="15dp"
+            android:gravity="center"
+            android:layout_gravity="right"
+
+            android:background="@drawable/for_button_send"
+            android:textColor="@color/textColor2"
+            android:textColorHint="@color/textColor2"
+            android:hint="Календарь"
+            android:textSize="25sp" />
 
     </LinearLayout>
 
@@ -70,55 +84,65 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:gravity="start"
-        android:layout_marginTop="25dp" >
+        android:layout_marginTop="30dp" >
 
         <TextView
-            android:layout_width="250dp"
-            android:layout_height="250dp"
-            android:layout_marginStart="10dp"
-            android:background="@drawable/for_button_send"
-            android:textColor="@color/black"
-            android:textColorHint="@color/textColor2"
-            android:hint="Погода будет\nпозже"
-            android:textAlignment="center"
+            android:id="@+id/textViewMainScreen"
+            android:layout_width="0dp"
+            android:layout_height="125dp"
+            android:layout_weight="1"
             android:gravity="center"
-            android:textSize="20sp" />
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="15dp"
+
+            android:background="@drawable/for_button_send"
+            android:textColor="@color/textColor2"
+            android:textColorHint="@color/textColor2"
+            android:hint="Время бодрствования"
+            android:textAlignment="center"
+            android:textSize="25sp"/>
 
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/Calendar"
         android:layout_below="@+id/linearLayout3"
-        android:layout_marginTop="20dp"
+        android:id="@+id/linearLayout4"
         android:layout_width="match_parent"
-        android:layout_height="80dp"
-        android:orientation="horizontal">
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="30dp">
 
         <TextView
-            android:id="@+id/fieldCalendar"
+            android:id="@+id/counterSleep"
+            android:layout_width="170dp"
+            android:layout_height="125dp"
             android:layout_weight="1"
-            android:layout_width="0dp"
-            android:layout_marginStart="10dp"
-            android:layout_height="match_parent"
+            android:gravity="center"
+            android:layout_marginStart="15dp"
+
             android:background="@drawable/for_button_send"
             android:textColor="@color/textColor2"
+            android:textColorHint="@color/textColor2"
+            android:hint="Количество\nснов"
             android:textAlignment="center"
-            android:gravity="center"
-            android:textSize="20sp" />
+            android:textSize="25sp" />
 
         <TextView
-            android:id="@+id/fieldTime"
-            android:layout_weight="0.5"
-            android:layout_width="0dp"
-            android:layout_marginStart="10dp"
-            android:layout_marginEnd="10dp"
-            android:layout_height="match_parent"
+            android:id="@+id/weatherView"
+            android:layout_width="170dp"
+            android:layout_height="125dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="15dp"
+
             android:background="@drawable/for_button_send"
             android:textColor="@color/textColor2"
+            android:textColorHint="@color/textColor2"
+            android:hint="Погода будет\nпозже"
             android:textAlignment="center"
-            android:gravity="center"
-            android:textSize="25sp"/>
+            android:textSize="25sp" />
+
 
     </LinearLayout>
 
@@ -141,7 +165,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:layout_below="@+id/Calendar"
+        android:layout_below="@+id/linearLayout4"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
