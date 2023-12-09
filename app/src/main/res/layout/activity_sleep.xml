@@ -53,36 +53,39 @@
             android:layout_marginTop="45dp"
             android:weightSum="3">
 
-            <TextView
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/fellAsleepView"
                 android:layout_width="0dp"
                 android:layout_height="70dp"
                 android:layout_weight="1"
                 android:gravity="center"
                 android:layout_marginRight="10dp"
                 android:layout_marginLeft="10dp"
-                android:id="@+id/fellAsleepView"
                 android:textColor="@color/black"
                 android:textSize="15sp"
+                android:textAllCaps="false"
                 android:background="@color/secondMainColor"/>
 
-            <TextView
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/wokeUpView"
                 android:layout_width="0dp"
                 android:layout_height="70dp"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:id="@+id/wokeUpView"
+                android:textAllCaps="false"
                 android:textColor="@color/black"
                 android:background="@color/secondMainColor"/>
 
-            <TextView
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/resultSleep"
                 android:layout_width="0dp"
                 android:layout_height="70dp"
                 android:layout_weight="1"
                 android:gravity="center"
                 android:layout_marginRight="10dp"
                 android:layout_marginLeft="10dp"
-                android:id="@+id/resultSleep"
                 android:textColor="@color/black"
+                android:textAllCaps="false"
                 android:background="@color/secondMainColor"/>
 
         </LinearLayout>
@@ -132,6 +135,7 @@
                 android:layout_height="match_parent"
                 android:gravity="center"
                 android:textSize="60sp"
+                android:textColor="@color/black"
                 android:id="@+id/timer"/>
 
         </LinearLayout>

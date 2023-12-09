@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -24,28 +25,32 @@ import PozMaxPav.com.model.database.AppDatabase;
 import PozMaxPav.com.model.database.MyApp;
 import PozMaxPav.com.model.database.User;
 import PozMaxPav.com.model.database.UserDao;
+import PozMaxPav.com.model.helperClasses.addNewTime.ChangeTimeFellAsleep;
+import PozMaxPav.com.model.helperClasses.addNewTime.ChangeTimeWokeUp;
 import PozMaxPav.com.model.helperClasses.notifications.NotificationService;
 import PozMaxPav.com.model.helperClasses.sharedPreference.SharedPreferencesUtils;
 import PozMaxPav.com.model.helperClasses.timer.TimerService;
 import PozMaxPav.com.model.helperClasses.addNewTime.AddTimeLogic;
 
-public class SleepActivity extends AppCompatActivity implements AddTimeLogic.ListenerInterface {
+public class SleepActivity extends AppCompatActivity
+        implements AddTimeLogic.ListenerInterface, ChangeTimeFellAsleep, ChangeTimeWokeUp {
 
     // region переменные
 
     private AppDatabase appDatabase;
     private String fellAsleepString, wokeUpString;
-    private Button fellAsleep,wokeUp,statistics,back_button_sleep,pause,cont,addButton;
-    private TextView fellAsleepView,wokeUpView,resultSleep,text_view_timeSinceLastSleep;
+    private Button fellAsleep,fellAsleepView,wokeUp,wokeUpView,resultSleep,statistics,back_button_sleep,pause,cont,addButton;
+    private TextView text_view_timeSinceLastSleep;
     private TextView timer;
     private LocalBroadcastManager localBroadcastManager;
     private AddTimeLogic addTimeLogic;
     private int selectedTimeFlag = 1; // Флаг для отслеживания выбора времени (1 или 2)
     private String firstSelectedTime = "";
     private String secondSelectedTime = "";
-    private Handler handler = new Handler();
+//    private String changeFellAsleep = "";
+    private final Handler handler = new Handler();
     private static final long DELAY = 1000;
-    private Model model = new Model();
+    private final Model model = new Model();
 
     // endregion
 
@@ -77,7 +82,7 @@ public class SleepActivity extends AppCompatActivity implements AddTimeLogic.Lis
             fellAsleepView.setText(newReturnAsleep);
         }
 
-        // время бодровствования
+        // время бодрствования
         text_view_timeSinceLastSleep = findViewById(R.id.text_view_timeSinceLastSleep);
         handler.postDelayed(new Runnable() {
             @Override
@@ -88,15 +93,16 @@ public class SleepActivity extends AppCompatActivity implements AddTimeLogic.Lis
         }, DELAY);
 
         // Создаем экземпляр AddTimeLogic
-        addTimeLogic = new AddTimeLogic(SleepActivity.this,SleepActivity.this);
+        addTimeLogic = new AddTimeLogic(SleepActivity.this, SleepActivity.this,
+                SleepActivity.this, SleepActivity.this);
 
         // Поле для вывода таймера
         timer = findViewById(R.id.timer);
 
-        // Инициализируем экземляр базы данных
+        // Инициализируем экземпляр базы данных
         appDatabase = ((MyApp) getApplication()).getAppDatabase();
 
-        // Получаем экземпляр базы данных с помощбю метода getInstance
+        // Получаем экземпляр базы данных с помощью метода getInstance
         appDatabase = AppDatabase.getInstance(getApplicationContext());
 
         // Инициализируем LocalBroadcastManager
@@ -135,6 +141,7 @@ public class SleepActivity extends AppCompatActivity implements AddTimeLogic.Lis
         }
         executor.shutdown();
     }
+
     public class InsertOrUpdateUserCalleble implements Callable<Void> {
         private User user;
         public InsertOrUpdateUserCalleble(User user) {
@@ -216,6 +223,11 @@ public class SleepActivity extends AppCompatActivity implements AddTimeLogic.Lis
             }
         });
 
+        // Редактируем время заснул вручную
+        fellAsleepView.setOnClickListener(v -> {
+            addTimeLogic.showTimePickerDialogFellAsleep();
+        });
+
         pause.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -262,6 +274,11 @@ public class SleepActivity extends AppCompatActivity implements AddTimeLogic.Lis
             }
         });
 
+        // Редактируем время проснулся вручную
+        wokeUpView.setOnClickListener(v -> {
+            addTimeLogic.showTimePickerDialogWokeUp();
+        });
+
         statistics.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -282,7 +299,7 @@ public class SleepActivity extends AppCompatActivity implements AddTimeLogic.Lis
         });
     }
 
-
+    // Осуществляем вставку в базу
     private void printSleepView2() {
         String asleep = SharedPreferencesUtils.getKeyAsleep(SleepActivity.this);
         String awoke = SharedPreferencesUtils.getKeyAwoke(SleepActivity.this);
@@ -292,7 +309,10 @@ public class SleepActivity extends AppCompatActivity implements AddTimeLogic.Lis
             executor.execute(new Runnable() {
                 @Override
                 public void run() {
-                    String result = model.result(SleepActivity.this);
+
+                    String first = SharedPreferencesUtils.getKeyAsleep(SleepActivity.this);
+                    String second = SharedPreferencesUtils.getKeyAwoke(SleepActivity.this);
+                    String result = model.result(first, second);
 
                     // Получаем текущую дату как дату создания группы
                     String groupDate = model.getCurrentDate();
@@ -327,6 +347,46 @@ public class SleepActivity extends AppCompatActivity implements AddTimeLogic.Lis
         timer.setText(time); // Устанавливаем отформатированное время в TextView
     }
 
+    // метод для изменения времени fellAsleep
+    @Override
+    public void changedTimeMethod(String changedTime) {
+        fellAsleepString = changedTime;
+
+        String string = "Заснул: " + fellAsleepString;
+        fellAsleepView.setText(string);
+
+        // Сохраняем fellAsleepString (время заснул) в SharedPreferences
+        SharedPreferencesUtils.saveKeyAsleep(SleepActivity.this, fellAsleepString);
+    }
+
+    // метод для изменения времени wokeUp
+    @Override
+    public void changedTimeWokeUp(String changedTime) {
+        wokeUpString = changedTime;
+
+        // TODO: надо подумать как избавиться от повторения кода
+        String string = "Проснулся: " + wokeUpString;
+        wokeUpView.setText(string);
+
+        // Останавливаем NotificationService
+        Intent notificationServiceIntent = new Intent(SleepActivity.this, NotificationService.class);
+        stopService(notificationServiceIntent);
+
+        // записываем wokeUpString
+        SharedPreferencesUtils.saveKeyAwoke(SleepActivity.this, wokeUpString);
+
+        // записываем wokeUpString для бодрствования
+        SharedPreferencesUtils.saveWakingTime(SleepActivity.this, wokeUpString);
+
+        printSleepView2();
+
+        // Останавливаем секундомер
+        timer.setVisibility(View.GONE);
+        Intent serviceIntent = new Intent(SleepActivity.this, TimerService.class);
+        stopService(serviceIntent);
+    }
+
+    // Добавляем время вручную
     @Override
     public void listenerMethod(String selectedTime) {
         // сохраняем первое время
@@ -344,38 +404,35 @@ public class SleepActivity extends AppCompatActivity implements AddTimeLogic.Lis
         }
     }
 
+    // Осуществляем вставку в базу времени добавленного вручную
     public void saveNewSleep() {
         if (!firstSelectedTime.isEmpty() && !secondSelectedTime.isEmpty()) {
-            LocalTime firstTime = LocalTime.parse(firstSelectedTime);
-            LocalTime secondTime = LocalTime.parse(secondSelectedTime);
-            long differenceInMinutes = ChronoUnit.MINUTES.between(firstTime, secondTime);
-            String resultSelectedTime = String.valueOf(differenceInMinutes);
 
-            if (firstTime != null && secondTime != null) {
-                ExecutorService executorService = Executors.newSingleThreadExecutor();
-                executorService.execute(new Runnable() {
-                    @Override
-                    public void run() {
-                        User newUser = new User();
-                        newUser.setDate(model.getCurrentDate());
-                        newUser.setSleep1(firstSelectedTime);
-                        newUser.setSleep2(secondSelectedTime);
-                        newUser.setSleep3(resultSelectedTime);
-                        insertOrUpdateUser(newUser);
+            String resultSelectedTime = model.result(firstSelectedTime, secondSelectedTime);
 
-                        // Сброс значений после сохранения
-                        firstSelectedTime = "";
-                        secondSelectedTime = "";
-                    }
-                });
-            }
+            ExecutorService executorService = Executors.newSingleThreadExecutor();
+            executorService.execute(new Runnable() {
+                @Override
+                public void run() {
+                    User newUser = new User();
+                    newUser.setDate(model.getCurrentDate());
+                    newUser.setSleep1(firstSelectedTime);
+                    newUser.setSleep2(secondSelectedTime);
+                    newUser.setSleep3(resultSelectedTime);
+                    insertOrUpdateUser(newUser);
+
+                    // Сброс значений после сохранения
+                    firstSelectedTime = "";
+                    secondSelectedTime = "";
+                }
+            });
         }
     }
-
 
     // метод для вывода времени бодрствования
     private void updateTextViewMainScreen() {
         String time = SharedPreferencesUtils.getKeyWakingTime(SleepActivity.this);
+
         String wakingTime = model.timeSinceLastSleep(time, SleepActivity.this);
 
         if (wakingTime != null) {

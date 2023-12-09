@@ -7,6 +7,9 @@ import android.widget.Button;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -22,7 +25,6 @@ import PozMaxPav.com.model.database.UserDao;
 
 public class SleepStatistics extends AppCompatActivity {
 
-    private Button back_button_statistics;
     private TextView statisticsView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +40,7 @@ public class SleepStatistics extends AppCompatActivity {
         // Получаем список пользователей из базы данных асинхронно
         ExecutorService executor = Executors.newSingleThreadExecutor();
         Future<List<User>> future = executor.submit(new GetUsersCallable(appDatabase));
+
         try {
             List<User> users = future.get();
             showStatistics(users);
@@ -74,8 +77,7 @@ public class SleepStatistics extends AppCompatActivity {
 
     private void addListenerOnButton() {
 
-        back_button_statistics = findViewById(R.id.back_button_statistics);
-
+        Button back_button_statistics = findViewById(R.id.back_button_statistics);
         back_button_statistics.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -89,12 +91,16 @@ public class SleepStatistics extends AppCompatActivity {
         String currentGroupDate = null; // Дата текущей группы
 
         // Сортируем список по sleep1
-        Collections.sort(users, new Comparator<User>() {
-            @Override
-            public int compare(User o1, User o2) {
-                return o1.getSleep1().compareTo(o2.getSleep1());
-            }
-        });
+//        users.sort(new Comparator<User>() {
+//            @Override
+//            public int compare(User o1, User o2) {
+//                return o1.getSleep1().compareTo(o2.getSleep1());
+//            }
+//        });
+
+        // Сортируем список сначала по дате, затем по времени сна внутри одинаковых дат
+        users.sort(Comparator.comparing(User::getDate).thenComparing(User::getSleep1));
+
 
         for (User item: users) {
             String groupDate = item.getDate(); // Получаем дату создания группы из записи
@@ -111,4 +117,5 @@ public class SleepStatistics extends AppCompatActivity {
         }
         statisticsView.setText(stringBuilder);
     }
+
 }

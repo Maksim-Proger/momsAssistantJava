@@ -64,7 +64,8 @@ public class Model {
 
         if (minutes % 10 == 1 && minutes % 100 != 11) {
             return " минуту";
-        } else if ((minutes % 10 > 2 && minutes % 10 <= 4) && (minutes % 100 < 10 || minutes % 100 >= 20)) {
+        } else if ((minutes % 10 > 2 && minutes % 10 <= 4)
+                && (minutes % 100 < 10 || minutes % 100 >= 20)) {
             return " минуты";
         } else {
             return " минут";
@@ -116,6 +117,21 @@ public class Model {
         return stringDifferenceTimeView;
     }
 
+    // метод вычисляет разницу между временем для дальнейшей записи в базу данных
+    public String result(String first, String second){
+
+        LocalTime time1 = LocalTime.parse(first);
+        LocalTime time2 = LocalTime.parse(second);
+
+        long differenceInMinutes = ChronoUnit.MINUTES.between(time1, time2);
+
+        // (Переход через полночь) Если разница отрицательная, добавляем 24 часа
+        if (differenceInMinutes < 0) {
+            differenceInMinutes += 24 * 60; // 24 часа * 60 минут
+        }
+
+        return String.valueOf(differenceInMinutes);
+    }
 
     // метод для определения времени суток
     public String checkTime(String timeNow){
@@ -138,20 +154,9 @@ public class Model {
         return "Что-то не работает!";
     }
 
-    // метод вычисляет разницу между временем для дальнейшей записи в базу данных
-    public String result(Context context){
-        String first = SharedPreferencesUtils.getKeyAsleep(context);
-        String second = SharedPreferencesUtils.getKeyAwoke(context);
-
-        LocalTime time1 = LocalTime.parse(first);
-        LocalTime time2 = LocalTime.parse(second);
-        long differenceInMinutes = ChronoUnit.MINUTES.between(time1, time2);
-        return String.valueOf(differenceInMinutes);
-    }
-
     // метод определения даты
     public String getCurrentDate() {
-        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()); // для проверки сортировки поменял dd-MM-yyyy на yyyy-MM-dd
         return sdf.format(new Date());
     }
 
@@ -228,7 +233,7 @@ public class Model {
     // endregion
 
     // region методы регистрации
-    // метод для для проверки наличия профиля пользователя
+    // метод для проверки наличия профиля пользователя
     public String inputValidation(Context context, String email, String password) {
         String emailSharedPreferences = SharedPreferencesUtils.getKeyEmail(context);
         String passwordSharedPreferencesUtils = SharedPreferencesUtils.getKeyPassword(context);
