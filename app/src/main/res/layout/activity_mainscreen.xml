@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/mainColor">
+
+<!--    Верхний Layout с кнопкой меню-->
+    <LinearLayout
+        android:id="@+id/linearLayout1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="15dp">
+
+        <ImageButton
+            android:id="@+id/button_show_popup_menu"
+            android:layout_width="55dp"
+            android:layout_height="55dp"
+            android:layout_weight="1"
+            android:background="@color/mainColor"
+            android:src="@drawable/menuicon"
+            android:textColor="@color/textColor2" />
+
+        <TextView
+            android:id="@+id/fieldName"
+            android:layout_width="240dp"
+            android:layout_height="55dp"
+            android:layout_weight="1"
+            android:background="@drawable/other_button"
+            android:layout_marginEnd="15dp"
+            android:gravity="center"
+            android:textColor="@color/black"
+            android:textSize="25sp"
+            tools:layout_editor_absoluteX="241dp"
+            tools:layout_editor_absoluteY="771dp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_below="@+id/linearLayout1"
+        android:id="@+id/linearLayout2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="30dp">
+
+        <TextView
+            android:id="@+id/fieldTime"
+            android:layout_width="250dp"
+            android:layout_height="60dp"
+            android:layout_marginEnd="15dp"
+            android:gravity="center"
+            android:layout_gravity="right"
+
+            android:background="@drawable/for_button_send"
+            android:textColor="@color/textColor2"
+            android:textColorHint="@color/textColor2"
+            android:hint="Время"
+            android:textSize="25sp"/>
+
+        <TextView
+            android:id="@+id/fieldCalendar"
+            android:layout_width="250dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="15dp"
+            android:gravity="center"
+            android:layout_gravity="right"
+
+            android:background="@drawable/for_button_send"
+            android:textColor="@color/textColor2"
+            android:textColorHint="@color/textColor2"
+            android:hint="Календарь"
+            android:textSize="25sp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_below="@+id/linearLayout2"
+        android:id="@+id/linearLayout3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="30dp" >
+
+        <TextView
+            android:id="@+id/textViewMainScreen"
+            android:layout_width="0dp"
+            android:layout_height="125dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="15dp"
+
+            android:background="@drawable/for_button_send"
+            android:textColor="@color/textColor2"
+            android:textColorHint="@color/textColor2"
+            android:hint="Время бодрствования"
+            android:textAlignment="center"
+            android:textSize="25sp"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_below="@+id/linearLayout3"
+        android:id="@+id/linearLayout4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="30dp">
+
+        <TextView
+            android:id="@+id/counterSleep"
+            android:layout_width="170dp"
+            android:layout_height="125dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:layout_marginStart="15dp"
+
+            android:background="@drawable/for_button_send"
+            android:textColor="@color/textColor2"
+            android:textColorHint="@color/textColor2"
+            android:hint="Количество\nснов"
+            android:textAlignment="center"
+            android:textSize="25sp" />
+
+        <TextView
+            android:id="@+id/weatherView"
+            android:layout_width="170dp"
+            android:layout_height="125dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="15dp"
+
+            android:background="@drawable/for_button_send"
+            android:textColor="@color/textColor2"
+            android:textColorHint="@color/textColor2"
+            android:hint="Погода будет\nпозже"
+            android:textAlignment="center"
+            android:textSize="25sp" />
+
+
+    </LinearLayout>
+
+
+    <!-- RecyclerView с прозрачным фоном -->
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/recyclerViewContainer"
+        android:layout_below="@id/linearLayout1"
+        android:layout_marginTop="16dp">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/categoryRecycler"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@android:color/transparent"/>
+
+    </FrameLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_below="@+id/linearLayout4"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:id="@+id/linearLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="15dp"
+            app:layout_constraintBottom_toBottomOf="parent" >
+
+            <ImageButton
+                android:id="@+id/sleep_button"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight="1"
+                android:background="@color/mainColor"
+                android:src="@drawable/sleepicon" />
+
+            <ImageButton
+                android:id="@+id/diary_button"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight="1"
+                android:background="@color/mainColor"
+                android:src="@drawable/diaryicon" />
+
+            <ImageButton
+                android:id="@+id/assistant_button"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight="1"
+                android:background="@color/mainColor"
+                android:src="@drawable/assistanticon" />
+
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</RelativeLayout>
+

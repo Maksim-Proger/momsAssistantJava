@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/mainColor">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:layout_width="wrap_content"
+                android:layout_height="48dp"
+                android:layout_gravity="center"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:background="@drawable/other_button"
+                android:text="@string/buttonBack"
+                android:textColor="@color/black"
+                android:id="@+id/back_button"
+                android:textSize="15sp"
+                android:textAllCaps="false"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_marginStart="0dp"
+                android:layout_marginEnd="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:textSize="26sp"
+                android:textAlignment="center"
+                android:gravity="center"
+                android:background="@drawable/other_button"
+                android:text="@string/registration_field"
+                android:textColor="@color/black"/>
+
+        </LinearLayout>
+
+        <EditText
+            android:id="@+id/editName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15sp"
+            android:layout_marginTop="60sp"
+            android:layout_marginRight="15sp"
+            android:background="@drawable/fields_for_login_page"
+            android:textColor="@color/black"
+            android:textColorHint="@color/textColor2"
+            android:hint="@string/name_field"
+            android:padding="10sp"
+            android:textAlignment="center" />
+
+        <EditText
+            android:id="@+id/editSurname"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15sp"
+            android:layout_marginTop="30sp"
+            android:layout_marginRight="15sp"
+            android:background="@drawable/fields_for_login_page"
+            android:textColor="@color/black"
+            android:textColorHint="@color/textColor2"
+            android:hint="@string/surname_field"
+            android:padding="10sp"
+            android:textAlignment="center" />
+
+        <EditText
+            android:id="@+id/editPatronymic"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15sp"
+            android:layout_marginTop="30sp"
+            android:layout_marginRight="15sp"
+            android:background="@drawable/fields_for_login_page"
+            android:textColor="@color/black"
+            android:textColorHint="@color/textColor2"
+            android:hint="@string/patronymic_field"
+            android:padding="10sp"
+            android:textAlignment="center" />
+
+        <EditText
+            android:id="@+id/editEmail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15sp"
+            android:layout_marginTop="30sp"
+            android:layout_marginRight="15sp"
+            android:background="@drawable/fields_for_login_page"
+            android:textColor="@color/black"
+            android:textColorHint="@color/textColor2"
+            android:hint="@string/email_field"
+            android:padding="10sp"
+            android:textAlignment="center" />
+
+        <EditText
+            android:id="@+id/editPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15sp"
+            android:layout_marginTop="30sp"
+            android:layout_marginRight="15sp"
+            android:background="@drawable/fields_for_login_page"
+            android:textColor="@color/black"
+            android:textColorHint="@color/textColor2"
+            android:hint="@string/password_field"
+            android:padding="10sp"
+            android:textAlignment="center" />
+
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/buttonReg"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:layout_marginLeft="70sp"
+            android:layout_marginTop="70sp"
+            android:layout_marginRight="70sp"
+            android:layout_marginBottom="20sp"
+            android:textSize="17sp"
+            android:background="@drawable/button_on_login_page"
+            android:textColor="@color/black"
+            android:textColorHint="@color/black"
+            android:text="@string/registration_button"
+            android:textAllCaps="false" />
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
