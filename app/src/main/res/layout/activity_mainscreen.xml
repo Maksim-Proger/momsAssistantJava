@@ -75,7 +75,7 @@
             android:background="@drawable/for_button_send"
             android:textColor="@color/textColor3"
             android:textColorHint="@color/textColor3"
-            android:hint="Календарь"
+            android:hint="Календарь тест"
             android:textSize="25sp" />
 
     </LinearLayout>
