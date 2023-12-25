@@ -43,8 +43,8 @@
         android:layout_below="@+id/linearLayout1"
         android:id="@+id/linearLayout2"
         android:layout_width="315dp"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
+        android:layout_height="80dp"
+        android:orientation="horizontal"
         android:layout_marginTop="30dp"
         android:background="@drawable/for_button_send"
         android:layout_alignParentEnd="true"
@@ -52,31 +52,30 @@
         android:alpha="0.5">
 
         <TextView
-            android:id="@+id/fieldTime"
-            android:layout_width="315dp"
-            android:layout_height="40dp"
-            android:layout_marginEnd="15dp"
-            android:gravity="right"
-            android:paddingEnd="25dp"
-
-            android:background="@drawable/for_button_send"
-            android:textColor="@color/textColor3"
-            android:textColorHint="@color/textColor3"
-            android:hint="Время"
-            android:textSize="25sp"/>
-
-        <TextView
             android:id="@+id/fieldCalendar"
-            android:layout_width="315dp"
-            android:layout_height="40dp"
-            android:layout_marginEnd="15dp"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
             android:gravity="center"
 
             android:background="@drawable/for_button_send"
             android:textColor="@color/textColor3"
             android:textColorHint="@color/textColor3"
-            android:hint="Календарь тест"
+            android:hint="Календарь"
             android:textSize="25sp" />
+
+        <TextView
+            android:id="@+id/fieldTime"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:gravity="center"
+
+            android:background="@drawable/for_button_send"
+            android:textColor="@color/textColor3"
+            android:textColorHint="@color/textColor3"
+            android:hint="Время"
+            android:textSize="35sp"/>
 
     </LinearLayout>
 
@@ -180,7 +179,7 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:background="@drawable/for_button_send"
-            android:padding="10dp"
+            android:padding="7dp"
             android:layout_marginStart="5dp"
             android:layout_marginEnd="5dp"
             android:layout_marginBottom="5dp"
