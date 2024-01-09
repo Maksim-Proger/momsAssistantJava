@@ -28,7 +28,7 @@ public class Model {
     // выводим текущую дату с днем недели (класс Calendar)
     public String sourceDate() {
         Calendar calendar = Calendar.getInstance();
-        SimpleDateFormat dateFormat = new SimpleDateFormat("EEEE: dd.MM.yyyy", Locale.getDefault());
+        SimpleDateFormat dateFormat = new SimpleDateFormat("EEEE\ndd.MM.yyyy", Locale.getDefault());
         String currentDate = dateFormat.format(calendar.getTime());
         // Преобразование первой буквы дня недели в заглавную
         return currentDate.substring(0, 1).toUpperCase() + currentDate.substring(1);
