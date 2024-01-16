@@ -12,7 +12,6 @@ import PozMaxPav.com.model.helperClasses.sharedPreference.SharedPreferencesUtils
 
 public class ChildrenProfileActivity extends AppCompatActivity {
 
-    private Button back_button, save_button;
     private EditText edit_name, edit_age, edit_weight, edit_height, edit_gender;
 
     @Override
@@ -32,8 +31,8 @@ public class ChildrenProfileActivity extends AppCompatActivity {
     }
 
     private void addListenerOnButton() {
-        back_button = findViewById(R.id.back_button);
-        save_button = findViewById(R.id.save_button);
+        Button back_button = findViewById(R.id.back_button);
+        Button save_button = findViewById(R.id.save_button);
 
         back_button.setOnClickListener(new View.OnClickListener() {
             @Override
