@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/mainColor">
@@ -61,10 +60,10 @@
                 android:gravity="center"
                 android:layout_marginRight="10dp"
                 android:layout_marginLeft="10dp"
-                android:textColor="@color/black"
                 android:textSize="15sp"
                 android:textAllCaps="false"
-                android:background="@color/secondMainColor"/>
+                android:background="@drawable/for_button_send"
+                android:textColor="@color/textColor3"/>
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/wokeUpView"
@@ -73,8 +72,8 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:textAllCaps="false"
-                android:textColor="@color/black"
-                android:background="@color/secondMainColor"/>
+                android:background="@drawable/for_button_send"
+                android:textColor="@color/textColor3"/>
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/resultSleep"
@@ -84,9 +83,9 @@
                 android:gravity="center"
                 android:layout_marginRight="10dp"
                 android:layout_marginLeft="10dp"
-                android:textColor="@color/black"
                 android:textAllCaps="false"
-                android:background="@color/secondMainColor"/>
+                android:background="@drawable/for_button_send"
+                android:textColor="@color/textColor3"/>
 
         </LinearLayout>
 
@@ -103,10 +102,10 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:textSize="15sp"
-                android:textColor="@color/textColor2"
                 android:layout_marginRight="10dp"
                 android:layout_marginLeft="10dp"
-                android:background="@color/secondMainColor"/>
+                android:background="@drawable/for_button_send"
+                android:textColor="@color/textColor3"/>
 
             <TextView
                 android:id="@+id/countField"
@@ -115,10 +114,10 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:textSize="15sp"
-                android:textColor="@color/textColor2"
                 android:layout_marginRight="10dp"
                 android:layout_marginLeft="10dp"
-                android:background="@color/secondMainColor"/>
+                android:background="@drawable/for_button_send"
+                android:textColor="@color/textColor3"/>
 
         </LinearLayout>
 
@@ -135,7 +134,7 @@
                 android:layout_height="match_parent"
                 android:gravity="center"
                 android:textSize="60sp"
-                android:textColor="@color/black"
+                android:textColor="@color/textColor3"
                 android:id="@+id/timer"/>
 
         </LinearLayout>
@@ -147,19 +146,20 @@
             android:layout_marginTop="15dp">
 
             <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/fellAsleep"
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 android:text="@string/fellAsleep"
                 android:layout_gravity="center"
                 android:layout_weight="1"
                 android:layout_marginStart="20dp"
-                android:id="@+id/fellAsleep"
-                android:textColor="@color/black"
+                android:textColor="@color/textColor3"
                 android:textAllCaps="false"
                 android:textSize="17sp"
                 android:background="@drawable/button_on_login_page"/>
 
             <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/wokeUp"
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 android:text="@string/wokeUp"
@@ -167,8 +167,7 @@
                 android:layout_weight="1"
                 android:layout_marginStart="40dp"
                 android:layout_marginEnd="20dp"
-                android:id="@+id/wokeUp"
-                android:textColor="@color/black"
+                android:textColor="@color/textColor3"
                 android:textAllCaps="false"
                 android:textSize="17sp"
                 android:background="@drawable/button_on_login_page"/>
@@ -181,19 +180,20 @@
             android:layout_marginTop="15dp">
 
             <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/pause"
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 android:text="Пауза"
                 android:layout_gravity="center"
                 android:layout_weight="1"
                 android:layout_marginStart="20dp"
-                android:id="@+id/pause"
-                android:textColor="@color/black"
+                android:textColor="@color/textColor3"
                 android:textAllCaps="false"
                 android:textSize="17sp"
                 android:background="@drawable/button_on_login_page"/>
 
             <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/cont"
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 android:text="Продолжить"
@@ -201,8 +201,7 @@
                 android:layout_weight="1"
                 android:layout_marginStart="40dp"
                 android:layout_marginEnd="20dp"
-                android:id="@+id/cont"
-                android:textColor="@color/black"
+                android:textColor="@color/textColor3"
                 android:textAllCaps="false"
                 android:textSize="17sp"
                 android:background="@drawable/button_on_login_page"/>
@@ -221,7 +220,7 @@
                 android:layout_gravity="center"
                 android:layout_weight="1"
                 android:layout_marginStart="20dp"
-                android:textColor="@color/black"
+                android:textColor="@color/textColor3"
                 android:text="@string/addNewSleep"
                 android:textAllCaps="false"
                 android:textSize="17sp"
@@ -236,7 +235,7 @@
                 android:layout_marginStart="40dp"
                 android:layout_marginEnd="20dp"
                 android:text="@string/sleepStatistics"
-                android:textColor="@color/black"
+                android:textColor="@color/textColor3"
                 android:textAllCaps="false"
                 android:textSize="17sp"
                 android:background="@drawable/button_on_login_page" />
