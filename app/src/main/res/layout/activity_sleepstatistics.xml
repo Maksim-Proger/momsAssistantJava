@@ -49,27 +49,32 @@
             android:layout_width="190dp"
             android:layout_height="48dp"
             android:layout_marginTop="10dp"
+            android:layout_marginEnd="5dp"
             android:layout_gravity="right"
             android:text="@string/resetStats"
             android:id="@+id/buttonResetStats"
             android:textAllCaps="false"
             android:textSize="17sp"
-            android:textColor="@color/black"
+            android:textColor="@color/textColor3"
             android:background="@drawable/button_on_login_page"/>
 
         <ScrollView
             android:layout_marginTop="10dp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginEnd="5dp"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@color/secondMainColor">
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/secondMainColor"
-                android:textColor="@color/black"
+                android:textColor="@color/textColor3"
                 android:paddingStart="10dp"
                 android:id="@+id/statisticsView"
-                android:textSize="20sp"/>
+                android:textSize="25sp"/>
 
         </ScrollView>
 

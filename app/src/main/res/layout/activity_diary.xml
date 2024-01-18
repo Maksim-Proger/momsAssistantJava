@@ -16,6 +16,7 @@
             android:orientation="horizontal">
 
             <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/back_button"
                 android:layout_width="wrap_content"
                 android:layout_height="48dp"
                 android:layout_gravity="center"
@@ -24,8 +25,8 @@
                 android:layout_marginTop="5dp"
                 android:layout_marginBottom="5dp"
                 android:background="@drawable/other_button"
+                android:textColor="@color/black"
                 android:text="@string/buttonBack"
-                android:id="@+id/back_button"
                 android:textSize="15sp"
                 android:textAllCaps="false"/>
 

@@ -1,204 +1,204 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/mainColor">
 
     <LinearLayout
+        android:id="@+id/topLinearLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/back_button"
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:layout_gravity="center"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginBottom="5dp"
+            android:background="@drawable/other_button"
+            android:text="@string/buttonBack"
+            android:textAllCaps="false"
+            android:textColor="@color/black"
+            android:textSize="15sp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginStart="0dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="5dp"
+            android:layout_marginBottom="5dp"
+            android:background="@drawable/other_button"
+            android:gravity="center"
+            android:text="@string/childrenProfile"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="26sp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_below="@+id/topLinearLayout"
+        android:id="@+id/linearLayout5"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <ImageButton
+            android:id="@+id/profile_image"
+            android:layout_width="250dp"
+            android:layout_height="250dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="15dp"
+            android:scaleType="fitXY"
+            app:srcCompat="@drawable/photoismissing" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <androidx.appcompat.widget.AppCompatButton
-                android:layout_width="wrap_content"
-                android:layout_height="48dp"
-                android:layout_gravity="center"
-                android:layout_marginLeft="5dp"
-                android:layout_marginRight="5dp"
-                android:layout_marginTop="5dp"
-                android:layout_marginBottom="5dp"
-                android:background="@drawable/other_button"
-                android:text="@string/buttonBack"
-                android:textColor="@color/black"
-                android:id="@+id/back_button"
-                android:textSize="15sp"
-                android:textAllCaps="false"/>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="48dp"
-                android:layout_marginStart="0dp"
-                android:layout_marginEnd="5dp"
-                android:layout_marginTop="5dp"
-                android:layout_marginBottom="5dp"
-                android:textSize="26sp"
-                android:textAlignment="center"
-                android:gravity="center"
-                android:background="@drawable/other_button"
-                android:text="@string/childrenProfile"
-                android:textColor="@color/black"/>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
             android:layout_marginTop="25dp"
-            android:orientation="horizontal">
-
-            <ImageView
-                android:id="@+id/imageView3"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                app:srcCompat="@drawable/photoismissing" />
+            android:layout_marginEnd="15dp"
+            android:orientation="vertical">
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="257dp"
-                android:layout_marginStart="10dp"
-                android:layout_weight="1"
-                android:orientation="vertical">
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
 
-                <LinearLayout
-                    android:layout_width="match_parent"
+                <TextView
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:layout_weight="1"
+                    android:text="Имя:"
+                    android:textColor="@color/textColor3"
+                    android:textSize="20sp" />
 
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:textSize="20sp"
-                        android:layout_weight="1"
-                        android:textColor="@color/black"
-                        android:text="Возраст:" />
+                <EditText
+                    android:id="@+id/edit_name"
+                    android:layout_width="0dp"
+                    android:layout_height="40dp"
+                    android:layout_weight="1.7"
+                    android:textColor="@color/textColor3"
+                    android:textSize="20sp" />
 
-                    <EditText
-                        android:id="@+id/edit_age"
-                        android:layout_width="match_parent"
-                        android:layout_height="48dp"
-                        android:layout_weight="1"
-                        android:textColor="@color/textColor2"
-                        android:layout_marginEnd="10dp"/>
+            </LinearLayout>
 
-                </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
 
-                <LinearLayout
-                    android:layout_width="match_parent"
+                <TextView
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:layout_weight="1"
+                    android:text="Возраст:"
+                    android:textColor="@color/textColor3"
+                    android:textSize="20sp" />
 
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:textSize="20sp"
-                        android:layout_weight="1"
-                        android:textColor="@color/black"
-                        android:text="Вес:" />
+                <EditText
+                    android:id="@+id/edit_age"
+                    android:layout_width="0dp"
+                    android:layout_height="40dp"
+                    android:layout_weight="1.7"
+                    android:textColor="@color/textColor3"
+                    android:textSize="20sp" />
 
-                    <EditText
-                        android:id="@+id/edit_weight"
-                        android:layout_width="match_parent"
-                        android:layout_height="48dp"
-                        android:layout_weight="1"
-                        android:textColor="@color/textColor2"
-                        android:layout_marginEnd="10dp"/>
+            </LinearLayout>
 
-                </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
 
-                <LinearLayout
-                    android:layout_width="match_parent"
+                <TextView
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:layout_weight="1"
+                    android:text="Вес:"
+                    android:textColor="@color/textColor3"
+                    android:textSize="20sp" />
 
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:textSize="20sp"
-                        android:layout_weight="1"
-                        android:textColor="@color/black"
-                        android:text="Рост:" />
+                <EditText
+                    android:id="@+id/edit_weight"
+                    android:layout_width="0dp"
+                    android:layout_height="40dp"
+                    android:layout_weight="1.7"
+                    android:textColor="@color/textColor3"
+                    android:textSize="20sp" />
 
-                    <EditText
-                        android:id="@+id/edit_height"
-                        android:layout_width="match_parent"
-                        android:layout_height="48dp"
-                        android:layout_weight="1"
-                        android:textColor="@color/textColor2"
-                        android:layout_marginEnd="10dp"/>
+            </LinearLayout>
 
-                </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
 
-                <LinearLayout
-                    android:layout_width="match_parent"
+                <TextView
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:layout_weight="1"
+                    android:text="Рост:"
+                    android:textColor="@color/textColor3"
+                    android:textSize="20sp" />
 
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:textSize="20sp"
-                        android:layout_weight="1"
-                        android:textColor="@color/black"
-                        android:text="Пол:" />
+                <EditText
+                    android:id="@+id/edit_height"
+                    android:layout_width="0dp"
+                    android:layout_height="40dp"
+                    android:layout_weight="1.7"
+                    android:textColor="@color/textColor3"
+                    android:textSize="20sp" />
 
-                    <EditText
-                        android:id="@+id/edit_gender"
-                        android:layout_width="match_parent"
-                        android:layout_height="48dp"
-                        android:layout_weight="1"
-                        android:textColor="@color/textColor2"
-                        android:layout_marginEnd="10dp"/>
+            </LinearLayout>
 
-                </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Пол:"
+                    android:textColor="@color/textColor3"
+                    android:textSize="20sp" />
+
+                <EditText
+                    android:id="@+id/edit_gender"
+                    android:layout_width="0dp"
+                    android:layout_height="40dp"
+                    android:layout_weight="1.7"
+                    android:textColor="@color/textColor3"
+                    android:textSize="20sp" />
 
             </LinearLayout>
 
         </LinearLayout>
 
-        <EditText
-            android:id="@+id/edit_name"
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:textColor="@color/textColor2" />
-
-        <EditText
-            android:id="@+id/textView17"
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:hint="Что-то еще"
-            android:textColorHint="@color/textColor2"
-            android:textColor="@color/textColor2" />
-
-        <EditText
-            android:id="@+id/textView18"
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:hint="Что-то еще"
-            android:textColorHint="@color/textColor2"
-            android:textColor="@color/textColor2" />
-
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/save_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:paddingHorizontal="15dp"
-            android:layout_marginTop="25dp"
-            android:background="@drawable/button_on_login_page"
-            android:gravity="center"
-            android:textAllCaps="false"
-            android:textSize="17sp"
-            android:text="@string/save" />
     </LinearLayout>
-</androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:layout_below="@+id/linearLayout5"
+        android:id="@+id/save_button"
+        android:layout_width="130dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="25dp"
+        android:layout_marginEnd="15dp"
+        android:layout_alignParentEnd="true"
+
+        android:background="@drawable/button_on_login_page"
+        android:text="@string/save"
+        android:textAllCaps="false"
+        android:textColor="@color/textColor3"
+        android:textSize="20sp" />
+
+</RelativeLayout>
