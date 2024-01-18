@@ -48,6 +48,15 @@ public class MainScreenActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mainscreen);
 
+        // TODO Тестируем работу счетчика кол-во снов
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                counterSleep();
+                handler.postDelayed(this, 10000);
+            }
+        }, 10000);
+
         if (!hasNotificationPermission()) {
             // Запрос на отправку уведомлений
             showPermissionDialog();
@@ -188,6 +197,12 @@ public class MainScreenActivity extends AppCompatActivity {
         Intent intent = new Intent(Settings.ACTION_APP_NOTIFICATION_SETTINGS)
                 .putExtra(Settings.EXTRA_APP_PACKAGE, getPackageName());
         startActivity(intent);
+    }
+
+    // TODO Тестируем работу счетчика кол-во снов
+    private void counterSleep() {
+        TextView textView = findViewById(R.id.counterSleep);
+        textView.setText(SharedPreferencesUtils.getKeyCounterSleep(MainScreenActivity.this));
     }
 
 }

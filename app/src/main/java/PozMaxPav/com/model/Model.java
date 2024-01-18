@@ -1,6 +1,9 @@
 package PozMaxPav.com.model;
 
 import android.content.Context;
+import android.util.Log;
+import android.widget.Button;
+
 import java.text.SimpleDateFormat;
 import java.time.Duration;
 import java.time.LocalDate;
@@ -281,6 +284,26 @@ public class Model {
         return matcher.matches();
     }
     // endregion
+
+
+    // Считаем кол-во снов
+    int count = 0;
+    public int counterSleeps(Button button) {
+
+        if (button != null) {
+            count++;
+        }
+
+        LocalTime nightTime = LocalTime.of(23,59);
+        LocalTime localTime = LocalTime.now();
+
+        if (localTime.isAfter(nightTime)) {
+            count = 0;
+        }
+
+        return count;
+    }
+
 
 }
 

@@ -39,15 +39,15 @@ public class SleepActivity extends AppCompatActivity
 
     private AppDatabase appDatabase;
     private String fellAsleepString, wokeUpString;
-    private Button fellAsleep,fellAsleepView,wokeUp,wokeUpView,resultSleep,statistics,back_button_sleep,pause,cont,addButton;
-    private TextView text_view_timeSinceLastSleep;
+    private Button fellAsleep,fellAsleepView,wokeUp,wokeUpView,resultSleep,
+            statistics,back_button_sleep,pause,cont,addButton;
+    private TextView text_view_timeSinceLastSleep, countField;
     private TextView timer;
     private LocalBroadcastManager localBroadcastManager;
     private AddTimeLogic addTimeLogic;
     private int selectedTimeFlag = 1; // Флаг для отслеживания выбора времени (1 или 2)
     private String firstSelectedTime = "";
     private String secondSelectedTime = "";
-//    private String changeFellAsleep = "";
     private final Handler handler = new Handler();
     private static final long DELAY = 1000;
     private final Model model = new Model();
@@ -74,13 +74,22 @@ public class SleepActivity extends AppCompatActivity
 
         setContentView(R.layout.activity_sleep);
 
-        // выводи сохраненную переменную
+        // выводи сохраненную переменную (заснул)
         fellAsleepView = findViewById(R.id.fellAsleepView);
         String returnAsleep = SharedPreferencesUtils.getKeyAsleep(this);
         if (returnAsleep != null) {
             String newReturnAsleep = "Заснул: " + returnAsleep;
             fellAsleepView.setText(newReturnAsleep);
         }
+
+        // Выводим сохраненную переменную (кол-во снов)
+        countField = findViewById(R.id.countField);
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                countField.setText(SharedPreferencesUtils.getKeyCounterSleep(SleepActivity.this));
+            }
+        }, DELAY);
 
         // время бодрствования
         text_view_timeSinceLastSleep = findViewById(R.id.text_view_timeSinceLastSleep);
@@ -195,6 +204,14 @@ public class SleepActivity extends AppCompatActivity
                 wokeUpView.setText(""); // очищаем поле для повторного нажатия
                 resultSleep.setText(""); // очищаем поле для повторного нажатия
 
+                // TODO Тестируем работу счетчика кол-во снов
+                int countSleep = model.counterSleeps(fellAsleep);
+                String res = countSleep + " сон";
+                SharedPreferencesUtils.saveCounterSleep(SleepActivity.this, res);
+                countField.setText(SharedPreferencesUtils.getKeyCounterSleep(SleepActivity.this));
+
+
+
                 fellAsleepString = model.fixTime();
                 String string = "Заснул: " + fellAsleepString;
                 fellAsleepView.setText(string);
@@ -206,7 +223,7 @@ public class SleepActivity extends AppCompatActivity
                 SharedPreferencesUtils.removeWakingTime(SleepActivity.this);
                 SharedPreferencesUtils.removeDifferenceTime(SleepActivity.this);
 
-                // TODO Создаем уведомление
+                // TODO Создаем уведомление (добавить переход при нажатии на уведомление)
                 Intent notificationServiceIntent = new Intent(SleepActivity.this, NotificationService.class);
                 notificationServiceIntent.setAction(NotificationService.ACTION_START);
                 startService(notificationServiceIntent);

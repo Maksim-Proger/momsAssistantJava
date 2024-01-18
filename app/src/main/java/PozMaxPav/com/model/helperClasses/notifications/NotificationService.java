@@ -22,7 +22,7 @@ public class NotificationService extends Service {
     private Boolean isRunning = false;
     private long startTime = 0;
     private long timePassed = 0;
-    private Handler notificationHandler = new Handler();
+    private final Handler notificationHandler = new Handler();
     private static final int NOTIFICATION_UPDATE_INTERVAL = 1000;
     private NotificationCompat.Builder builder;
 
