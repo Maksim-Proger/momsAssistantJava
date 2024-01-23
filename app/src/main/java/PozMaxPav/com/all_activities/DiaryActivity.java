@@ -9,8 +9,6 @@ import PozMaxPav.com.R;
 
 public class DiaryActivity extends AppCompatActivity {
 
-    private Button back_button_diary;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -20,13 +18,21 @@ public class DiaryActivity extends AppCompatActivity {
     }
 
     private void addListenerOnButton() {
-        back_button_diary = findViewById(R.id.back_button);
-        
-        back_button_diary.setOnClickListener(new View.OnClickListener() {
+        Button back_button = findViewById(R.id.back_button);
+        Button back_to_home = findViewById(R.id.back_to_home);
+
+        back_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                getOnBackPressedDispatcher().onBackPressed();
+            }
+        });
+
+        back_to_home.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
                 Intent intent = new Intent(
-                        DiaryActivity.this,MainScreenActivity.class);
+                        DiaryActivity.this, MainScreenActivity.class);
                 startActivity(intent);
             }
         });

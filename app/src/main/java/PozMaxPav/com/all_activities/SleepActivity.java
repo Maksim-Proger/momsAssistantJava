@@ -40,7 +40,7 @@ public class SleepActivity extends AppCompatActivity
     private AppDatabase appDatabase;
     private String fellAsleepString, wokeUpString;
     private Button fellAsleep,fellAsleepView,wokeUp,wokeUpView,resultSleep,
-            statistics,back_button_sleep,pause,cont,addButton;
+            statistics,pause,cont,addButton;
     private TextView text_view_timeSinceLastSleep, countField;
     private TextView timer;
     private LocalBroadcastManager localBroadcastManager;
@@ -181,7 +181,8 @@ public class SleepActivity extends AppCompatActivity
         fellAsleep = findViewById(R.id.fellAsleep);
         wokeUp = findViewById(R.id.wokeUp);
         statistics = findViewById(R.id.statistics);
-        back_button_sleep = findViewById(R.id.back_button_sleep);
+        Button back_button = findViewById(R.id.back_button);
+        Button back_to_home = findViewById(R.id.back_to_home);
         pause = findViewById(R.id.pause);
         cont = findViewById(R.id.cont);
         wokeUpView = findViewById(R.id.wokeUpView);
@@ -189,10 +190,18 @@ public class SleepActivity extends AppCompatActivity
         addButton = findViewById(R.id.addButton);
         // endregion
 
-        back_button_sleep.setOnClickListener(new View.OnClickListener() {
+        back_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 getOnBackPressedDispatcher().onBackPressed();
+            }
+        });
+
+        back_to_home.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(SleepActivity.this, MainScreenActivity.class);
+                startActivity(intent);
             }
         });
 

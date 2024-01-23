@@ -13,7 +13,6 @@ import PozMaxPav.com.model.helperClasses.sharedPreference.SharedPreferencesUtils
 
 public class RegistrationActivity extends AppCompatActivity {
 
-    private Button back_button,buttonReg;
     private EditText editName,editSurname,editPatronymic,editEmail,editPassword;
 
     @Override
@@ -26,8 +25,9 @@ public class RegistrationActivity extends AppCompatActivity {
 
     private void addListenerOnButton() {
 
-        back_button = findViewById(R.id.back_button);
-        buttonReg = findViewById(R.id.buttonReg);
+        Button back_button = findViewById(R.id.back_button);
+        Button buttonReg = findViewById(R.id.buttonReg);
+        Button back_to_home = findViewById(R.id.back_to_home);
 
         editName = findViewById(R.id.editName);
         editSurname = findViewById(R.id.editSurname);
@@ -39,6 +39,14 @@ public class RegistrationActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 getOnBackPressedDispatcher().onBackPressed();
+            }
+        });
+
+        back_to_home.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(RegistrationActivity.this, MainScreenActivity.class);
+                startActivity(intent);
             }
         });
 

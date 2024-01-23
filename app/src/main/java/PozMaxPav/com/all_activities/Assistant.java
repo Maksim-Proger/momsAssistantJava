@@ -1,5 +1,6 @@
 package PozMaxPav.com.all_activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -18,7 +19,6 @@ import PozMaxPav.com.model.helperClasses.classesForAssistant.ChatMessage;
 public class Assistant extends AppCompatActivity {
 
     private EditText editAssistant;
-    private Button back_button_assistant;
     private ImageButton buttonAssistant;
     private RecyclerView recyclerView;
     private ChatAdapter adapter;
@@ -40,7 +40,8 @@ public class Assistant extends AppCompatActivity {
     private void addListenerOnButton() {
         editAssistant = findViewById(R.id.editAssistent);
         buttonAssistant = findViewById(R.id.buttonAssistent);
-        back_button_assistant = findViewById(R.id.back_button_assistant);
+        Button back_button = findViewById(R.id.back_button);
+        Button back_to_home = findViewById(R.id.back_to_home);
         buttonAssistant.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -48,10 +49,18 @@ public class Assistant extends AppCompatActivity {
             }
         });
 
-        back_button_assistant.setOnClickListener(new View.OnClickListener() {
+        back_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                onBackPressed();
+                getOnBackPressedDispatcher().onBackPressed();
+            }
+        });
+
+        back_to_home.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Assistant.this, MainScreenActivity.class);
+                startActivity(intent);
             }
         });
     }
