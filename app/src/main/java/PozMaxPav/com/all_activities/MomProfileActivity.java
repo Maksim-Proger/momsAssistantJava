@@ -16,9 +16,7 @@ import PozMaxPav.com.model.helperClasses.sharedPreference.SharedPreferencesUtils
 
 public class MomProfileActivity extends AppCompatActivity {
 
-    private Button back_button, change_profile_image_button;
     private EditText editName,editSurname,editPatronymic,editEmail,editPassword;
-
     private ImageButton profile_image;
     final int SELECT_IMAGE_CODE = 1;
 
@@ -31,7 +29,8 @@ public class MomProfileActivity extends AppCompatActivity {
     }
 
     private void addListenerOnButton() {
-        back_button = findViewById(R.id.back_button);
+        Button back_button = findViewById(R.id.back_button);
+        Button back_to_home = findViewById(R.id.back_to_home);
         profile_image = findViewById(R.id.profile_image);
 
         editName = findViewById(R.id.editName);
@@ -67,7 +66,15 @@ public class MomProfileActivity extends AppCompatActivity {
         back_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                onBackPressed();
+                getOnBackPressedDispatcher().onBackPressed();
+            }
+        });
+
+        back_to_home.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MomProfileActivity.this, MainScreenActivity.class);
+                startActivity(intent);
             }
         });
 

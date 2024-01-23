@@ -25,10 +25,30 @@ public class SharedPreferencesUtils {
     private static final String KEY_CHILDREN_HEIGHT = "Children_height";
     private static final String KEY_CHILDREN_GENDER = "Children_gender";
 
-    // переменная для отсчета времения бодрствования
+    // переменная для отсчета времени бодрствования
     private static final String KEY_WAKING_TIME = "waking_time";
     private static final String KEY_DIFFERENCE_TIME = "difference_Time";
 
+    // Переменная для подсчета количества снов
+    private static final String KEY_COUNTER_SLEEP = "counter_sleep";
+
+    // Методы для работы с переменной количества снов
+    public static String getKeyCounterSleep(Context context) {
+        SharedPreferences sharedPreferences = context.getSharedPreferences(
+                PREFS_NAME, Context.MODE_PRIVATE
+        );
+        return sharedPreferences.getString(KEY_COUNTER_SLEEP, null);
+    }
+
+    public static void saveCounterSleep(
+            Context context, String counterSleep) {
+
+        SharedPreferences sharedPreferences = context.getSharedPreferences(
+                PREFS_NAME, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString(KEY_COUNTER_SLEEP, counterSleep);
+        editor.apply();
+    }
 
     public static String getKeyName(Context context) {
         SharedPreferences sharedPreferences = context.getSharedPreferences(
@@ -105,7 +125,6 @@ public class SharedPreferencesUtils {
 
 
     // Активность Сон
-
     public static String getKeyAsleep(Context context) {
         SharedPreferences sharedPreferences = context.getSharedPreferences(
                 PREFS_NAME, Context.MODE_PRIVATE);
@@ -143,8 +162,7 @@ public class SharedPreferencesUtils {
         editor.apply();
     }
 
-    // Активность деткого профиля
-
+    // Активность детского профиля
     public static String getKeyChildrenName(Context context) {
         SharedPreferences sharedPreferences = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
         return sharedPreferences.getString(KEY_CHILDREN_NAME, null);
@@ -185,7 +203,7 @@ public class SharedPreferencesUtils {
         editor.apply();
     }
 
-    // для отсчета времения бодрствования
+    // для отсчета времени бодрствования
     public static String getKeyWakingTime(Context context) {
         SharedPreferences sharedPreferences = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
         return sharedPreferences.getString(KEY_WAKING_TIME, null);
