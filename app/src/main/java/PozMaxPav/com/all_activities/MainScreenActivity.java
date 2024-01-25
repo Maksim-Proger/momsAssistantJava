@@ -6,10 +6,13 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.NotificationManager;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.PowerManager;
 import android.provider.Settings;
 import android.view.View;
 import android.widget.ImageButton;
@@ -42,6 +45,13 @@ public class MainScreenActivity extends AppCompatActivity {
         return notificationManager.areNotificationsEnabled();
     }
 
+    // TODO Проверка наличия разрешения для игнорирования оптимизации батареи
+    private boolean ignoringBatteryEnabled() {
+        PowerManager powerManager = (PowerManager) getSystemService(Context.POWER_SERVICE);
+        return powerManager.isIgnoringBatteryOptimizations(getPackageName());
+    }
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,6 +71,18 @@ public class MainScreenActivity extends AppCompatActivity {
             // Запрос на отправку уведомлений
             showPermissionDialog();
         }
+
+        // TODO доработать эту проверку
+//        if (!ignoringBatteryEnabled()) {
+//            requestIgnoreBatteryOptimizations();
+//        }
+
+        if (!ignoringBatteryEnabled()) {
+            Intent intent = new Intent(Settings.ACTION_REQUEST_IGNORE_BATTERY_OPTIMIZATIONS);
+            intent.setData(Uri.parse("package:" + getPackageName()));
+            startActivity(intent);
+        }
+
 
         // region Получение и вывод имени пользователя и вывод в поле fieldName
         fieldName = findViewById(R.id.fieldName);
@@ -114,7 +136,6 @@ public class MainScreenActivity extends AppCompatActivity {
             textViewMainScreen.setText(wakingTimeResult);
         }
     }
-
 
     private void addListenerOnButton() {
         Model model = new Model();
@@ -192,12 +213,38 @@ public class MainScreenActivity extends AppCompatActivity {
                 .show();
     }
 
-    // метод для открытия настроек телефона
+    // Метод игнорирования оптимизации батарее
+    private void requestIgnoreBatteryOptimizations() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder
+                .setTitle("Разрешение на использование ресурсов телефона")
+                .setMessage("Приложению необходимо предоставить разрешение на использование " +
+                        "ресурсов телефона без ограничений, это " +
+                        "необходимо для выполнения важных функций приложения?")
+                .setPositiveButton("Да", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        openBatterySettings();
+                    }
+                })
+                .setNegativeButton("Нет", null)
+                .show();
+    }
+
+    // метод для открытия настроек телефона (уведомления)
     private void openNotificationSettings() {
         Intent intent = new Intent(Settings.ACTION_APP_NOTIFICATION_SETTINGS)
                 .putExtra(Settings.EXTRA_APP_PACKAGE, getPackageName());
         startActivity(intent);
     }
+
+    // метод для открытия настроек телефона (оптимизация батареи)
+    private void openBatterySettings() {
+        Intent intent = new Intent(Settings.ACTION_IGNORE_BATTERY_OPTIMIZATION_SETTINGS)
+                .putExtra(Settings.EXTRA_APP_PACKAGE, getPackageName());
+        startActivity(intent);
+    }
+
 
     // TODO Тестируем работу счетчика кол-во снов
     private void counterSleep() {
