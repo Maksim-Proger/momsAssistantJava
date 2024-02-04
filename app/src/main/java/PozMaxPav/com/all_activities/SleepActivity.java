@@ -57,7 +57,7 @@ public class SleepActivity extends AppCompatActivity
     // region Регистрируем BroadcastReceiver
 
     // Регистрируем BroadcastReceiver для обновления времени из сервиса
-    private BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
+    private final BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
             long elapsedMillis = intent.getLongExtra("elapsedMillis", 0);
