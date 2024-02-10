@@ -4,13 +4,12 @@ import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.Service;
 import android.content.Intent;
-import android.content.pm.ServiceInfo;
 import android.os.Handler;
 import android.os.IBinder;
 import android.os.SystemClock;
 import androidx.annotation.Nullable;
 import androidx.core.app.NotificationCompat;
-import androidx.localbroadcastmanager.content.LocalBroadcastManager;
+import java.util.Locale;
 import PozMaxPav.com.R;
 
 public class NotificationService extends Service {
@@ -154,7 +153,8 @@ public class NotificationService extends Service {
         long minutes = (time / (1000 * 60)) % 60;
         long hours = (time / (1000 * 60 * 60));
 
-        return String.format("%02d:%02d:%02d", hours, minutes, seconds);
+        return String.format(Locale.getDefault(), "%02d:%02d:%02d",
+                hours, minutes, seconds);
     }
 
     @Override

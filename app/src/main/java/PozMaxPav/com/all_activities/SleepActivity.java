@@ -32,7 +32,6 @@ import PozMaxPav.com.model.helperClasses.addNewTime.AddTimeLogic;
 public class SleepActivity extends AppCompatActivity
         implements AddTimeLogic.ListenerInterface, ChangeTimeFellAsleep, ChangeTimeWokeUp {
 
-
     private AppDatabase appDatabase;
     private String fellAsleepString, wokeUpString;
     private Button fellAsleep,fellAsleepView,wokeUp,wokeUpView,resultSleep,
@@ -247,7 +246,7 @@ public class SleepActivity extends AppCompatActivity
         pause.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // Приостанавливаем работу секундомера
+                // TODO Приостанавливаем работу секундомера (на реальном устройстве не работает)
                 Intent serviceIntent = new Intent(SleepActivity.this, TimerService.class);
                 serviceIntent.setAction(TimerService.ACTION_PAUSE);
                 startService(serviceIntent);

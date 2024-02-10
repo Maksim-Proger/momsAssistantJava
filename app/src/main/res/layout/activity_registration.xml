@@ -32,17 +32,6 @@
                 android:layout_marginBottom="5dp"
                 android:background="@drawable/new_icon_back" />
 
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/back_to_home"
-                android:layout_width="35dp"
-                android:layout_height="35dp"
-                android:layout_gravity="center"
-                android:layout_marginLeft="5dp"
-                android:layout_marginTop="5dp"
-                android:layout_marginRight="5dp"
-                android:layout_marginBottom="5dp"
-                android:background="@drawable/new_icon_back_to_main_screen" />
-
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
@@ -62,7 +51,7 @@
         <EditText
             android:id="@+id/editName"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="48dp"
             android:layout_marginLeft="15sp"
             android:layout_marginTop="60sp"
             android:layout_marginRight="15sp"
@@ -76,7 +65,7 @@
         <EditText
             android:id="@+id/editSurname"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="48dp"
             android:layout_marginLeft="15sp"
             android:layout_marginTop="30sp"
             android:layout_marginRight="15sp"
@@ -90,7 +79,7 @@
         <EditText
             android:id="@+id/editPatronymic"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="48dp"
             android:layout_marginLeft="15sp"
             android:layout_marginTop="30sp"
             android:layout_marginRight="15sp"
@@ -104,7 +93,7 @@
         <EditText
             android:id="@+id/editEmail"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="48dp"
             android:layout_marginLeft="15sp"
             android:layout_marginTop="30sp"
             android:layout_marginRight="15sp"
@@ -118,7 +107,7 @@
         <EditText
             android:id="@+id/editPassword"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="48dp"
             android:layout_marginLeft="15sp"
             android:layout_marginTop="30sp"
             android:layout_marginRight="15sp"

@@ -81,16 +81,17 @@
 
                 <TextView
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.7"
                     android:text="Имя:"
+                    android:gravity="bottom"
                     android:textColor="@color/textColor3"
                     android:textSize="20sp" />
 
                 <EditText
                     android:id="@+id/edit_name"
                     android:layout_width="0dp"
-                    android:layout_height="40dp"
+                    android:layout_height="wrap_content"
                     android:layout_weight="1.7"
                     android:textColor="@color/textColor3"
                     android:textSize="20sp" />
@@ -104,16 +105,17 @@
 
                 <TextView
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.7"
                     android:text="Возраст:"
+                    android:gravity="bottom"
                     android:textColor="@color/textColor3"
                     android:textSize="20sp" />
 
                 <EditText
                     android:id="@+id/edit_age"
                     android:layout_width="0dp"
-                    android:layout_height="40dp"
+                    android:layout_height="wrap_content"
                     android:layout_weight="1.7"
                     android:textColor="@color/textColor3"
                     android:textSize="20sp" />
@@ -127,16 +129,17 @@
 
                 <TextView
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.7"
                     android:text="Вес:"
+                    android:gravity="bottom"
                     android:textColor="@color/textColor3"
                     android:textSize="20sp" />
 
                 <EditText
                     android:id="@+id/edit_weight"
                     android:layout_width="0dp"
-                    android:layout_height="40dp"
+                    android:layout_height="wrap_content"
                     android:layout_weight="1.7"
                     android:textColor="@color/textColor3"
                     android:textSize="20sp" />
@@ -150,16 +153,17 @@
 
                 <TextView
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.7"
                     android:text="Рост:"
+                    android:gravity="bottom"
                     android:textColor="@color/textColor3"
                     android:textSize="20sp" />
 
                 <EditText
                     android:id="@+id/edit_height"
                     android:layout_width="0dp"
-                    android:layout_height="40dp"
+                    android:layout_height="wrap_content"
                     android:layout_weight="1.7"
                     android:textColor="@color/textColor3"
                     android:textSize="20sp" />
@@ -173,16 +177,17 @@
 
                 <TextView
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.7"
                     android:text="Пол:"
+                    android:gravity="bottom"
                     android:textColor="@color/textColor3"
                     android:textSize="20sp" />
 
                 <EditText
                     android:id="@+id/edit_gender"
                     android:layout_width="0dp"
-                    android:layout_height="40dp"
+                    android:layout_height="wrap_content"
                     android:layout_weight="1.7"
                     android:textColor="@color/textColor3"
                     android:textSize="20sp" />
