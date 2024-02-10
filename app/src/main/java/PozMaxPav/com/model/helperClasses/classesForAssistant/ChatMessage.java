@@ -1,9 +1,9 @@
 package PozMaxPav.com.model.helperClasses.classesForAssistant;
 
 public class ChatMessage {
-    private String message;
-    private boolean userMessage;
-    private boolean isEmptyLine;
+    private final String message;
+    private final boolean userMessage;
+    private final boolean isEmptyLine;
 
     public ChatMessage(String message, boolean userMessage, boolean isEmptyLine) {
         this.message = message;

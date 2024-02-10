@@ -38,8 +38,8 @@ public class Assistant extends AppCompatActivity {
     }
 
     private void addListenerOnButton() {
-        editAssistant = findViewById(R.id.editAssistent);
-        buttonAssistant = findViewById(R.id.buttonAssistent);
+        editAssistant = findViewById(R.id.editAssistant);
+        buttonAssistant = findViewById(R.id.buttonAssistant);
         Button back_button = findViewById(R.id.back_button);
         Button back_to_home = findViewById(R.id.back_to_home);
         buttonAssistant.setOnClickListener(new View.OnClickListener() {

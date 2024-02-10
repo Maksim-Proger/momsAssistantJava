@@ -63,7 +63,7 @@
             android:id="@+id/recyclerView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_above="@+id/editAssistent"
+            android:layout_above="@+id/editAssistant"
             android:padding="8dp"
             android:clipToPadding="false" />
 
@@ -79,7 +79,7 @@
         android:layout_marginBottom="25dp">
 
         <EditText
-            android:id="@+id/editAssistent"
+            android:id="@+id/editAssistant"
             android:layout_width="200dp"
             android:layout_height="60dp"
             android:layout_weight="1"
@@ -87,11 +87,12 @@
             android:layout_marginEnd="15dp"
             android:hint="Задайте тут свой вопрос:"
             android:textColorHint="@color/textColor2"
+            android:textColor="@color/textColor2"
             android:textAlignment="center"
             android:background="@drawable/other_button" />
 
         <ImageButton
-            android:id="@+id/buttonAssistent"
+            android:id="@+id/buttonAssistant"
             android:layout_width="0dp"
             android:layout_height="60dp"
             android:layout_gravity="center"

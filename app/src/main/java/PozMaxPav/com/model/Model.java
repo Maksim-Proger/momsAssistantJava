@@ -218,7 +218,14 @@ public class Model {
                     "рассказать про необходимость диеты для мамы. Могу дать ответы на часто " +
                     "возникающие вопросы, например, можно ли маме выпивать алкоголь в небольшом " +
                     "количестве, естественно. И это далеко не все мои возможности.";
+        } else if (containsAnyNormalized(tokens,
+                "Что такое лактостаз", "про лактостаз", "о лактостазе")) {
+            return readBase.read(context, "lactostasis.txt");
+        } else if (containsAnyNormalized(tokens,
+                "справиться с лактостазом", "у тебя лактостаз", "при лактостазе")) {
+            return readBase.read(context, "how_to_cope_with_lactostasis");
         }
+
         return "Пока я не могу ответить вам на этот вопрос. Попробуйте его переформулировать.";
     }
 
@@ -286,7 +293,9 @@ public class Model {
     // endregion
 
 
-    // Считаем кол-во снов
+    /**
+     * Считаем кол-во снов
+     */
     int count = 0;
     public int counterSleeps(Button button) {
 

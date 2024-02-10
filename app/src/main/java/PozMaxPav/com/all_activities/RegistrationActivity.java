@@ -27,7 +27,6 @@ public class RegistrationActivity extends AppCompatActivity {
 
         Button back_button = findViewById(R.id.back_button);
         Button buttonReg = findViewById(R.id.buttonReg);
-        Button back_to_home = findViewById(R.id.back_to_home);
 
         editName = findViewById(R.id.editName);
         editSurname = findViewById(R.id.editSurname);
@@ -39,14 +38,6 @@ public class RegistrationActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 getOnBackPressedDispatcher().onBackPressed();
-            }
-        });
-
-        back_to_home.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(RegistrationActivity.this, MainScreenActivity.class);
-                startActivity(intent);
             }
         });
 
