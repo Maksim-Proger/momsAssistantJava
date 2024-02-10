@@ -32,7 +32,6 @@ import PozMaxPav.com.model.helperClasses.addNewTime.AddTimeLogic;
 public class SleepActivity extends AppCompatActivity
         implements AddTimeLogic.ListenerInterface, ChangeTimeFellAsleep, ChangeTimeWokeUp {
 
-    // region переменные
 
     private AppDatabase appDatabase;
     private String fellAsleepString, wokeUpString;
@@ -49,9 +48,6 @@ public class SleepActivity extends AppCompatActivity
     private static final long DELAY = 1000;
     private final Model model = new Model();
 
-    // endregion
-
-    // region Регистрируем BroadcastReceiver
 
     // Регистрируем BroadcastReceiver для обновления времени из сервиса
     private final BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
@@ -62,9 +58,7 @@ public class SleepActivity extends AppCompatActivity
         }
     };
 
-    // endregion
 
-    // region метод onCreate
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -116,7 +110,7 @@ public class SleepActivity extends AppCompatActivity
 
         addListenerOnButton();
     }
-    // endregion
+
 
     @Override
     protected void onDestroy() {
@@ -124,7 +118,7 @@ public class SleepActivity extends AppCompatActivity
         LocalBroadcastManager.getInstance(this).unregisterReceiver(broadcastReceiver);
     }
 
-    // region DataBase
+
 
     @Override
     protected void onStart() {
@@ -139,7 +133,7 @@ public class SleepActivity extends AppCompatActivity
     }
     private void insertOrUpdateUser(User user) {
         ExecutorService executor = Executors.newSingleThreadExecutor();
-        Future<Void> future = executor.submit(new InsertOrUpdateUserCalleble(user));
+        Future<Void> future = executor.submit(new InsertOrUpdateUserCallable(user));
         try {
             future.get();
         } catch (Exception e) {
@@ -148,9 +142,9 @@ public class SleepActivity extends AppCompatActivity
         executor.shutdown();
     }
 
-    public class InsertOrUpdateUserCalleble implements Callable<Void> {
-        private User user;
-        public InsertOrUpdateUserCalleble(User user) {
+    public class InsertOrUpdateUserCallable implements Callable<Void> {
+        private final User user;
+        public InsertOrUpdateUserCallable(User user) {
             this.user = user;
         }
         @Override
@@ -171,7 +165,6 @@ public class SleepActivity extends AppCompatActivity
         }
     }
 
-    // endregion
 
     private void addListenerOnButton() {
         // region находим поля и кнопки
@@ -238,7 +231,7 @@ public class SleepActivity extends AppCompatActivity
 //                String testTime = fellAsleepString;
 //                testClock.setText(model.checkTime(testTime));
 
-                // TODO Запускаем секундомер (разобраться с проблемой сброса секундомера)
+                // Запускаем секундомер
                 timer.setVisibility(View.VISIBLE);
                 Intent serviceIntent = new Intent(SleepActivity.this, TimerService.class);
                 serviceIntent.setAction(TimerService.ACTION_START);
@@ -258,6 +251,11 @@ public class SleepActivity extends AppCompatActivity
                 Intent serviceIntent = new Intent(SleepActivity.this, TimerService.class);
                 serviceIntent.setAction(TimerService.ACTION_PAUSE);
                 startService(serviceIntent);
+
+                // Приостанавливаем работу NotificationService
+                Intent notificationIntent = new Intent(SleepActivity.this, NotificationService.class);
+                notificationIntent.setAction(NotificationService.ACTION_PAUSE);
+                startService(notificationIntent);
             }
         });
 
@@ -268,6 +266,11 @@ public class SleepActivity extends AppCompatActivity
                 Intent serviceIntent = new Intent(SleepActivity.this, TimerService.class);
                 serviceIntent.setAction(TimerService.ACTION_RESUME);
                 startService(serviceIntent);
+
+                // Возобновляем работу NotificationService
+                Intent notificationIntent = new Intent(SleepActivity.this, NotificationService.class);
+                notificationIntent.setAction(NotificationService.ACTION_RESUME);
+                startService(notificationIntent);
             }
         });
 
