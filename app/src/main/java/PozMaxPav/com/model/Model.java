@@ -219,11 +219,11 @@ public class Model {
                     "возникающие вопросы, например, можно ли маме выпивать алкоголь в небольшом " +
                     "количестве, естественно. И это далеко не все мои возможности.";
         } else if (containsAnyNormalized(tokens,
-                "Что такое лактостаз", "про лактостаз", "о лактостазе")) {
+                "что такое лактостаз", "про лактостаз", "о лактостазе")) {
             return readBase.read(context, "lactostasis.txt");
         } else if (containsAnyNormalized(tokens,
                 "справиться с лактостазом", "у тебя лактостаз", "при лактостазе")) {
-            return readBase.read(context, "how_to_cope_with_lactostasis");
+            return readBase.read(context, "lactostasisTreatment.txt");
         }
 
         return "Пока я не могу ответить вам на этот вопрос. Попробуйте его переформулировать.";
@@ -231,11 +231,14 @@ public class Model {
 
     // Проверка, содержит ли массив нормализованных строк хотя бы одну из заданных нормализованных строк
     private boolean containsAnyNormalized(String[] array, String... normalizedValues) {
-        for (String normalizedValue: normalizedValues) {
-            for (String token: array) {
-                if (token.equalsIgnoreCase(normalizedValue)) {
-                    return true;
-                }
+        // Преобразование массива строк array в одну строку с пробелами между элементами
+        // Сведение к нижнему регистру для регистронезависимого поиска
+        String combined = String.join(" ", array).toLowerCase();
+
+        for (String normalizedValue : normalizedValues) {
+            // Проверка, содержится ли normalizedValue (приведенное к нижнему регистру) в combined
+            if (combined.contains(normalizedValue.toLowerCase())) {
+                return true;
             }
         }
         return false;
