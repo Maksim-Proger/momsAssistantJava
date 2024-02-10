@@ -12,8 +12,6 @@ import PozMaxPav.com.all_activities.gamesActivities.TicTacToeActivity;
 
 public class GamesActivity extends AppCompatActivity {
 
-    private Button back_button_games, ticTac;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -23,13 +21,22 @@ public class GamesActivity extends AppCompatActivity {
     }
 
     private void addListenerOnButton() {
-        back_button_games = findViewById(R.id.back_button_games);
-        ticTac = findViewById(R.id.tictac);
+        Button back_button = findViewById(R.id.back_button);
+        Button back_to_home = findViewById(R.id.back_to_home);
+        Button ticTac = findViewById(R.id.tictac);
 
-        back_button_games.setOnClickListener(new View.OnClickListener() {
+        back_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                onBackPressed();
+                getOnBackPressedDispatcher().onBackPressed();
+            }
+        });
+
+        back_to_home.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(GamesActivity.this, MainScreenActivity.class);
+                startActivity(intent);
             }
         });
 

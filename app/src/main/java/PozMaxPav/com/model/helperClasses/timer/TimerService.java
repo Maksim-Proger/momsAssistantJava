@@ -24,26 +24,30 @@ public class TimerService extends Service {
         if (intent != null) {
             String action = intent.getAction();
             if (action != null) {
-                if (action.equals(ACTION_START)) {
-                    if (!isRunning) {
-                        startTime = SystemClock.elapsedRealtime() - elapsedMillis;
-                        isRunning = true;
-                        isPaused = false;
-                        handler = new Handler();
-                        startTimer();
-                    }
-                } else if (action.equals(ACTION_PAUSE)) {
-                    if (isRunning && !isPaused) {
-                        handler.removeCallbacksAndMessages(null);
-                        elapsedMillis = SystemClock.elapsedRealtime() - startTime;
-                        isPaused = true;
-                    }
-                } else if (action.equals(ACTION_RESUME)) {
-                    if (isRunning && isPaused) {
-                        startTime = SystemClock.elapsedRealtime() - elapsedMillis;
-                        isPaused = false;
-                        startTimer();
-                    }
+                switch (action) {
+                    case ACTION_START:
+                        if (!isRunning) {
+                            startTime = SystemClock.elapsedRealtime() - elapsedMillis;
+                            isRunning = true;
+                            isPaused = false;
+                            handler = new Handler();
+                            startTimer();
+                        }
+                        break;
+                    case ACTION_PAUSE:
+                        if (isRunning && !isPaused) {
+                            handler.removeCallbacksAndMessages(null);
+                            elapsedMillis = SystemClock.elapsedRealtime() - startTime;
+                            isPaused = true;
+                        }
+                        break;
+                    case ACTION_RESUME:
+                        if (isRunning && isPaused) {
+                            startTime = SystemClock.elapsedRealtime() - elapsedMillis;
+                            isPaused = false;
+                            startTimer();
+                        }
+                        break;
                 }
             }
         }

@@ -1,5 +1,6 @@
 package PozMaxPav.com.all_activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -77,11 +78,20 @@ public class SleepStatistics extends AppCompatActivity {
 
     private void addListenerOnButton() {
 
-        Button back_button_statistics = findViewById(R.id.back_button_statistics);
-        back_button_statistics.setOnClickListener(new View.OnClickListener() {
+        Button back_button = findViewById(R.id.back_button);
+        Button back_to_home = findViewById(R.id.back_to_home);
+        back_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 getOnBackPressedDispatcher().onBackPressed();
+            }
+        });
+
+        back_to_home.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(SleepStatistics.this, MainScreenActivity.class);
+                startActivity(intent);
             }
         });
     }

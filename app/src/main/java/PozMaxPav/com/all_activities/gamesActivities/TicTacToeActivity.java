@@ -1,6 +1,7 @@
 package PozMaxPav.com.all_activities.gamesActivities;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -9,12 +10,12 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import PozMaxPav.com.R;
+import PozMaxPav.com.all_activities.MainScreenActivity;
 import PozMaxPav.com.model.logicForGames.LogicForTicTacToe;
 
 public class TicTacToeActivity extends AppCompatActivity {
 
     private final Button[] buttons = new Button[25];
-    private Button back_button;
     private boolean gameOver = false;
     private final LogicForTicTacToe logic = new LogicForTicTacToe(this);
 
@@ -38,11 +39,20 @@ public class TicTacToeActivity extends AppCompatActivity {
     }
 
     private void addListenerOnButton() {
-        back_button = findViewById(R.id.back_button);
+        Button back_button = findViewById(R.id.back_button);
+        Button back_to_home = findViewById(R.id.back_to_home);
         back_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                onBackPressed();
+                getOnBackPressedDispatcher().onBackPressed();
+            }
+        });
+
+        back_to_home.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(TicTacToeActivity.this, MainScreenActivity.class);
+                startActivity(intent);
             }
         });
 

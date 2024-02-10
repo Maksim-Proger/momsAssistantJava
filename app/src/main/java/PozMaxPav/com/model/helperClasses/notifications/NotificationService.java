@@ -16,13 +16,16 @@ import PozMaxPav.com.R;
 public class NotificationService extends Service {
 
     public static final String ACTION_START = "Action_Start";
+    public static final String ACTION_PAUSE = "Action_Pause";
+    public static final String ACTION_RESUME = "Action_Resume";
     private static final String CHANNEL_ID = "Channel_id";
     private static final int NOTIFICATION_ID = 1;
     private Handler handler;
     private Boolean isRunning = false;
+    private Boolean isPaused = false;
     private long startTime = 0;
     private long timePassed = 0;
-    private Handler notificationHandler = new Handler();
+    private final Handler notificationHandler = new Handler();
     private static final int NOTIFICATION_UPDATE_INTERVAL = 1000;
     private NotificationCompat.Builder builder;
 
@@ -51,13 +54,25 @@ public class NotificationService extends Service {
         if (intent != null) {
             String action = intent.getAction();
             if (action != null) {
-                if (action.equals(ACTION_START)) {
-                    if (!isRunning) {
-                        startTime = SystemClock.elapsedRealtime() - timePassed;
-                        isRunning = true;
-                        handler = new Handler();
-                        startTimer();
-                    }
+                switch (action) {
+                    case ACTION_START:
+                        if (!isRunning) {
+                            startTime = SystemClock.elapsedRealtime() - timePassed;
+                            isRunning = true;
+                            handler = new Handler();
+                            startTimer();
+                        }
+                        break;
+                    case ACTION_PAUSE:
+                        if (isRunning && !isPaused) {
+                            pauseTimer();
+                        }
+                        break;
+                    case ACTION_RESUME:
+                        if (isRunning && isPaused) {
+                            resumeTimer();
+                        }
+                        break;
                 }
             }
         }
@@ -65,9 +80,9 @@ public class NotificationService extends Service {
 
         // startForeground нужен, чтобы избежать случайного закрытия службы системой
         startForeground(NOTIFICATION_ID, builder.build()); // после обновления до android 14
-                                                           // пришлось явно указать тип переднего
-                                                           // плана для службы в манифесте
-                                                           // и добавить разрешение
+        // пришлось явно указать тип переднего
+        // плана для службы в манифесте
+        // и добавить разрешение
 
         // Возвращаем START_STICKY, чтобы сервис автоматически
         // перезапускался, если его убьет система.
@@ -112,16 +127,27 @@ public class NotificationService extends Service {
             public void run() {
                 if (isRunning) {
                     timePassed = SystemClock.elapsedRealtime() - startTime;
-                    Intent intent = new Intent("UPDATE_TIME");
-                    intent.putExtra("timePassed", timePassed);
-                    sendBroadcast(intent);
-                    LocalBroadcastManager.getInstance(NotificationService.this).sendBroadcast(intent);
+                    showNotification();
                     handler.postDelayed(this, 1000); // Обновляем каждую секунду
                 }
             }
         });
     }
 
+    private void pauseTimer() {
+        if (handler != null) {
+            handler.removeCallbacksAndMessages(null);
+            isPaused = true;
+        }
+    }
+
+    private void resumeTimer() {
+        if (isPaused) {
+            startTime = SystemClock.elapsedRealtime() - timePassed;
+            isPaused = false;
+            startTimer();
+        }
+    }
 
     private String formatTime(long time) {
         long seconds = (time / 1000) % 60;
@@ -137,9 +163,8 @@ public class NotificationService extends Service {
         if (handler != null) {
             handler.removeCallbacksAndMessages(null);
         }
-        if (notificationHandler != null) {
-            notificationHandler.removeCallbacksAndMessages(null);
-        }
+        notificationHandler.removeCallbacksAndMessages(null);
+
         // Удалите уведомление, если оно было создано
         NotificationManager notificationManager = getSystemService(NotificationManager.class);
         notificationManager.cancel(NOTIFICATION_ID);
