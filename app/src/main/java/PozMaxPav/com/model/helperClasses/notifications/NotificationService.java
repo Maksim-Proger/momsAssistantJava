@@ -65,9 +65,9 @@ public class NotificationService extends Service {
 
         // startForeground нужен, чтобы избежать случайного закрытия службы системой
         startForeground(NOTIFICATION_ID, builder.build()); // после обновления до android 14
-                                                           // пришлось явно указать тип переднего
-                                                           // плана для службы в манифесте
-                                                           // и добавить разрешение
+        // пришлось явно указать тип переднего
+        // плана для службы в манифесте
+        // и добавить разрешение
 
         // Возвращаем START_STICKY, чтобы сервис автоматически
         // перезапускался, если его убьет система.
@@ -137,9 +137,8 @@ public class NotificationService extends Service {
         if (handler != null) {
             handler.removeCallbacksAndMessages(null);
         }
-        if (notificationHandler != null) {
-            notificationHandler.removeCallbacksAndMessages(null);
-        }
+        notificationHandler.removeCallbacksAndMessages(null);
+
         // Удалите уведомление, если оно было создано
         NotificationManager notificationManager = getSystemService(NotificationManager.class);
         notificationManager.cancel(NOTIFICATION_ID);
